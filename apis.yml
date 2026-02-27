@@ -1,0 +1,144 @@
+name: Azure Databricks
+description: 'Azure Databricks is an Apache Spark-based analytics platform optimized for  Microsoft Azure. It provides a collaborative workspace for data engineers,  data scientists, and analysts to work together on big data and machine learning workloads.
+
+  '
+image: https://azure.microsoft.com/svghandler/databricks/
+tags:
+- big data
+- analytics
+- apache spark
+- machine learning
+- data engineering
+created: '2024'
+modified: '2024'
+url: https://azure.microsoft.com/en-us/services/databricks/
+specificationVersion: '0.18'
+apis:
+- name: Azure Databricks REST API
+  description: 'Core REST API for managing Azure Databricks workspaces, clusters, jobs,  notebooks, and other resources programmatically.
+
+    '
+  image: https://azure.microsoft.com/svghandler/databricks/
+  humanUrl: https://learn.microsoft.com/azure/databricks/
+  baseUrl: https://<databricks-instance>.azuredatabricks.net/api
+  tags:
+  - clusters
+  - jobs
+  - notebooks
+  - workspace
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/
+  - type: OpenAPI
+    url: https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/
+  - type: Authentication
+    url: https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/authentication
+  contact:
+  - type: Support
+    url: https://learn.microsoft.com/answers/tags/166/azure-databricks
+- name: Clusters API
+  description: Manage Databricks clusters for running Spark jobs
+  baseUrl: https://<databricks-instance>.azuredatabricks.net/api/2.0/clusters
+  tags:
+  - clusters
+  - compute
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/clusters
+- name: Jobs API
+  description: Create, manage, and run jobs on Databricks clusters
+  baseUrl: https://<databricks-instance>.azuredatabricks.net/api/2.1/jobs
+  tags:
+  - jobs
+  - automation
+  - scheduling
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/jobs
+- name: Workspace API
+  description: Manage notebooks, folders, and other workspace objects
+  baseUrl: https://<databricks-instance>.azuredatabricks.net/api/2.0/workspace
+  tags:
+  - workspace
+  - notebooks
+  - folders
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/workspace
+- name: DBFS API
+  description: Access Databricks File System (DBFS) for file operations
+  baseUrl: https://<databricks-instance>.azuredatabricks.net/api/2.0/dbfs
+  tags:
+  - storage
+  - files
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/dbfs
+- name: Libraries API
+  description: Manage libraries and dependencies on clusters
+  baseUrl: https://<databricks-instance>.azuredatabricks.net/api/2.0/libraries
+  tags:
+  - libraries
+  - dependencies
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/libraries
+- name: Secrets API
+  description: Manage secrets and secret scopes for secure credential storage
+  baseUrl: https://<databricks-instance>.azuredatabricks.net/api/2.0/secrets
+  tags:
+  - security
+  - secrets
+  - credentials
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/secrets
+- name: Token Management API
+  description: Create and manage personal access tokens for API authentication
+  baseUrl: https://<databricks-instance>.azuredatabricks.net/api/2.0/token
+  tags:
+  - authentication
+  - security
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/token-management
+- name: SQL Analytics API
+  description: Manage SQL warehouses, queries, and dashboards
+  baseUrl: https://<databricks-instance>.azuredatabricks.net/api/2.0/sql
+  tags:
+  - sql
+  - analytics
+  - queries
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/azure/databricks/sql/api/
+- name: MLflow API
+  description: Track experiments, log metrics, and manage ML models
+  baseUrl: https://<databricks-instance>.azuredatabricks.net/api/2.0/mlflow
+  tags:
+  - machine learning
+  - mlops
+  - experiments
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/azure/databricks/mlflow/
+common:
+- type: Getting Started
+  url: https://learn.microsoft.com/azure/databricks/getting-started/
+- type: Pricing
+  url: https://azure.microsoft.com/pricing/details/databricks/
+- type: Status
+  url: https://status.azuredatabricks.net/
+- type: Security
+  url: https://learn.microsoft.com/azure/databricks/security/
+- type: SDKs
+  url: https://learn.microsoft.com/azure/databricks/dev-tools/
+- type: Terraform Provider
+  url: https://registry.terraform.io/providers/databricks/databricks/latest/docs
+- type: CLI
+  url: https://learn.microsoft.com/azure/databricks/dev-tools/cli/
+maintainers:
+- type: Microsoft
+  url: https://www.microsoft.com
+- type: Databricks
+  url: https://www.databricks.com
