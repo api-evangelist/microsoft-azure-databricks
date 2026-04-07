@@ -53,7 +53,7 @@ paths:
   /2.0/clusters/create:
     post:
       operationId: createCluster
-      summary: Create a new cluster
+      summary: Azure Databricks Create a new cluster
       description: >-
         Creates a new Apache Spark cluster. Returns the ID of the newly created
         cluster. The cluster starts in a PENDING state and transitions to
@@ -93,7 +93,7 @@ paths:
   /2.0/clusters/edit:
     post:
       operationId: editCluster
-      summary: Edit a cluster
+      summary: Azure Databricks Edit a cluster
       description: >-
         Edits the configuration of an existing cluster. The cluster must be in
         a RUNNING or TERMINATED state. If the cluster is running, it will be
@@ -134,7 +134,7 @@ paths:
   /2.0/clusters/start:
     post:
       operationId: startCluster
-      summary: Start a terminated cluster
+      summary: Azure Databricks Start a terminated cluster
       description: >-
         Starts a terminated cluster given its ID. Works only for clusters in a
         TERMINATED state. Uses the last specified cluster configuration.
@@ -172,7 +172,7 @@ paths:
   /2.0/clusters/restart:
     post:
       operationId: restartCluster
-      summary: Restart a running cluster
+      summary: Azure Databricks Restart a running cluster
       description: >-
         Restarts a running cluster given its ID. The cluster must be in a
         RUNNING state.
@@ -210,7 +210,7 @@ paths:
   /2.0/clusters/delete:
     post:
       operationId: terminateCluster
-      summary: Terminate a cluster
+      summary: Azure Databricks Terminate a cluster
       description: >-
         Terminates a cluster given its ID. The cluster is removed from the
         running state but its configuration is preserved so it can be restarted.
@@ -249,7 +249,7 @@ paths:
   /2.0/clusters/permanent-delete:
     post:
       operationId: permanentDeleteCluster
-      summary: Permanently delete a cluster
+      summary: Azure Databricks Permanently delete a cluster
       description: >-
         Permanently deletes a Spark cluster. If the cluster is running, it is
         terminated and its resources freed. The cluster is removed permanently
@@ -288,7 +288,7 @@ paths:
   /2.0/clusters/get:
     get:
       operationId: getCluster
-      summary: Get cluster information
+      summary: Azure Databricks Get cluster information
       description: >-
         Retrieves the information for a cluster given its identifier. Returns
         the current state, configuration, and metadata for the cluster.
@@ -323,7 +323,7 @@ paths:
   /2.0/clusters/list:
     get:
       operationId: listClusters
-      summary: List all clusters
+      summary: Azure Databricks List all clusters
       description: >-
         Returns information about all pinned and active clusters, and up to 200
         of the most recently terminated all-purpose clusters in the past 30
@@ -364,7 +364,7 @@ paths:
   /2.0/clusters/pin:
     post:
       operationId: pinCluster
-      summary: Pin a cluster
+      summary: Azure Databricks Pin a cluster
       description: >-
         Pins a cluster to ensure it is always returned by the list clusters
         API. Pinning a cluster that is already pinned has no effect.
@@ -402,7 +402,7 @@ paths:
   /2.0/clusters/unpin:
     post:
       operationId: unpinCluster
-      summary: Unpin a cluster
+      summary: Azure Databricks Unpin a cluster
       description: >-
         Unpins a cluster. Unpinning a cluster that is not pinned has no effect.
       tags:
@@ -439,7 +439,7 @@ paths:
   /2.0/clusters/events:
     post:
       operationId: listClusterEvents
-      summary: List cluster events
+      summary: Azure Databricks List cluster events
       description: >-
         Retrieves a list of events about the activity of a cluster. Events are
         returned in reverse chronological order. This endpoint allows paginating
@@ -544,7 +544,7 @@ paths:
   /2.0/clusters/spark-versions:
     get:
       operationId: listSparkVersions
-      summary: List available Spark versions
+      summary: Azure Databricks List available Spark versions
       description: >-
         Returns the list of available Databricks Runtime versions. These
         versions can be used to launch clusters.
@@ -578,7 +578,7 @@ paths:
   /2.0/clusters/list-node-types:
     get:
       operationId: listNodeTypes
-      summary: List available node types
+      summary: Azure Databricks List available node types
       description: >-
         Returns a list of supported Azure VM node types. These node types can
         be used to launch clusters.
@@ -605,7 +605,7 @@ paths:
   /2.1/jobs/create:
     post:
       operationId: createJob
-      summary: Create a new job
+      summary: Azure Databricks Create a new job
       description: >-
         Creates a new job with the provided settings. Returns the job_id of the
         newly created job.
@@ -644,7 +644,7 @@ paths:
   /2.1/jobs/list:
     get:
       operationId: listJobs
-      summary: List all jobs
+      summary: Azure Databricks List all jobs
       description: >-
         Retrieves a list of jobs defined in the workspace. Results are paginated
         with a default limit of 20 jobs per page.
@@ -706,7 +706,7 @@ paths:
   /2.1/jobs/get:
     get:
       operationId: getJob
-      summary: Get a single job
+      summary: Azure Databricks Get a single job
       description: >-
         Retrieves the details for a single job, including its settings and
         most recent run information.
@@ -742,7 +742,7 @@ paths:
   /2.1/jobs/update:
     post:
       operationId: updateJob
-      summary: Partially update a job
+      summary: Azure Databricks Partially update a job
       description: >-
         Adds, changes, or removes specific settings of an existing job.
         Use reset to overwrite all settings.
@@ -791,7 +791,7 @@ paths:
   /2.1/jobs/reset:
     post:
       operationId: resetJob
-      summary: Overwrite all job settings
+      summary: Azure Databricks Overwrite all job settings
       description: >-
         Overwrites all settings for a specific job. Use update to change
         individual settings.
@@ -833,7 +833,7 @@ paths:
   /2.1/jobs/delete:
     post:
       operationId: deleteJob
-      summary: Delete a job
+      summary: Azure Databricks Delete a job
       description: >-
         Deletes a job and sends an email to the addresses specified in
         email_notifications. No action occurs if the job has already been
@@ -873,7 +873,7 @@ paths:
   /2.1/jobs/run-now:
     post:
       operationId: runJobNow
-      summary: Trigger a new job run
+      summary: Azure Databricks Trigger a new job run
       description: >-
         Runs the job now and returns the run_id of the triggered run. A job
         can have at most one active run at a time unless max_concurrent_runs
@@ -955,7 +955,7 @@ paths:
   /2.1/jobs/runs/submit:
     post:
       operationId: submitRun
-      summary: Submit a one-time run
+      summary: Azure Databricks Submit a one-time run
       description: >-
         Submits a one-time run without creating a job. This endpoint allows
         you to submit a workload directly without defining a job. Returns the
@@ -1011,7 +1011,7 @@ paths:
   /2.1/jobs/runs/list:
     get:
       operationId: listJobRuns
-      summary: List runs for a job
+      summary: Azure Databricks List runs for a job
       description: >-
         Lists runs in descending order by start time for a specific job or
         all jobs.
@@ -1111,7 +1111,7 @@ paths:
   /2.1/jobs/runs/get:
     get:
       operationId: getJobRun
-      summary: Get a single job run
+      summary: Azure Databricks Get a single job run
       description: >-
         Retrieves the metadata of a run including its status, timing, cluster
         information, and task details.
@@ -1159,7 +1159,7 @@ paths:
   /2.1/jobs/runs/cancel:
     post:
       operationId: cancelJobRun
-      summary: Cancel a job run
+      summary: Azure Databricks Cancel a job run
       description: >-
         Cancels a run. The run is canceled asynchronously, so when this
         request completes, the run may still be running. The run is terminated
@@ -1199,7 +1199,7 @@ paths:
   /2.1/jobs/runs/delete:
     post:
       operationId: deleteJobRun
-      summary: Delete a job run
+      summary: Azure Databricks Delete a job run
       description: >-
         Deletes a non-active run. Returns an HTTP 400 error if the run is
         still active.
@@ -1238,7 +1238,7 @@ paths:
   /2.1/jobs/runs/get-output:
     get:
       operationId: getJobRunOutput
-      summary: Get job run output
+      summary: Azure Databricks Get job run output
       description: >-
         Retrieves the output and metadata of a single task run. When a notebook
         task returns a value through dbutils.notebook.exit(), this endpoint
@@ -1293,7 +1293,7 @@ paths:
   /2.0/workspace/list:
     get:
       operationId: listWorkspaceObjects
-      summary: List workspace objects
+      summary: Azure Databricks List workspace objects
       description: >-
         Lists the contents of a directory in the workspace, or the object
         if it is not a directory. If the input path does not exist, this call
@@ -1336,7 +1336,7 @@ paths:
   /2.0/workspace/get-status:
     get:
       operationId: getWorkspaceObjectStatus
-      summary: Get workspace object status
+      summary: Azure Databricks Get workspace object status
       description: >-
         Gets the status of an object or a directory. If the object is a
         directory, its contents are not included in the response.
@@ -1371,7 +1371,7 @@ paths:
   /2.0/workspace/mkdirs:
     post:
       operationId: createWorkspaceDirectory
-      summary: Create a directory
+      summary: Azure Databricks Create a directory
       description: >-
         Creates the specified directory and all necessary parent directories
         if they do not exist. If there is an object (not a directory) at
@@ -1413,7 +1413,7 @@ paths:
   /2.0/workspace/delete:
     post:
       operationId: deleteWorkspaceObject
-      summary: Delete a workspace object
+      summary: Azure Databricks Delete a workspace object
       description: >-
         Deletes an object or a directory (and optionally its contents
         recursively). If the path does not exist, this call returns an error
@@ -1462,7 +1462,7 @@ paths:
   /2.0/workspace/import:
     post:
       operationId: importWorkspaceObject
-      summary: Import a workspace object
+      summary: Azure Databricks Import a workspace object
       description: >-
         Imports a notebook or the contents of an entire directory. If the
         path already exists and overwrite is set to false, this call returns
@@ -1534,7 +1534,7 @@ paths:
   /2.0/workspace/export:
     get:
       operationId: exportWorkspaceObject
-      summary: Export a workspace object
+      summary: Azure Databricks Export a workspace object
       description: >-
         Exports a notebook or the contents of an entire directory. The
         notebook is exported in the requested format (default is SOURCE).
