@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CreateClusterRequest",
+  "type": "object",
+  "properties": {
+    "cluster_name": {
+      "type": "string",
+      "description": "Cluster name requested by the user. Does not have to be unique. If not specified at creation, the cluster name is an empty string."
+    },
+    "spark_version": {
+      "type": "string",
+      "description": "The runtime version of the cluster. You can retrieve a list of available runtime versions using the spark-versions endpoint."
+    },
+    "node_type_id": {
+      "type": "string",
+      "description": "The node type for the worker nodes. Refer to list-node-types for available node types."
+    },
+    "driver_node_type_id": {
+      "type": "string",
+      "description": "The node type for the driver node. If unset, the driver node type is set as the same value as node_type_id."
+    },
+    "num_workers": {
+      "type": "integer",
+      "description": "Number of worker nodes. For a fixed-size cluster, set this to the desired number of workers. For an autoscaling cluster, this field is ignored in favor of autoscale settings."
+    },
+    "spark_conf": {
+      "type": "object",
+      "description": "Map of Spark configuration key-value pairs. These are passed directly to the Spark driver and executors."
+    },
+    "ssh_public_keys": {
+      "type": "array",
+      "description": "SSH public keys for accessing cluster nodes"
+    },
+    "custom_tags": {
+      "type": "object",
+      "description": "Custom tags applied to cluster resources. Databricks adds default tags in addition to any custom tags you specify."
+    },
+    "init_scripts": {
+      "type": "array",
+      "description": "Init scripts to run when the cluster starts"
+    },
+    "spark_env_vars": {
+      "type": "object",
+      "description": "Map of environment variable key-value pairs for the Spark process."
+    },
+    "enable_elastic_disk": {
+      "type": "boolean",
+      "description": "If true, enable autoscaling local storage. When enabled, the amount of disk space used by the cluster auto-adjusts."
+    },
+    "instance_pool_id": {
+      "type": "string",
+      "description": "ID of the instance pool to use for cluster nodes. If specified, the cluster uses the instance pool for both driver and worker nodes."
+    },
+    "policy_id": {
+      "type": "string",
+      "description": "Identifier of the cluster policy used to create the cluster."
+    },
+    "enable_local_disk_encryption": {
+      "type": "boolean",
+      "description": "Whether to enable local disk encryption for the cluster"
+    },
+    "runtime_engine": {
+      "type": "string",
+      "description": "The runtime engine to use. PHOTON provides optimized query execution."
+    },
+    "data_security_mode": {
+      "type": "string",
+      "description": "Data security mode for the cluster. Determines how data access is controlled."
+    },
+    "single_user_name": {
+      "type": "string",
+      "description": "The name of the single user who can execute commands on the cluster. Required when data_security_mode is SINGLE_USER."
+    }
+  }
+}

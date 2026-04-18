@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Run",
+  "type": "object",
+  "properties": {
+    "run_id": {
+      "type": "integer",
+      "description": "Canonical identifier of the run"
+    },
+    "job_id": {
+      "type": "integer",
+      "description": "ID of the job this run belongs to"
+    },
+    "run_name": {
+      "type": "string",
+      "description": "Name of the run"
+    },
+    "creator_user_name": {
+      "type": "string",
+      "description": "Username of the user who triggered the run"
+    },
+    "number_in_job": {
+      "type": "integer",
+      "description": "Sequence number of this run among all runs of the job"
+    },
+    "tasks": {
+      "type": "array"
+    },
+    "cluster_spec": {
+      "type": "object"
+    },
+    "cluster_instance": {
+      "type": "object"
+    },
+    "start_time": {
+      "type": "integer",
+      "description": "Start time of the run (epoch milliseconds)"
+    },
+    "setup_duration": {
+      "type": "integer",
+      "description": "Time spent setting up the cluster in milliseconds"
+    },
+    "execution_duration": {
+      "type": "integer",
+      "description": "Time spent executing the run in milliseconds"
+    },
+    "cleanup_duration": {
+      "type": "integer",
+      "description": "Time spent cleaning up after the run in milliseconds"
+    },
+    "end_time": {
+      "type": "integer",
+      "description": "End time of the run (epoch milliseconds)"
+    },
+    "trigger": {
+      "type": "string",
+      "description": "What triggered this run"
+    },
+    "run_type": {
+      "type": "string"
+    },
+    "attempt_number": {
+      "type": "integer",
+      "description": "Current attempt number of the run"
+    },
+    "run_page_url": {
+      "type": "string",
+      "description": "URL of the run page in the Databricks UI"
+    },
+    "format": {
+      "type": "string"
+    }
+  }
+}

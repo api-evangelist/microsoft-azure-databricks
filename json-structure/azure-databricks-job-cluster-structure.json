@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "JobCluster",
+  "type": "object",
+  "properties": {
+    "job_cluster_key": {
+      "type": "string"
+    }
+  }
+}

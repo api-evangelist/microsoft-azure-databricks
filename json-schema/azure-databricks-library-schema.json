@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Library",
+  "type": "object",
+  "properties": {
+    "jar": {
+      "type": "string",
+      "description": "URI of the JAR library to install"
+    },
+    "egg": {
+      "type": "string",
+      "description": "URI of the egg library to install"
+    },
+    "whl": {
+      "type": "string",
+      "description": "URI of the wheel library to install"
+    },
+    "pypi": {
+      "type": "object"
+    },
+    "maven": {
+      "type": "object"
+    },
+    "cran": {
+      "type": "object"
+    },
+    "requirements": {
+      "type": "string",
+      "description": "Path to a requirements.txt file. Only supported on clusters running Databricks Runtime 15.0+."
+    }
+  }
+}

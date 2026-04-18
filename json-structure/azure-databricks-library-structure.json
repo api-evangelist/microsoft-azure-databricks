@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Library",
+  "type": "object",
+  "properties": {
+    "jar": {
+      "type": "string"
+    },
+    "egg": {
+      "type": "string"
+    },
+    "whl": {
+      "type": "string"
+    },
+    "pypi": {
+      "type": "object"
+    },
+    "maven": {
+      "type": "object"
+    },
+    "cran": {
+      "type": "object"
+    },
+    "requirements": {
+      "type": "string"
+    }
+  }
+}

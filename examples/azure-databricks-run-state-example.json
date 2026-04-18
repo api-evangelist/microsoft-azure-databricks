@@ -1,0 +1,6 @@
+{
+  "life_cycle_state": "example_value",
+  "result_state": "example_value",
+  "state_message": "example_value",
+  "user_cancelled_or_timedout": true
+}

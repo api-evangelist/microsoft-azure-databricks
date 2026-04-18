@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "InitScriptInfo",
+  "type": "object",
+  "properties": {
+    "workspace": {
+      "type": "object"
+    },
+    "volumes": {
+      "type": "object"
+    },
+    "dbfs": {
+      "type": "object"
+    },
+    "abfss": {
+      "type": "object"
+    }
+  }
+}

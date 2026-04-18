@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "AzureAttributes",
+  "type": "object",
+  "properties": {
+    "first_on_demand": {
+      "type": "integer"
+    },
+    "availability": {
+      "type": "string"
+    },
+    "spot_bid_max_price": {
+      "type": "number"
+    }
+  }
+}

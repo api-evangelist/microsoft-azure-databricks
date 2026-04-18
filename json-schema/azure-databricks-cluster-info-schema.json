@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ClusterInfo",
+  "type": "object",
+  "properties": {
+    "cluster_id": {
+      "type": "string",
+      "description": "Canonical identifier for the cluster"
+    },
+    "cluster_name": {
+      "type": "string",
+      "description": "Name of the cluster"
+    },
+    "spark_version": {
+      "type": "string",
+      "description": "Databricks Runtime version"
+    },
+    "node_type_id": {
+      "type": "string",
+      "description": "Node type for worker nodes"
+    },
+    "driver_node_type_id": {
+      "type": "string",
+      "description": "Node type for the driver node"
+    },
+    "num_workers": {
+      "type": "integer",
+      "description": "Number of worker nodes"
+    },
+    "state": {
+      "type": "string",
+      "description": "Current state of the cluster"
+    },
+    "state_message": {
+      "type": "string",
+      "description": "Message associated with the current state"
+    },
+    "creator_user_name": {
+      "type": "string",
+      "description": "Username of the cluster creator"
+    },
+    "start_time": {
+      "type": "integer",
+      "description": "Time when the cluster was started (epoch milliseconds)"
+    },
+    "terminated_time": {
+      "type": "integer",
+      "description": "Time when the cluster was terminated (epoch milliseconds)"
+    },
+    "last_state_loss_time": {
+      "type": "integer",
+      "description": "Time when the cluster driver lost its state (epoch milliseconds)"
+    },
+    "last_activity_time": {
+      "type": "integer",
+      "description": "Time when the cluster last had activity (epoch milliseconds)"
+    },
+    "autotermination_minutes": {
+      "type": "integer",
+      "description": "Automatically terminates the cluster after it is inactive for this time in minutes. 0 indicates no autotermination."
+    },
+    "cluster_source": {
+      "type": "string",
+      "description": "Indicates the source that created the cluster"
+    },
+    "spark_conf": {
+      "type": "object",
+      "description": "Spark configuration key-value pairs"
+    },
+    "custom_tags": {
+      "type": "object"
+    },
+    "init_scripts": {
+      "type": "array"
+    },
+    "spark_env_vars": {
+      "type": "object"
+    },
+    "enable_elastic_disk": {
+      "type": "boolean"
+    },
+    "instance_pool_id": {
+      "type": "string"
+    },
+    "policy_id": {
+      "type": "string"
+    },
+    "default_tags": {
+      "type": "object",
+      "description": "Tags applied automatically by Databricks"
+    },
+    "cluster_log_status": {
+      "type": "object"
+    },
+    "termination_reason": {
+      "type": "object"
+    },
+    "data_security_mode": {
+      "type": "string"
+    },
+    "single_user_name": {
+      "type": "string"
+    },
+    "runtime_engine": {
+      "type": "string"
+    },
+    "disk_spec": {
+      "type": "object"
+    },
+    "executors": {
+      "type": "array"
+    },
+    "jdbc_port": {
+      "type": "integer",
+      "description": "Port on which the JDBC/ODBC server is listening"
+    },
+    "cluster_memory_mb": {
+      "type": "integer",
+      "description": "Total memory in the cluster in megabytes"
+    },
+    "cluster_cores": {
+      "type": "number",
+      "description": "Total number of CPU cores in the cluster"
+    }
+  }
+}

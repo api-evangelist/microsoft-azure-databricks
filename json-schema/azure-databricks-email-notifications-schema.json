@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EmailNotifications",
+  "type": "object",
+  "properties": {
+    "on_start": {
+      "type": "array",
+      "description": "Email addresses to notify when a run starts"
+    },
+    "on_success": {
+      "type": "array",
+      "description": "Email addresses to notify when a run succeeds"
+    },
+    "on_failure": {
+      "type": "array",
+      "description": "Email addresses to notify when a run fails"
+    },
+    "on_duration_warning_threshold_exceeded": {
+      "type": "array",
+      "description": "Email addresses to notify when a run exceeds the duration warning threshold"
+    },
+    "no_alert_for_skipped_runs": {
+      "type": "boolean",
+      "description": "Do not send alert for skipped runs"
+    }
+  }
+}

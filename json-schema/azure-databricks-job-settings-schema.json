@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "JobSettings",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Optional name for the job. Default is Untitled."
+    },
+    "tags": {
+      "type": "object",
+      "description": "Map of tags associated with the job"
+    },
+    "tasks": {
+      "type": "array",
+      "description": "List of task specifications for the job. A job must contain at least one task."
+    },
+    "job_clusters": {
+      "type": "array",
+      "description": "A list of job cluster specifications that can be shared and reused by tasks."
+    },
+    "notification_settings": {
+      "type": "object"
+    },
+    "timeout_seconds": {
+      "type": "integer",
+      "description": "Timeout in seconds applied to each run of this job. Default is no timeout."
+    },
+    "max_concurrent_runs": {
+      "type": "integer",
+      "description": "Maximum allowed number of concurrent runs of the job. Default is 1."
+    },
+    "trigger": {
+      "type": "object",
+      "description": "Trigger settings for file arrival events"
+    },
+    "continuous": {
+      "type": "object",
+      "description": "Settings for continuous job execution"
+    },
+    "format": {
+      "type": "string",
+      "description": "Format of the job. MULTI_TASK is the preferred format for creating jobs with multiple tasks."
+    },
+    "queue": {
+      "type": "object"
+    },
+    "parameters": {
+      "type": "array",
+      "description": "Job-level parameters"
+    },
+    "run_as": {
+      "type": "object",
+      "description": "User or service principal to run the job as"
+    }
+  }
+}

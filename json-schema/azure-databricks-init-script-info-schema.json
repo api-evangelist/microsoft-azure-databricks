@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "InitScriptInfo",
+  "type": "object",
+  "description": "Configuration for a cluster init script",
+  "properties": {
+    "workspace": {
+      "type": "object"
+    },
+    "volumes": {
+      "type": "object"
+    },
+    "dbfs": {
+      "type": "object"
+    },
+    "abfss": {
+      "type": "object"
+    }
+  }
+}

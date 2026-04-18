@@ -1,0 +1,5 @@
+{
+  "quartz_cron_expression": "example_value",
+  "timezone_id": "500123",
+  "pause_status": "example_value"
+}

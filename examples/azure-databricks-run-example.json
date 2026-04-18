@@ -1,0 +1,20 @@
+{
+  "run_id": "500123",
+  "job_id": "500123",
+  "run_name": "example_value",
+  "creator_user_name": "example_value",
+  "number_in_job": 10,
+  "tasks": [],
+  "cluster_spec": "example_value",
+  "cluster_instance": "example_value",
+  "start_time": 10,
+  "setup_duration": 10,
+  "execution_duration": 10,
+  "cleanup_duration": 10,
+  "end_time": 10,
+  "trigger": "example_value",
+  "run_type": "example_value",
+  "attempt_number": 10,
+  "run_page_url": "https://www.example.com",
+  "format": "example_value"
+}

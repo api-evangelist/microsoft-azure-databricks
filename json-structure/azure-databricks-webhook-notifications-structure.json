@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "WebhookNotifications",
+  "type": "object",
+  "properties": {
+    "on_start": {
+      "type": "array"
+    },
+    "on_success": {
+      "type": "array"
+    },
+    "on_failure": {
+      "type": "array"
+    },
+    "on_duration_warning_threshold_exceeded": {
+      "type": "array"
+    }
+  }
+}

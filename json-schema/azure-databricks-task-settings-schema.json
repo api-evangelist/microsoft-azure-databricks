@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TaskSettings",
+  "type": "object",
+  "properties": {
+    "task_key": {
+      "type": "string",
+      "description": "Unique key for the task within the job. Must be unique among all tasks in the same job."
+    },
+    "description": {
+      "type": "string",
+      "description": "Optional description for the task"
+    },
+    "depends_on": {
+      "type": "array",
+      "description": "Tasks this task depends on. The task will not start until all dependent tasks complete successfully."
+    },
+    "existing_cluster_id": {
+      "type": "string",
+      "description": "ID of an existing cluster to use for this task"
+    },
+    "job_cluster_key": {
+      "type": "string",
+      "description": "Key of a job cluster specification to use. Refers to a cluster defined in the job's job_clusters field."
+    },
+    "notebook_task": {
+      "type": "object"
+    },
+    "spark_jar_task": {
+      "type": "object"
+    },
+    "spark_python_task": {
+      "type": "object"
+    },
+    "spark_submit_task": {
+      "type": "object"
+    },
+    "pipeline_task": {
+      "type": "object"
+    },
+    "python_wheel_task": {
+      "type": "object"
+    },
+    "sql_task": {
+      "type": "object"
+    },
+    "dbt_task": {
+      "type": "object"
+    },
+    "run_if": {
+      "type": "string",
+      "description": "Condition for running this task based on dependencies"
+    },
+    "timeout_seconds": {
+      "type": "integer",
+      "description": "Timeout in seconds for this individual task"
+    },
+    "max_retries": {
+      "type": "integer",
+      "description": "Maximum number of retries for this task"
+    },
+    "min_retry_interval_millis": {
+      "type": "integer",
+      "description": "Minimum interval between retries in milliseconds"
+    },
+    "retry_on_timeout": {
+      "type": "boolean",
+      "description": "Whether to retry the task if it times out"
+    },
+    "libraries": {
+      "type": "array",
+      "description": "Libraries to install on the task cluster"
+    }
+  }
+}

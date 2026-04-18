@@ -1,0 +1,5 @@
+{
+  "first_on_demand": 10,
+  "availability": "example_value",
+  "spot_bid_max_price": 42.5
+}

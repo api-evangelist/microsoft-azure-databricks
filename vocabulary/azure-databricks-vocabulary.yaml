@@ -1,0 +1,10 @@
+name: azure-databricks API Vocabulary
+provider: azure-databricks
+created: '2026-04-18'
+modified: '2026-04-18'
+operations: 32
+schemas: 22
+tags:
+- Clusters
+- Jobs
+- Workspace

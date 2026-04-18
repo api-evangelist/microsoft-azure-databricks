@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "WorkspaceObject",
+  "type": "object",
+  "properties": {
+    "object_type": {
+      "type": "string"
+    },
+    "path": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string"
+    },
+    "object_id": {
+      "type": "integer"
+    },
+    "created_at": {
+      "type": "integer"
+    },
+    "modified_at": {
+      "type": "integer"
+    },
+    "resource_id": {
+      "type": "string"
+    }
+  }
+}

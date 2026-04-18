@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RunState",
+  "type": "object",
+  "properties": {
+    "life_cycle_state": {
+      "type": "string",
+      "description": "Life cycle state of the run"
+    },
+    "result_state": {
+      "type": "string",
+      "description": "Result state of the run (available after completion)"
+    },
+    "state_message": {
+      "type": "string",
+      "description": "Descriptive message for the current state"
+    },
+    "user_cancelled_or_timedout": {
+      "type": "boolean",
+      "description": "Whether the run was cancelled by a user or timed out"
+    }
+  }
+}

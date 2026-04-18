@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Job",
+  "type": "object",
+  "properties": {
+    "job_id": {
+      "type": "integer",
+      "description": "Canonical identifier of the job"
+    },
+    "creator_user_name": {
+      "type": "string",
+      "description": "Username of the job creator"
+    },
+    "run_as_user_name": {
+      "type": "string",
+      "description": "User the job runs as"
+    },
+    "created_time": {
+      "type": "integer",
+      "description": "Time the job was created (epoch milliseconds)"
+    }
+  }
+}

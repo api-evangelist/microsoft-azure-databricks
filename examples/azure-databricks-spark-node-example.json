@@ -1,0 +1,8 @@
+{
+  "private_ip": "example_value",
+  "public_dns": "example_value",
+  "node_id": "500123",
+  "instance_id": "500123",
+  "start_timestamp": 10,
+  "host_private_ip": "example_value"
+}

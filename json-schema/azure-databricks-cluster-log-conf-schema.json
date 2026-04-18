@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ClusterLogConf",
+  "type": "object",
+  "description": "Configuration for delivering Spark logs to a destination",
+  "properties": {
+    "dbfs": {
+      "type": "object"
+    },
+    "s3": {
+      "type": "object"
+    }
+  }
+}

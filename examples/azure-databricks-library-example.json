@@ -1,0 +1,9 @@
+{
+  "jar": "example_value",
+  "egg": "example_value",
+  "whl": "example_value",
+  "pypi": "example_value",
+  "maven": "example_value",
+  "cran": "example_value",
+  "requirements": "example_value"
+}

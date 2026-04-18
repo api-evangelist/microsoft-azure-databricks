@@ -1,0 +1,7 @@
+{
+  "on_start": [],
+  "on_success": [],
+  "on_failure": [],
+  "on_duration_warning_threshold_exceeded": [],
+  "no_alert_for_skipped_runs": true
+}

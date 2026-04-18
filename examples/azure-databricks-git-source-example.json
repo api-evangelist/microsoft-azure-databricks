@@ -1,0 +1,7 @@
+{
+  "git_url": "https://www.example.com",
+  "git_provider": "example_value",
+  "git_branch": "example_value",
+  "git_tag": "example_value",
+  "git_commit": "example_value"
+}

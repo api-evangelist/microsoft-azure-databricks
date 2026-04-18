@@ -1,0 +1,19 @@
+{
+  "cluster_name": "example_value",
+  "spark_version": "example_value",
+  "node_type_id": "500123",
+  "driver_node_type_id": "500123",
+  "num_workers": 10,
+  "spark_conf": "example_value",
+  "ssh_public_keys": [],
+  "custom_tags": "example_value",
+  "init_scripts": [],
+  "spark_env_vars": "example_value",
+  "enable_elastic_disk": true,
+  "instance_pool_id": "500123",
+  "policy_id": "500123",
+  "enable_local_disk_encryption": true,
+  "runtime_engine": "example_value",
+  "data_security_mode": "example_value",
+  "single_user_name": "example_value"
+}

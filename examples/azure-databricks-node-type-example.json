@@ -1,0 +1,10 @@
+{
+  "node_type_id": "500123",
+  "memory_mb": 10,
+  "num_cores": 42.5,
+  "description": "A sample description.",
+  "instance_type_id": "500123",
+  "is_deprecated": true,
+  "num_gpus": 10,
+  "category": "example_value"
+}

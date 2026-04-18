@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "GitSource",
+  "type": "object",
+  "properties": {
+    "git_url": {
+      "type": "string"
+    },
+    "git_provider": {
+      "type": "string"
+    },
+    "git_branch": {
+      "type": "string"
+    },
+    "git_tag": {
+      "type": "string"
+    },
+    "git_commit": {
+      "type": "string"
+    }
+  }
+}

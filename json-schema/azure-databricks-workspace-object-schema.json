@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WorkspaceObject",
+  "type": "object",
+  "properties": {
+    "object_type": {
+      "type": "string",
+      "description": "Type of the workspace object"
+    },
+    "path": {
+      "type": "string",
+      "description": "Absolute path of the object in the workspace"
+    },
+    "language": {
+      "type": "string",
+      "description": "Programming language of the object. Only applicable for notebooks."
+    },
+    "object_id": {
+      "type": "integer",
+      "description": "Unique identifier for the object"
+    },
+    "created_at": {
+      "type": "integer",
+      "description": "Creation timestamp in epoch milliseconds"
+    },
+    "modified_at": {
+      "type": "integer",
+      "description": "Last modification timestamp in epoch milliseconds"
+    },
+    "resource_id": {
+      "type": "string",
+      "description": "Resource ID for the object"
+    }
+  }
+}

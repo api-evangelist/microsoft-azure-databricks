@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "RunState",
+  "type": "object",
+  "properties": {
+    "life_cycle_state": {
+      "type": "string"
+    },
+    "result_state": {
+      "type": "string"
+    },
+    "state_message": {
+      "type": "string"
+    },
+    "user_cancelled_or_timedout": {
+      "type": "boolean"
+    }
+  }
+}

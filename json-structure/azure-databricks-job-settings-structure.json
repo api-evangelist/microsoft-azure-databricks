@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "JobSettings",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "object"
+    },
+    "tasks": {
+      "type": "array"
+    },
+    "job_clusters": {
+      "type": "array"
+    },
+    "notification_settings": {
+      "type": "object"
+    },
+    "timeout_seconds": {
+      "type": "integer"
+    },
+    "max_concurrent_runs": {
+      "type": "integer"
+    },
+    "trigger": {
+      "type": "object"
+    },
+    "continuous": {
+      "type": "object"
+    },
+    "format": {
+      "type": "string"
+    },
+    "queue": {
+      "type": "object"
+    },
+    "parameters": {
+      "type": "array"
+    },
+    "run_as": {
+      "type": "object"
+    }
+  }
+}

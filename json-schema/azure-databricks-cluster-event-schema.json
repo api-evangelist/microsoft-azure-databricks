@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ClusterEvent",
+  "type": "object",
+  "properties": {
+    "cluster_id": {
+      "type": "string",
+      "description": "Cluster ID associated with the event"
+    },
+    "timestamp": {
+      "type": "integer",
+      "description": "Timestamp of the event in epoch milliseconds"
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of event"
+    },
+    "details": {
+      "type": "object",
+      "description": "Event-specific details"
+    }
+  }
+}

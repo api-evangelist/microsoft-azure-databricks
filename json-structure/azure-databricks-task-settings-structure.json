@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "TaskSettings",
+  "type": "object",
+  "properties": {
+    "task_key": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "depends_on": {
+      "type": "array"
+    },
+    "existing_cluster_id": {
+      "type": "string"
+    },
+    "job_cluster_key": {
+      "type": "string"
+    },
+    "notebook_task": {
+      "type": "object"
+    },
+    "spark_jar_task": {
+      "type": "object"
+    },
+    "spark_python_task": {
+      "type": "object"
+    },
+    "spark_submit_task": {
+      "type": "object"
+    },
+    "pipeline_task": {
+      "type": "object"
+    },
+    "python_wheel_task": {
+      "type": "object"
+    },
+    "sql_task": {
+      "type": "object"
+    },
+    "dbt_task": {
+      "type": "object"
+    },
+    "run_if": {
+      "type": "string"
+    },
+    "timeout_seconds": {
+      "type": "integer"
+    },
+    "max_retries": {
+      "type": "integer"
+    },
+    "min_retry_interval_millis": {
+      "type": "integer"
+    },
+    "retry_on_timeout": {
+      "type": "boolean"
+    },
+    "libraries": {
+      "type": "array"
+    }
+  }
+}

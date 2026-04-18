@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ClusterInfo",
+  "type": "object",
+  "properties": {
+    "cluster_id": {
+      "type": "string"
+    },
+    "cluster_name": {
+      "type": "string"
+    },
+    "spark_version": {
+      "type": "string"
+    },
+    "node_type_id": {
+      "type": "string"
+    },
+    "driver_node_type_id": {
+      "type": "string"
+    },
+    "num_workers": {
+      "type": "integer"
+    },
+    "state": {
+      "type": "string"
+    },
+    "state_message": {
+      "type": "string"
+    },
+    "creator_user_name": {
+      "type": "string"
+    },
+    "start_time": {
+      "type": "integer"
+    },
+    "terminated_time": {
+      "type": "integer"
+    },
+    "last_state_loss_time": {
+      "type": "integer"
+    },
+    "last_activity_time": {
+      "type": "integer"
+    },
+    "autotermination_minutes": {
+      "type": "integer"
+    },
+    "cluster_source": {
+      "type": "string"
+    },
+    "spark_conf": {
+      "type": "object"
+    },
+    "custom_tags": {
+      "type": "object"
+    },
+    "init_scripts": {
+      "type": "array"
+    },
+    "spark_env_vars": {
+      "type": "object"
+    },
+    "enable_elastic_disk": {
+      "type": "boolean"
+    },
+    "instance_pool_id": {
+      "type": "string"
+    },
+    "policy_id": {
+      "type": "string"
+    },
+    "default_tags": {
+      "type": "object"
+    },
+    "cluster_log_status": {
+      "type": "object"
+    },
+    "termination_reason": {
+      "type": "object"
+    },
+    "data_security_mode": {
+      "type": "string"
+    },
+    "single_user_name": {
+      "type": "string"
+    },
+    "runtime_engine": {
+      "type": "string"
+    },
+    "disk_spec": {
+      "type": "object"
+    },
+    "executors": {
+      "type": "array"
+    },
+    "jdbc_port": {
+      "type": "integer"
+    },
+    "cluster_memory_mb": {
+      "type": "integer"
+    },
+    "cluster_cores": {
+      "type": "number"
+    }
+  }
+}

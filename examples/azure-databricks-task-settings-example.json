@@ -1,0 +1,21 @@
+{
+  "task_key": "example_value",
+  "description": "A sample description.",
+  "depends_on": [],
+  "existing_cluster_id": "500123",
+  "job_cluster_key": "example_value",
+  "notebook_task": "example_value",
+  "spark_jar_task": "example_value",
+  "spark_python_task": "example_value",
+  "spark_submit_task": "example_value",
+  "pipeline_task": "example_value",
+  "python_wheel_task": "example_value",
+  "sql_task": "example_value",
+  "dbt_task": "example_value",
+  "run_if": "example_value",
+  "timeout_seconds": 10,
+  "max_retries": 10,
+  "min_retry_interval_millis": 10,
+  "retry_on_timeout": true,
+  "libraries": []
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "NodeType",
+  "type": "object",
+  "properties": {
+    "node_type_id": {
+      "type": "string"
+    },
+    "memory_mb": {
+      "type": "integer"
+    },
+    "num_cores": {
+      "type": "number"
+    },
+    "description": {
+      "type": "string"
+    },
+    "instance_type_id": {
+      "type": "string"
+    },
+    "is_deprecated": {
+      "type": "boolean"
+    },
+    "num_gpus": {
+      "type": "integer"
+    },
+    "category": {
+      "type": "string"
+    }
+  }
+}

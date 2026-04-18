@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Error",
+  "type": "object",
+  "properties": {
+    "error_code": {
+      "type": "string",
+      "description": "Databricks error code (e.g., RESOURCE_DOES_NOT_EXIST, INVALID_PARAMETER_VALUE)"
+    },
+    "message": {
+      "type": "string",
+      "description": "Human-readable error message"
+    }
+  }
+}
