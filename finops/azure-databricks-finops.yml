@@ -1,0 +1,440 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+provider: Azure Databricks
+providerId: azure-databricks
+publisherName: Azure Databricks
+serviceCategory: API
+created: '2026-05-04'
+modified: '2026-05-04'
+tags:
+  - Analytics
+  - Apache Spark
+  - Big Data
+  - Data Engineering
+  - Machine Learning
+  - FinOps
+  - Cost Management
+  - FOCUS
+description: FinOps framework definition for the Azure Databricks API surface. Provides a FOCUS-aligned
+  mapping for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
+principles:
+  - name: Visibility
+    description: Make API consumption costs visible to engineering, product, and finance teams in near
+      real-time.
+  - name: Allocation
+    description: Tag every chargeable API call with the consuming team, environment, application, and
+      feature so cost can be allocated.
+  - name: Optimization
+    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
+      cost per useful unit of work.
+  - name: Accountability
+    description: Establish budget owners and chargeback or showback flows for each consuming team.
+domains:
+  - name: Understand Usage and Cost
+    capabilities:
+      - Data Ingestion
+      - Allocation
+      - Reporting and Analytics
+      - Anomaly Management
+  - name: Quantify Business Value
+    capabilities:
+      - Planning and Estimating
+      - Forecasting
+      - Budgeting
+      - Benchmarking
+      - Unit Economics
+  - name: Optimize Usage and Cost
+    capabilities:
+      - Architecting for Cloud
+      - Rate Optimization
+      - Workload Optimization
+      - Cloud Sustainability
+      - Licensing and SaaS
+  - name: Manage the FinOps Practice
+    capabilities:
+      - FinOps Practice Operations
+      - FinOps Education and Enablement
+      - Invoicing and Chargeback
+      - Onboarding Workloads
+      - Intersecting Disciplines
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+    - Usage
+    - Purchase
+    - Tax
+    - Credit
+    - Adjustment
+  chargeFrequency: Recurring
+focusColumns:
+  ServiceName: Azure Databricks
+  ServiceCategory: Developer Tools / API
+  ProviderName: Azure Databricks
+  PublisherName: Azure Databricks
+  InvoiceIssuerName: Azure Databricks
+  PricingCategory: Usage-Based
+  PricingUnit: request
+  BillingCurrency: USD
+  ChargeCategory: Usage
+meters:
+  - name: api_requests
+    description: Count of billable API requests
+    unit: request
+    aggregation: sum
+    dimensions:
+      - api
+      - endpoint
+      - tier
+      - region
+      - consumer
+  - name: data_egress
+    description: Bytes returned over the network in API responses
+    unit: GB
+    aggregation: sum
+    dimensions:
+      - api
+      - region
+      - consumer
+  - name: compute_seconds
+    description: Server-side compute consumed by the request, where applicable
+    unit: second
+    aggregation: sum
+    dimensions:
+      - api
+      - endpoint
+      - tier
+apis:
+  - name: Azure Databricks REST API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api
+    tags:
+      - Clusters
+      - Jobs
+      - Notebooks
+      - Workspace
+    serviceName: Azure Databricks REST API
+    serviceCategory: API
+  - name: Clusters API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/clusters
+    tags:
+      - Clusters
+      - Compute
+    serviceName: Clusters API
+    serviceCategory: API
+  - name: Jobs API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.1/jobs
+    tags:
+      - Automation
+      - Jobs
+      - Scheduling
+    serviceName: Jobs API
+    serviceCategory: API
+  - name: Workspace API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/workspace
+    tags:
+      - Folders
+      - Notebooks
+      - Workspace
+    serviceName: Workspace API
+    serviceCategory: API
+  - name: DBFS API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/dbfs
+    tags:
+      - Files
+      - Storage
+    serviceName: DBFS API
+    serviceCategory: API
+  - name: Libraries API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/libraries
+    tags:
+      - Dependencies
+      - Libraries
+    serviceName: Libraries API
+    serviceCategory: API
+  - name: Secrets API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/secrets
+    tags:
+      - Credentials
+      - Secrets
+      - Security
+    serviceName: Secrets API
+    serviceCategory: API
+  - name: Token Management API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/token
+    tags:
+      - Authentication
+      - Security
+      - Tokens
+    serviceName: Token Management API
+    serviceCategory: API
+  - name: SQL Analytics API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/sql
+    tags:
+      - Analytics
+      - Queries
+      - Sql
+      - Warehouses
+    serviceName: SQL Analytics API
+    serviceCategory: API
+  - name: MLflow API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/mlflow
+    tags:
+      - Experiments
+      - Machine Learning
+      - Mlops
+      - Model Tracking
+    serviceName: MLflow API
+    serviceCategory: API
+  - name: Instance Pools API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/instance-pools
+    tags:
+      - Clusters
+      - Compute
+      - Instance Pools
+    serviceName: Instance Pools API
+    serviceCategory: API
+  - name: Cluster Policies API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/policies/clusters
+    tags:
+      - Clusters
+      - Governance
+      - Policies
+    serviceName: Cluster Policies API
+    serviceCategory: API
+  - name: Repos API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/repos
+    tags:
+      - Git
+      - Repositories
+      - Version Control
+    serviceName: Repos API
+    serviceCategory: API
+  - name: Git Credentials API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/git-credentials
+    tags:
+      - Authentication
+      - Credentials
+      - Git
+    serviceName: Git Credentials API
+    serviceCategory: API
+  - name: Pipelines API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/pipelines
+    tags:
+      - Data Engineering
+      - Delta Live Tables
+      - ETL
+      - Pipelines
+    serviceName: Pipelines API
+    serviceCategory: API
+  - name: Permissions API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/permissions
+    tags:
+      - Access Control
+      - Permissions
+      - Security
+    serviceName: Permissions API
+    serviceCategory: API
+  - name: Unity Catalog - Catalogs API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.1/unity-catalog/catalogs
+    tags:
+      - Catalogs
+      - Data Governance
+      - Unity Catalog
+    serviceName: Unity Catalog - Catalogs API
+    serviceCategory: API
+  - name: Unity Catalog - Schemas API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.1/unity-catalog/schemas
+    tags:
+      - Data Governance
+      - Schemas
+      - Unity Catalog
+    serviceName: Unity Catalog - Schemas API
+    serviceCategory: API
+  - name: Unity Catalog - Tables API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.1/unity-catalog/tables
+    tags:
+      - Data Governance
+      - Tables
+      - Unity Catalog
+    serviceName: Unity Catalog - Tables API
+    serviceCategory: API
+  - name: Unity Catalog - Volumes API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.1/unity-catalog/volumes
+    tags:
+      - Storage
+      - Unity Catalog
+      - Volumes
+    serviceName: Unity Catalog - Volumes API
+    serviceCategory: API
+  - name: Unity Catalog - Grants API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.1/unity-catalog/permissions
+    tags:
+      - Data Governance
+      - Permissions
+      - Unity Catalog
+    serviceName: Unity Catalog - Grants API
+    serviceCategory: API
+  - name: Unity Catalog - External Locations API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.1/unity-catalog/external-locations
+    tags:
+      - External Locations
+      - Storage
+      - Unity Catalog
+    serviceName: Unity Catalog - External Locations API
+    serviceCategory: API
+  - name: Unity Catalog - Storage Credentials API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.1/unity-catalog/storage-credentials
+    tags:
+      - Credentials
+      - Security
+      - Storage
+      - Unity Catalog
+    serviceName: Unity Catalog - Storage Credentials API
+    serviceCategory: API
+  - name: Unity Catalog - Metastores API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.1/unity-catalog/metastores
+    tags:
+      - Data Governance
+      - Metastores
+      - Unity Catalog
+    serviceName: Unity Catalog - Metastores API
+    serviceCategory: API
+  - name: Model Serving Endpoints API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/serving-endpoints
+    tags:
+      - Deployment
+      - Inference
+      - Machine Learning
+      - Model Serving
+    serviceName: Model Serving Endpoints API
+    serviceCategory: API
+  - name: Model Registry API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/mlflow/databricks
+    tags:
+      - Machine Learning
+      - Mlops
+      - Model Registry
+    serviceName: Model Registry API
+    serviceCategory: API
+  - name: Registered Models API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.1/unity-catalog/models
+    tags:
+      - Machine Learning
+      - Model Registry
+      - Unity Catalog
+    serviceName: Registered Models API
+    serviceCategory: API
+  - name: Global Init Scripts API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/global-init-scripts
+    tags:
+      - Administration
+      - Clusters
+      - Initialization
+    serviceName: Global Init Scripts API
+    serviceCategory: API
+  - name: IP Access Lists API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/ip-access-lists
+    tags:
+      - Access Control
+      - Networking
+      - Security
+    serviceName: IP Access Lists API
+    serviceCategory: API
+  - name: Statement Execution API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/sql/statements
+    tags:
+      - Query Execution
+      - Sql
+      - Warehouses
+    serviceName: Statement Execution API
+    serviceCategory: API
+  - name: Command Execution API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/1.2
+    tags:
+      - Clusters
+      - Commands
+      - Execution
+    serviceName: Command Execution API
+    serviceCategory: API
+  - name: Files API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/fs/files
+    tags:
+      - Files
+      - Storage
+      - Unity Catalog
+    serviceName: Files API
+    serviceCategory: API
+  - name: Apps API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/apps
+    tags:
+      - Applications
+      - Deployment
+    serviceName: Apps API
+    serviceCategory: API
+  - name: Lakeview API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/lakeview
+    tags:
+      - Dashboards
+      - Lakeview
+      - Visualization
+    serviceName: Lakeview API
+    serviceCategory: API
+  - name: Online Tables API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/online-tables
+    tags:
+      - Feature Serving
+      - Machine Learning
+      - Online Tables
+    serviceName: Online Tables API
+    serviceCategory: API
+  - name: Vector Search Indexes API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/vector-search/indexes
+    tags:
+      - AI
+      - RAG
+      - Similarity Search
+      - Vector Search
+    serviceName: Vector Search Indexes API
+    serviceCategory: API
+  - name: Vector Search Endpoints API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/vector-search/endpoints
+    tags:
+      - AI
+      - Endpoints
+      - Vector Search
+    serviceName: Vector Search Endpoints API
+    serviceCategory: API
+  - name: Query History API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/sql/history/queries
+    tags:
+      - Monitoring
+      - Query History
+      - Sql
+    serviceName: Query History API
+    serviceCategory: API
+  - name: Account SCIM API
+    baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/account/scim/v2
+    tags:
+      - Groups
+      - Identity Management
+      - SCIM
+      - Users
+    serviceName: Account SCIM API
+    serviceCategory: API
+unitEconomics:
+  - name: Cost per 1K Requests
+    metric: billed_cost / (api_requests / 1000)
+    target: TBD
+  - name: Cost per Active Consumer
+    metric: billed_cost / active_consumers
+    target: TBD
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
