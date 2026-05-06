@@ -1,320 +1,639 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "Azure Databricks Data Engineering"
-  description: "Manage Azure Databricks clusters, jobs, and workspace objects for data engineering workflows. Used by data engineers and platform administrators."
+  label: Azure Databricks Data Engineering
+  description: Manage Azure Databricks clusters, jobs, and workspace objects for data engineering workflows. Used by data
+    engineers and platform administrators.
   tags:
-    - Azure
-    - Databricks
-    - Data Engineering
-    - Apache Spark
-  created: "2026-04-18"
-  modified: "2026-04-18"
-
+  - Azure
+  - Databricks
+  - Data Engineering
+  - Apache Spark
+  created: '2026-04-18'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      DATABRICKS_TOKEN: DATABRICKS_TOKEN
-      DATABRICKS_HOST: DATABRICKS_HOST
-
+- namespace: env
+  keys:
+    DATABRICKS_TOKEN: DATABRICKS_TOKEN
+    DATABRICKS_HOST: DATABRICKS_HOST
 capability:
   consumes:
-    - import: databricks
-      location: ./shared/databricks.yaml
-
+  - type: http
+    namespace: databricks
+    baseUri: https://{databricks_instance}.azuredatabricks.net/api
+    description: Azure Databricks REST API
+    authentication:
+      type: bearer
+      token: '{{DATABRICKS_TOKEN}}'
+    resources:
+    - name: clusters
+      path: /2.0/clusters
+      description: Manage Databricks clusters
+      operations:
+      - name: create-cluster
+        method: POST
+        description: Create a new cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cluster_name: '{{tools.cluster_name}}'
+            spark_version: '{{tools.spark_version}}'
+            node_type_id: '{{tools.node_type_id}}'
+            num_workers: '{{tools.num_workers}}'
+      - name: list-clusters
+        method: GET
+        description: List all clusters
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-cluster
+        method: GET
+        description: Get cluster details
+        inputParameters:
+        - name: cluster_id
+          in: query
+          type: string
+          required: true
+          description: The cluster ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: edit-cluster
+        method: POST
+        description: Edit cluster configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: start-cluster
+        method: POST
+        description: Start a terminated cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cluster_id: '{{tools.cluster_id}}'
+      - name: restart-cluster
+        method: POST
+        description: Restart a cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cluster_id: '{{tools.cluster_id}}'
+      - name: terminate-cluster
+        method: POST
+        description: Terminate a running cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cluster_id: '{{tools.cluster_id}}'
+      - name: delete-cluster
+        method: POST
+        description: Permanently delete a cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cluster_id: '{{tools.cluster_id}}'
+      - name: pin-cluster
+        method: POST
+        description: Pin a cluster to prevent auto-termination
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: unpin-cluster
+        method: POST
+        description: Unpin a cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: list-cluster-events
+        method: POST
+        description: List cluster events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: list-spark-versions
+        method: GET
+        description: List available Spark versions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: list-node-types
+        method: GET
+        description: List available node types
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: jobs
+      path: /2.1/jobs
+      description: Manage Databricks jobs
+      operations:
+      - name: create-job
+        method: POST
+        description: Create a new job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: list-jobs
+        method: GET
+        description: List all jobs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-job
+        method: GET
+        description: Get job details
+        inputParameters:
+        - name: job_id
+          in: query
+          type: integer
+          required: true
+          description: The job ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-job
+        method: POST
+        description: Partially update job settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: reset-job
+        method: POST
+        description: Overwrite all job settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-job
+        method: POST
+        description: Delete a job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: run-job-now
+        method: POST
+        description: Trigger a one-time job run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: list-job-runs
+        method: GET
+        description: List job runs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-job-run
+        method: GET
+        description: Get run details
+        inputParameters:
+        - name: run_id
+          in: query
+          type: integer
+          required: true
+          description: The run ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: cancel-job-run
+        method: POST
+        description: Cancel a running job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-job-run-output
+        method: GET
+        description: Get job run output
+        inputParameters:
+        - name: run_id
+          in: query
+          type: integer
+          required: true
+          description: The run ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: workspace
+      path: /2.0/workspace
+      description: Manage workspace objects
+      operations:
+      - name: list-workspace-objects
+        method: GET
+        description: List workspace objects in a directory
+        inputParameters:
+        - name: path
+          in: query
+          type: string
+          required: true
+          description: The workspace path
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-workspace-object-status
+        method: GET
+        description: Get workspace object status
+        inputParameters:
+        - name: path
+          in: query
+          type: string
+          required: true
+          description: The workspace path
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-workspace-directory
+        method: POST
+        description: Create a workspace directory
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-workspace-object
+        method: POST
+        description: Delete a workspace object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: import-workspace-object
+        method: POST
+        description: Import a notebook or file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: export-workspace-object
+        method: GET
+        description: Export a notebook or file
+        inputParameters:
+        - name: path
+          in: query
+          type: string
+          required: true
+          description: The workspace path
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8080
-      namespace: databricks-engineering-api
-      description: "Unified REST API for Azure Databricks data engineering."
-      resources:
-        - path: /v1/clusters
-          name: clusters
-          description: "Manage Databricks clusters"
-          operations:
-            - method: GET
-              name: list-clusters
-              description: "List all clusters"
-              call: "databricks.list-clusters"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-cluster
-              description: "Create a new cluster"
-              call: "databricks.create-cluster"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/jobs
-          name: jobs
-          description: "Manage Databricks jobs"
-          operations:
-            - method: GET
-              name: list-jobs
-              description: "List all jobs"
-              call: "databricks.list-jobs"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-job
-              description: "Create a new job"
-              call: "databricks.create-job"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/workspace
-          name: workspace
-          description: "Manage workspace objects"
-          operations:
-            - method: GET
-              name: list-workspace-objects
-              description: "List workspace objects"
-              call: "databricks.list-workspace-objects"
-              with:
-                path: "rest.path"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9090
-      namespace: databricks-engineering-mcp
-      transport: http
-      description: "MCP server for AI-assisted Azure Databricks data engineering."
-      tools:
-        - name: create-cluster
-          description: "Create a new Databricks cluster"
-          hints:
-            readOnly: false
-          call: "databricks.create-cluster"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-clusters
-          description: "List all Databricks clusters"
-          hints:
-            readOnly: true
-          call: "databricks.list-clusters"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-cluster
-          description: "Get details of a specific cluster"
-          hints:
-            readOnly: true
-          call: "databricks.get-cluster"
-          with:
-            cluster_id: "tools.cluster_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: edit-cluster
-          description: "Edit cluster configuration"
-          hints:
-            readOnly: false
-            idempotent: true
-          call: "databricks.edit-cluster"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: start-cluster
-          description: "Start a terminated cluster"
-          hints:
-            readOnly: false
-          call: "databricks.start-cluster"
-          with:
-            cluster_id: "tools.cluster_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: restart-cluster
-          description: "Restart a running cluster"
-          hints:
-            readOnly: false
-          call: "databricks.restart-cluster"
-          with:
-            cluster_id: "tools.cluster_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: terminate-cluster
-          description: "Terminate a running cluster"
-          hints:
-            destructive: true
-          call: "databricks.terminate-cluster"
-          with:
-            cluster_id: "tools.cluster_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: delete-cluster
-          description: "Permanently delete a cluster"
-          hints:
-            destructive: true
-            idempotent: true
-          call: "databricks.delete-cluster"
-          with:
-            cluster_id: "tools.cluster_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-spark-versions
-          description: "List available Spark runtime versions"
-          hints:
-            readOnly: true
-          call: "databricks.list-spark-versions"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-node-types
-          description: "List available node types"
-          hints:
-            readOnly: true
-          call: "databricks.list-node-types"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-job
-          description: "Create a new Databricks job"
-          hints:
-            readOnly: false
-          call: "databricks.create-job"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-jobs
-          description: "List all Databricks jobs"
-          hints:
-            readOnly: true
-          call: "databricks.list-jobs"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-job
-          description: "Get job details"
-          hints:
-            readOnly: true
-          call: "databricks.get-job"
-          with:
-            job_id: "tools.job_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: update-job
-          description: "Partially update job settings"
-          hints:
-            readOnly: false
-          call: "databricks.update-job"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: delete-job
-          description: "Delete a job"
-          hints:
-            destructive: true
-            idempotent: true
-          call: "databricks.delete-job"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: run-job-now
-          description: "Trigger a one-time job run"
-          hints:
-            readOnly: false
-          call: "databricks.run-job-now"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-job-runs
-          description: "List job runs"
-          hints:
-            readOnly: true
-          call: "databricks.list-job-runs"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-job-run
-          description: "Get details of a specific job run"
-          hints:
-            readOnly: true
-          call: "databricks.get-job-run"
-          with:
-            run_id: "tools.run_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: cancel-job-run
-          description: "Cancel a running job"
-          hints:
-            destructive: true
-          call: "databricks.cancel-job-run"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-job-run-output
-          description: "Get the output of a completed job run"
-          hints:
-            readOnly: true
-          call: "databricks.get-job-run-output"
-          with:
-            run_id: "tools.run_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-workspace-objects
-          description: "List workspace objects in a directory"
-          hints:
-            readOnly: true
-          call: "databricks.list-workspace-objects"
-          with:
-            path: "tools.path"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-workspace-object-status
-          description: "Get status of a workspace object"
-          hints:
-            readOnly: true
-          call: "databricks.get-workspace-object-status"
-          with:
-            path: "tools.path"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-workspace-directory
-          description: "Create a directory in the workspace"
-          hints:
-            readOnly: false
-          call: "databricks.create-workspace-directory"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: delete-workspace-object
-          description: "Delete a workspace object"
-          hints:
-            destructive: true
-            idempotent: true
-          call: "databricks.delete-workspace-object"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: import-workspace-object
-          description: "Import a notebook or file into the workspace"
-          hints:
-            readOnly: false
-          call: "databricks.import-workspace-object"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: export-workspace-object
-          description: "Export a notebook or file from the workspace"
-          hints:
-            readOnly: true
-          call: "databricks.export-workspace-object"
-          with:
-            path: "tools.path"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: databricks-engineering-api
+    description: Unified REST API for Azure Databricks data engineering.
+    resources:
+    - path: /v1/clusters
+      name: clusters
+      description: Manage Databricks clusters
+      operations:
+      - method: GET
+        name: list-clusters
+        description: List all clusters
+        call: databricks.list-clusters
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-cluster
+        description: Create a new cluster
+        call: databricks.create-cluster
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs
+      name: jobs
+      description: Manage Databricks jobs
+      operations:
+      - method: GET
+        name: list-jobs
+        description: List all jobs
+        call: databricks.list-jobs
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-job
+        description: Create a new job
+        call: databricks.create-job
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workspace
+      name: workspace
+      description: Manage workspace objects
+      operations:
+      - method: GET
+        name: list-workspace-objects
+        description: List workspace objects
+        call: databricks.list-workspace-objects
+        with:
+          path: rest.path
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: databricks-engineering-mcp
+    transport: http
+    description: MCP server for AI-assisted Azure Databricks data engineering.
+    tools:
+    - name: create-cluster
+      description: Create a new Databricks cluster
+      hints:
+        readOnly: false
+      call: databricks.create-cluster
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-clusters
+      description: List all Databricks clusters
+      hints:
+        readOnly: true
+      call: databricks.list-clusters
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-cluster
+      description: Get details of a specific cluster
+      hints:
+        readOnly: true
+      call: databricks.get-cluster
+      with:
+        cluster_id: tools.cluster_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: edit-cluster
+      description: Edit cluster configuration
+      hints:
+        readOnly: false
+        idempotent: true
+      call: databricks.edit-cluster
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: start-cluster
+      description: Start a terminated cluster
+      hints:
+        readOnly: false
+      call: databricks.start-cluster
+      with:
+        cluster_id: tools.cluster_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: restart-cluster
+      description: Restart a running cluster
+      hints:
+        readOnly: false
+      call: databricks.restart-cluster
+      with:
+        cluster_id: tools.cluster_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: terminate-cluster
+      description: Terminate a running cluster
+      hints:
+        destructive: true
+      call: databricks.terminate-cluster
+      with:
+        cluster_id: tools.cluster_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-cluster
+      description: Permanently delete a cluster
+      hints:
+        destructive: true
+        idempotent: true
+      call: databricks.delete-cluster
+      with:
+        cluster_id: tools.cluster_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-spark-versions
+      description: List available Spark runtime versions
+      hints:
+        readOnly: true
+      call: databricks.list-spark-versions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-node-types
+      description: List available node types
+      hints:
+        readOnly: true
+      call: databricks.list-node-types
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-job
+      description: Create a new Databricks job
+      hints:
+        readOnly: false
+      call: databricks.create-job
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-jobs
+      description: List all Databricks jobs
+      hints:
+        readOnly: true
+      call: databricks.list-jobs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-job
+      description: Get job details
+      hints:
+        readOnly: true
+      call: databricks.get-job
+      with:
+        job_id: tools.job_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-job
+      description: Partially update job settings
+      hints:
+        readOnly: false
+      call: databricks.update-job
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-job
+      description: Delete a job
+      hints:
+        destructive: true
+        idempotent: true
+      call: databricks.delete-job
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: run-job-now
+      description: Trigger a one-time job run
+      hints:
+        readOnly: false
+      call: databricks.run-job-now
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-job-runs
+      description: List job runs
+      hints:
+        readOnly: true
+      call: databricks.list-job-runs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-job-run
+      description: Get details of a specific job run
+      hints:
+        readOnly: true
+      call: databricks.get-job-run
+      with:
+        run_id: tools.run_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancel-job-run
+      description: Cancel a running job
+      hints:
+        destructive: true
+      call: databricks.cancel-job-run
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-job-run-output
+      description: Get the output of a completed job run
+      hints:
+        readOnly: true
+      call: databricks.get-job-run-output
+      with:
+        run_id: tools.run_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-workspace-objects
+      description: List workspace objects in a directory
+      hints:
+        readOnly: true
+      call: databricks.list-workspace-objects
+      with:
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-workspace-object-status
+      description: Get status of a workspace object
+      hints:
+        readOnly: true
+      call: databricks.get-workspace-object-status
+      with:
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-workspace-directory
+      description: Create a directory in the workspace
+      hints:
+        readOnly: false
+      call: databricks.create-workspace-directory
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-workspace-object
+      description: Delete a workspace object
+      hints:
+        destructive: true
+        idempotent: true
+      call: databricks.delete-workspace-object
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: import-workspace-object
+      description: Import a notebook or file into the workspace
+      hints:
+        readOnly: false
+      call: databricks.import-workspace-object
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: export-workspace-object
+      description: Export a notebook or file from the workspace
+      hints:
+        readOnly: true
+      call: databricks.export-workspace-object
+      with:
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
