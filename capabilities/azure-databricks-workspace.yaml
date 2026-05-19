@@ -1,0 +1,302 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Azure Databricks REST API — Workspace
+  description: 'Azure Databricks REST API — Workspace. 6 operations. Lead operation: Azure Databricks Delete a Workspace Object.
+    Self-contained Naftiko capability covering one Azure Databricks business surface.'
+  tags:
+  - Azure Databricks
+  - Workspace
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AZURE_DATABRICKS_API_KEY: AZURE_DATABRICKS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: azure-databricks-workspace
+    baseUri: https://{databricks_instance}.azuredatabricks.net/api
+    description: Azure Databricks REST API — Workspace business capability. Self-contained, no shared references.
+    resources:
+    - name: 2.0-workspace-delete
+      path: /2.0/workspace/delete
+      operations:
+      - name: deleteworkspaceobject
+        method: POST
+        description: Azure Databricks Delete a Workspace Object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: 2.0-workspace-export
+      path: /2.0/workspace/export
+      operations:
+      - name: exportworkspaceobject
+        method: GET
+        description: Azure Databricks Export a Workspace Object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: path
+          in: query
+          type: string
+          description: The absolute path of the object to export
+          required: true
+        - name: format
+          in: query
+          type: string
+          description: Format of the exported content
+        - name: direct_download
+          in: query
+          type: boolean
+          description: Whether to download the exported file directly. Default is false.
+    - name: 2.0-workspace-get-status
+      path: /2.0/workspace/get-status
+      operations:
+      - name: getworkspaceobjectstatus
+        method: GET
+        description: Azure Databricks Get Workspace Object Status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: path
+          in: query
+          type: string
+          description: The absolute path of the workspace object
+          required: true
+    - name: 2.0-workspace-import
+      path: /2.0/workspace/import
+      operations:
+      - name: importworkspaceobject
+        method: POST
+        description: Azure Databricks Import a Workspace Object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: 2.0-workspace-list
+      path: /2.0/workspace/list
+      operations:
+      - name: listworkspaceobjects
+        method: GET
+        description: Azure Databricks List Workspace Objects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: path
+          in: query
+          type: string
+          description: The absolute path of the workspace directory to list. A path of / lists the root directory.
+          required: true
+    - name: 2.0-workspace-mkdirs
+      path: /2.0/workspace/mkdirs
+      operations:
+      - name: createworkspacedirectory
+        method: POST
+        description: Azure Databricks Create a Directory
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.AZURE_DATABRICKS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: azure-databricks-workspace-rest
+    port: 8080
+    description: REST adapter for Azure Databricks REST API — Workspace. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/2-0/workspace/delete
+      name: 2-0-workspace-delete
+      description: REST surface for 2.0-workspace-delete.
+      operations:
+      - method: POST
+        name: deleteworkspaceobject
+        description: Azure Databricks Delete a Workspace Object
+        call: azure-databricks-workspace.deleteworkspaceobject
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/2-0/workspace/export
+      name: 2-0-workspace-export
+      description: REST surface for 2.0-workspace-export.
+      operations:
+      - method: GET
+        name: exportworkspaceobject
+        description: Azure Databricks Export a Workspace Object
+        call: azure-databricks-workspace.exportworkspaceobject
+        with:
+          path: rest.path
+          format: rest.format
+          direct_download: rest.direct_download
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/2-0/workspace/get-status
+      name: 2-0-workspace-get-status
+      description: REST surface for 2.0-workspace-get-status.
+      operations:
+      - method: GET
+        name: getworkspaceobjectstatus
+        description: Azure Databricks Get Workspace Object Status
+        call: azure-databricks-workspace.getworkspaceobjectstatus
+        with:
+          path: rest.path
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/2-0/workspace/import
+      name: 2-0-workspace-import
+      description: REST surface for 2.0-workspace-import.
+      operations:
+      - method: POST
+        name: importworkspaceobject
+        description: Azure Databricks Import a Workspace Object
+        call: azure-databricks-workspace.importworkspaceobject
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/2-0/workspace/list
+      name: 2-0-workspace-list
+      description: REST surface for 2.0-workspace-list.
+      operations:
+      - method: GET
+        name: listworkspaceobjects
+        description: Azure Databricks List Workspace Objects
+        call: azure-databricks-workspace.listworkspaceobjects
+        with:
+          path: rest.path
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/2-0/workspace/mkdirs
+      name: 2-0-workspace-mkdirs
+      description: REST surface for 2.0-workspace-mkdirs.
+      operations:
+      - method: POST
+        name: createworkspacedirectory
+        description: Azure Databricks Create a Directory
+        call: azure-databricks-workspace.createworkspacedirectory
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: azure-databricks-workspace-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Azure Databricks REST API — Workspace. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: azure-databricks-delete-workspace-object
+      description: Azure Databricks Delete a Workspace Object
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: azure-databricks-workspace.deleteworkspaceobject
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: azure-databricks-export-workspace-object
+      description: Azure Databricks Export a Workspace Object
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: azure-databricks-workspace.exportworkspaceobject
+      with:
+        path: tools.path
+        format: tools.format
+        direct_download: tools.direct_download
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: azure-databricks-get-workspace-object
+      description: Azure Databricks Get Workspace Object Status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: azure-databricks-workspace.getworkspaceobjectstatus
+      with:
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: azure-databricks-import-workspace-object
+      description: Azure Databricks Import a Workspace Object
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: azure-databricks-workspace.importworkspaceobject
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: azure-databricks-list-workspace-objects
+      description: Azure Databricks List Workspace Objects
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: azure-databricks-workspace.listworkspaceobjects
+      with:
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: azure-databricks-create-directory
+      description: Azure Databricks Create a Directory
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: azure-databricks-workspace.createworkspacedirectory
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
