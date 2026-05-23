@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CronSchedule",
+  "title": "CronSchedule",
+  "type": "object",
+  "properties": {
+    "quartz_cron_expression": {
+      "type": "string",
+      "description": "Quartz cron expression for the schedule. See http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html",
+      "examples": [
+        "0 0 8 * * ?"
+      ]
+    },
+    "timezone_id": {
+      "type": "string",
+      "description": "Java timezone ID for the schedule",
+      "examples": [
+        "America/Los_Angeles"
+      ]
+    },
+    "pause_status": {
+      "type": "string",
+      "enum": [
+        "PAUSED",
+        "UNPAUSED"
+      ],
+      "description": "Whether the schedule is paused or active",
+      "example": "PAUSED"
+    }
+  }
+}

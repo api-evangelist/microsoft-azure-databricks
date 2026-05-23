@@ -1,0 +1,27 @@
+{
+  "operationId": "importWorkspaceObject",
+  "method": "POST",
+  "path": "/2.0/workspace/import",
+  "summary": "Azure Databricks Import a Workspace Object",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "ImportworkspaceobjectRequestExample",
+      "example": {
+        "path": "example_value",
+        "format": "SOURCE",
+        "language": "SCALA",
+        "content": "example_value",
+        "overwrite": true
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Importworkspaceobject200Example",
+      "example": {}
+    }
+  ]
+}

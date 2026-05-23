@@ -1,0 +1,23 @@
+{
+  "operationId": "getWorkspaceObjectStatus",
+  "method": "GET",
+  "path": "/2.0/workspace/get-status",
+  "summary": "Azure Databricks Get Workspace Object Status",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getworkspaceobjectstatus200Example",
+      "example": {
+        "object_type": "NOTEBOOK",
+        "path": "example_value",
+        "language": "SCALA",
+        "object_id": "500123",
+        "created_at": "2026-01-15T10:30:00Z",
+        "modified_at": "2026-01-15T10:30:00Z",
+        "resource_id": "500123"
+      }
+    }
+  ]
+}

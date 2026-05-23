@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Library",
+  "title": "Library",
+  "type": "object",
+  "properties": {
+    "jar": {
+      "type": "string",
+      "description": "URI of the JAR library to install",
+      "example": "example_value"
+    },
+    "egg": {
+      "type": "string",
+      "description": "URI of the egg library to install",
+      "deprecated": true,
+      "example": "example_value"
+    },
+    "whl": {
+      "type": "string",
+      "description": "URI of the wheel library to install",
+      "example": "example_value"
+    },
+    "pypi": {
+      "type": "object",
+      "properties": {
+        "package": {
+          "type": "string",
+          "description": "Name of the PyPI package to install"
+        },
+        "repo": {
+          "type": "string",
+          "description": "Repository URL to install the package from"
+        }
+      },
+      "example": "example_value"
+    },
+    "maven": {
+      "type": "object",
+      "properties": {
+        "coordinates": {
+          "type": "string",
+          "description": "Maven coordinates (group:artifact:version)"
+        },
+        "repo": {
+          "type": "string",
+          "description": "Maven repository URL"
+        },
+        "exclusions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of dependencies to exclude"
+        }
+      },
+      "example": "example_value"
+    },
+    "cran": {
+      "type": "object",
+      "properties": {
+        "package": {
+          "type": "string",
+          "description": "Name of the CRAN package"
+        },
+        "repo": {
+          "type": "string",
+          "description": "CRAN repository URL"
+        }
+      },
+      "example": "example_value"
+    },
+    "requirements": {
+      "type": "string",
+      "description": "Path to a requirements.txt file. Only supported on clusters running Databricks Runtime 15.0+.",
+      "example": "example_value"
+    }
+  }
+}

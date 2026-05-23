@@ -1,0 +1,14 @@
+name: Azure Databricks Domain Vocabulary
+provider: Azure Databricks
+providerId: microsoft-azure-databricks
+description: Tag-derived vocabulary for the Azure Databricks API surface; sourced from openapi/ tags.
+terms:
+- term: Clusters
+  description: Manage Databricks clusters for running Apache Spark workloads. Create, start, restart, resize, terminate, and
+    permanently delete clusters.
+- term: Jobs
+  description: Create and manage jobs to run notebooks, JARs, Spark submit, Python scripts, and pipeline tasks on Databricks
+    clusters. Schedule recurring jobs, trigger runs, and monitor execution.
+- term: Workspace
+  description: Manage workspace objects such as notebooks, folders, files, and repos. Import, export, list, and delete workspace
+    objects.

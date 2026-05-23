@@ -1,0 +1,90 @@
+{
+  "operationId": "submitRun",
+  "method": "POST",
+  "path": "/2.1/jobs/runs/submit",
+  "summary": "Azure Databricks Submit a One-time Run",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "SubmitrunRequestExample",
+      "example": {
+        "run_name": "example_value",
+        "tasks": [
+          {
+            "task_key": "example_value",
+            "description": "A sample description.",
+            "depends_on": [
+              {}
+            ],
+            "existing_cluster_id": "500123",
+            "job_cluster_key": "example_value",
+            "notebook_task": {
+              "notebook_path": "example_value",
+              "base_parameters": "example_value",
+              "source": "WORKSPACE"
+            },
+            "spark_jar_task": {
+              "main_class_name": "example_value",
+              "parameters": {},
+              "jar_uri": "example_value"
+            },
+            "spark_python_task": {
+              "python_file": "example_value",
+              "parameters": {},
+              "source": "WORKSPACE"
+            },
+            "spark_submit_task": {
+              "parameters": {}
+            },
+            "pipeline_task": {
+              "pipeline_id": "500123",
+              "full_refresh": true
+            },
+            "python_wheel_task": {
+              "package_name": "example_value",
+              "entry_point": "example_value",
+              "parameters": {},
+              "named_parameters": "example_value"
+            },
+            "sql_task": {
+              "warehouse_id": "500123",
+              "query": {},
+              "dashboard": {},
+              "alert": {},
+              "file": {}
+            },
+            "dbt_task": {
+              "commands": {},
+              "project_directory": "example_value",
+              "schema": "example_value",
+              "warehouse_id": "500123",
+              "profiles_directory": "example_value",
+              "catalog": "example_value",
+              "source": "WORKSPACE"
+            },
+            "run_if": "ALL_SUCCESS",
+            "timeout_seconds": 10,
+            "max_retries": 10,
+            "min_retry_interval_millis": 10,
+            "retry_on_timeout": true,
+            "libraries": [
+              {}
+            ]
+          }
+        ],
+        "timeout_seconds": 10,
+        "idempotency_token": "example_value"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Submitrun200Example",
+      "example": {
+        "run_id": "500123"
+      }
+    }
+  ]
+}

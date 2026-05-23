@@ -1,0 +1,18 @@
+{
+  "operationId": "exportWorkspaceObject",
+  "method": "GET",
+  "path": "/2.0/workspace/export",
+  "summary": "Azure Databricks Export a Workspace Object",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Exportworkspaceobject200Example",
+      "example": {
+        "content": "example_value",
+        "file_type": "example_value"
+      }
+    }
+  ]
+}

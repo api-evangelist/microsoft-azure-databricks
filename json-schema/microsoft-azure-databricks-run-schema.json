@@ -1,0 +1,179 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Run",
+  "title": "Run",
+  "type": "object",
+  "properties": {
+    "run_id": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Canonical identifier of the run",
+      "example": "500123"
+    },
+    "job_id": {
+      "type": "integer",
+      "format": "int64",
+      "description": "ID of the job this run belongs to",
+      "example": "500123"
+    },
+    "run_name": {
+      "type": "string",
+      "description": "Name of the run",
+      "example": "example_value"
+    },
+    "creator_user_name": {
+      "type": "string",
+      "description": "Username of the user who triggered the run",
+      "example": "example_value"
+    },
+    "number_in_job": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Sequence number of this run among all runs of the job",
+      "example": 10
+    },
+    "state": {
+      "$ref": "#/components/schemas/RunState"
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "run_id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "task_key": {
+            "type": "string"
+          },
+          "state": {
+            "$ref": "#/components/schemas/RunState"
+          },
+          "start_time": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "setup_duration": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "execution_duration": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "cleanup_duration": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "end_time": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "attempt_number": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "example": []
+    },
+    "schedule": {
+      "$ref": "#/components/schemas/CronSchedule"
+    },
+    "cluster_spec": {
+      "type": "object",
+      "properties": {
+        "existing_cluster_id": {
+          "type": "string"
+        },
+        "new_cluster": {
+          "$ref": "#/components/schemas/CreateClusterRequest"
+        }
+      },
+      "example": "example_value"
+    },
+    "cluster_instance": {
+      "type": "object",
+      "properties": {
+        "cluster_id": {
+          "type": "string"
+        },
+        "spark_context_id": {
+          "type": "string"
+        }
+      },
+      "example": "example_value"
+    },
+    "start_time": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Start time of the run (epoch milliseconds)",
+      "example": 10
+    },
+    "setup_duration": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Time spent setting up the cluster in milliseconds",
+      "example": 10
+    },
+    "execution_duration": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Time spent executing the run in milliseconds",
+      "example": 10
+    },
+    "cleanup_duration": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Time spent cleaning up after the run in milliseconds",
+      "example": 10
+    },
+    "end_time": {
+      "type": "integer",
+      "format": "int64",
+      "description": "End time of the run (epoch milliseconds)",
+      "example": 10
+    },
+    "trigger": {
+      "type": "string",
+      "enum": [
+        "PERIODIC",
+        "ONE_TIME",
+        "RETRY",
+        "RUN_JOB_TASK",
+        "FILE_ARRIVAL"
+      ],
+      "description": "What triggered this run",
+      "example": "PERIODIC"
+    },
+    "run_type": {
+      "type": "string",
+      "enum": [
+        "JOB_RUN",
+        "WORKFLOW_RUN",
+        "SUBMIT_RUN"
+      ],
+      "example": "JOB_RUN"
+    },
+    "attempt_number": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Current attempt number of the run",
+      "example": 10
+    },
+    "run_page_url": {
+      "type": "string",
+      "description": "URL of the run page in the Databricks UI",
+      "example": "https://www.example.com"
+    },
+    "format": {
+      "type": "string",
+      "enum": [
+        "SINGLE_TASK",
+        "MULTI_TASK"
+      ],
+      "example": "SINGLE_TASK"
+    }
+  }
+}

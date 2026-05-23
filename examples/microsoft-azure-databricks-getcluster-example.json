@@ -1,0 +1,105 @@
+{
+  "operationId": "getCluster",
+  "method": "GET",
+  "path": "/2.0/clusters/get",
+  "summary": "Azure Databricks Get Cluster Information",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getcluster200Example",
+      "example": {
+        "cluster_id": "500123",
+        "cluster_name": "example_value",
+        "spark_version": "example_value",
+        "node_type_id": "500123",
+        "driver_node_type_id": "500123",
+        "num_workers": 10,
+        "autoscale": {
+          "min_workers": 10,
+          "max_workers": 10
+        },
+        "state": "PENDING",
+        "state_message": "example_value",
+        "creator_user_name": "example_value",
+        "start_time": 10,
+        "terminated_time": 10,
+        "last_state_loss_time": 10,
+        "last_activity_time": 10,
+        "autotermination_minutes": 10,
+        "cluster_source": "UI",
+        "spark_conf": "example_value",
+        "azure_attributes": {
+          "first_on_demand": 10,
+          "availability": "SPOT_AZURE",
+          "spot_bid_max_price": 42.5
+        },
+        "custom_tags": "example_value",
+        "cluster_log_conf": {
+          "dbfs": {
+            "destination": "example_value"
+          },
+          "s3": {
+            "destination": "example_value",
+            "region": "example_value",
+            "endpoint": "example_value"
+          }
+        },
+        "init_scripts": [
+          {
+            "workspace": {},
+            "volumes": {},
+            "dbfs": {},
+            "abfss": {}
+          }
+        ],
+        "spark_env_vars": "example_value",
+        "enable_elastic_disk": true,
+        "instance_pool_id": "500123",
+        "policy_id": "500123",
+        "default_tags": "example_value",
+        "cluster_log_status": {
+          "last_attempted": 10,
+          "last_exception": "example_value"
+        },
+        "termination_reason": {
+          "code": "example_value",
+          "type": "example_value",
+          "parameters": "example_value"
+        },
+        "data_security_mode": "example_value",
+        "single_user_name": "example_value",
+        "runtime_engine": "example_value",
+        "disk_spec": {
+          "disk_count": 10,
+          "disk_size": 10,
+          "disk_type": {
+            "azure_disk_volume_type": "example_value"
+          }
+        },
+        "executors": [
+          {
+            "private_ip": "example_value",
+            "public_dns": "example_value",
+            "node_id": "500123",
+            "instance_id": "500123",
+            "start_timestamp": 10,
+            "host_private_ip": "example_value"
+          }
+        ],
+        "driver": {
+          "private_ip": "example_value",
+          "public_dns": "example_value",
+          "node_id": "500123",
+          "instance_id": "500123",
+          "start_timestamp": 10,
+          "host_private_ip": "example_value"
+        },
+        "jdbc_port": 10,
+        "cluster_memory_mb": 10,
+        "cluster_cores": 42.5
+      }
+    }
+  ]
+}

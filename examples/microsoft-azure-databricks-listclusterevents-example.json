@@ -1,0 +1,42 @@
+{
+  "operationId": "listClusterEvents",
+  "method": "POST",
+  "path": "/2.0/clusters/events",
+  "summary": "Azure Databricks List Cluster Events",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "ListclustereventsRequestExample",
+      "example": {
+        "cluster_id": "500123",
+        "start_time": 10,
+        "end_time": 10,
+        "order": "DESC",
+        "event_types": [
+          "CREATING"
+        ],
+        "offset": 10,
+        "limit": 10
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listclusterevents200Example",
+      "example": {
+        "events": [
+          {
+            "cluster_id": "500123",
+            "timestamp": 10,
+            "type": "example_value",
+            "details": "example_value"
+          }
+        ],
+        "next_page": "example_value",
+        "total_count": 10
+      }
+    }
+  ]
+}

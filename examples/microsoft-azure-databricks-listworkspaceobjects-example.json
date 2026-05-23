@@ -1,0 +1,27 @@
+{
+  "operationId": "listWorkspaceObjects",
+  "method": "GET",
+  "path": "/2.0/workspace/list",
+  "summary": "Azure Databricks List Workspace Objects",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listworkspaceobjects200Example",
+      "example": {
+        "objects": [
+          {
+            "object_type": "NOTEBOOK",
+            "path": "example_value",
+            "language": "SCALA",
+            "object_id": "500123",
+            "created_at": "2026-01-15T10:30:00Z",
+            "modified_at": "2026-01-15T10:30:00Z",
+            "resource_id": "500123"
+          }
+        ]
+      }
+    }
+  ]
+}

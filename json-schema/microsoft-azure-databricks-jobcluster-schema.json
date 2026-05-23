@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/JobCluster",
+  "title": "JobCluster",
+  "type": "object",
+  "required": [
+    "job_cluster_key",
+    "new_cluster"
+  ],
+  "properties": {
+    "job_cluster_key": {
+      "type": "string",
+      "description": "Unique key identifying this cluster specification",
+      "example": "example_value"
+    },
+    "new_cluster": {
+      "$ref": "#/components/schemas/CreateClusterRequest"
+    }
+  }
+}

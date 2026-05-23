@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AutoScale",
+  "title": "AutoScale",
+  "type": "object",
+  "properties": {
+    "min_workers": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Minimum number of workers",
+      "example": 10
+    },
+    "max_workers": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Maximum number of workers",
+      "example": 10
+    }
+  },
+  "required": [
+    "min_workers",
+    "max_workers"
+  ]
+}

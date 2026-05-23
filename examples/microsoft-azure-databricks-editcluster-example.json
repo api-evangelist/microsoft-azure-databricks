@@ -1,0 +1,21 @@
+{
+  "operationId": "editCluster",
+  "method": "POST",
+  "path": "/2.0/clusters/edit",
+  "summary": "Azure Databricks Edit a Cluster",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "EditclusterRequestExample",
+      "example": {}
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Editcluster200Example",
+      "example": {}
+    }
+  ]
+}

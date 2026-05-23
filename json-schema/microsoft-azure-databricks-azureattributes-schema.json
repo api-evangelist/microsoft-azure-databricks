@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AzureAttributes",
+  "title": "AzureAttributes",
+  "type": "object",
+  "description": "Attributes specific to Azure Databricks clusters",
+  "properties": {
+    "first_on_demand": {
+      "type": "integer",
+      "format": "int32",
+      "description": "The first nodes provisioned as on-demand instances. Remaining nodes will be spot instances.",
+      "example": 10
+    },
+    "availability": {
+      "type": "string",
+      "enum": [
+        "SPOT_AZURE",
+        "ON_DEMAND_AZURE",
+        "SPOT_WITH_FALLBACK_AZURE"
+      ],
+      "description": "Azure availability type for cluster nodes",
+      "example": "SPOT_AZURE"
+    },
+    "spot_bid_max_price": {
+      "type": "number",
+      "format": "double",
+      "description": "Max price for Azure spot instances. Set to -1 (default) to indicate that the instance should not be evicted based on price.",
+      "example": 42.5
+    }
+  }
+}

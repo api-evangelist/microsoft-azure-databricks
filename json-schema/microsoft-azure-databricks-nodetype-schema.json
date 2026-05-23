@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/NodeType",
+  "title": "NodeType",
+  "type": "object",
+  "properties": {
+    "node_type_id": {
+      "type": "string",
+      "description": "Unique identifier for the node type",
+      "example": "500123"
+    },
+    "memory_mb": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Memory in megabytes",
+      "example": 10
+    },
+    "num_cores": {
+      "type": "number",
+      "format": "float",
+      "description": "Number of CPU cores",
+      "example": 42.5
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description",
+      "example": "A sample description."
+    },
+    "instance_type_id": {
+      "type": "string",
+      "description": "Azure instance type identifier",
+      "example": "500123"
+    },
+    "is_deprecated": {
+      "type": "boolean",
+      "description": "Whether the node type is deprecated",
+      "example": true
+    },
+    "num_gpus": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Number of GPUs available",
+      "example": 10
+    },
+    "category": {
+      "type": "string",
+      "description": "Category of the node type (General Purpose, Memory Optimized, etc.)",
+      "example": "example_value"
+    }
+  }
+}

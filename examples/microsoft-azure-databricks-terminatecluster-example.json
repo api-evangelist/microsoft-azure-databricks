@@ -1,0 +1,23 @@
+{
+  "operationId": "terminateCluster",
+  "method": "POST",
+  "path": "/2.0/clusters/delete",
+  "summary": "Azure Databricks Terminate a Cluster",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "TerminateclusterRequestExample",
+      "example": {
+        "cluster_id": "500123"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Terminatecluster200Example",
+      "example": {}
+    }
+  ]
+}

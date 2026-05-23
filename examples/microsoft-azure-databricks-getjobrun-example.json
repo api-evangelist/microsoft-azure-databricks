@@ -1,0 +1,80 @@
+{
+  "operationId": "getJobRun",
+  "method": "GET",
+  "path": "/2.1/jobs/runs/get",
+  "summary": "Azure Databricks Get a Single Job Run",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getjobrun200Example",
+      "example": {
+        "run_id": "500123",
+        "job_id": "500123",
+        "run_name": "example_value",
+        "creator_user_name": "example_value",
+        "number_in_job": 10,
+        "state": {
+          "life_cycle_state": "PENDING",
+          "result_state": "SUCCESS",
+          "state_message": "example_value",
+          "user_cancelled_or_timedout": true
+        },
+        "tasks": [
+          {
+            "run_id": "500123",
+            "task_key": "example_value",
+            "start_time": 10,
+            "setup_duration": 10,
+            "execution_duration": 10,
+            "cleanup_duration": 10,
+            "end_time": 10,
+            "attempt_number": 10
+          }
+        ],
+        "schedule": {
+          "quartz_cron_expression": "example_value",
+          "timezone_id": "500123",
+          "pause_status": "PAUSED"
+        },
+        "cluster_spec": {
+          "existing_cluster_id": "500123",
+          "new_cluster": {
+            "cluster_name": "example_value",
+            "spark_version": "example_value",
+            "node_type_id": "500123",
+            "driver_node_type_id": "500123",
+            "num_workers": 10,
+            "spark_conf": "example_value",
+            "ssh_public_keys": {},
+            "custom_tags": "example_value",
+            "init_scripts": {},
+            "spark_env_vars": "example_value",
+            "enable_elastic_disk": true,
+            "instance_pool_id": "500123",
+            "policy_id": "500123",
+            "enable_local_disk_encryption": true,
+            "runtime_engine": "STANDARD",
+            "data_security_mode": "NONE",
+            "single_user_name": "example_value"
+          }
+        },
+        "cluster_instance": {
+          "cluster_id": "500123",
+          "spark_context_id": "500123"
+        },
+        "start_time": 10,
+        "setup_duration": 10,
+        "execution_duration": 10,
+        "cleanup_duration": 10,
+        "end_time": 10,
+        "trigger": "PERIODIC",
+        "run_type": "JOB_RUN",
+        "attempt_number": 10,
+        "run_page_url": "https://www.example.com",
+        "format": "SINGLE_TASK"
+      }
+    }
+  ]
+}

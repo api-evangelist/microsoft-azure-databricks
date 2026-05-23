@@ -1,0 +1,23 @@
+{
+  "operationId": "cancelJobRun",
+  "method": "POST",
+  "path": "/2.1/jobs/runs/cancel",
+  "summary": "Azure Databricks Cancel a Job Run",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "CanceljobrunRequestExample",
+      "example": {
+        "run_id": "500123"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Canceljobrun200Example",
+      "example": {}
+    }
+  ]
+}

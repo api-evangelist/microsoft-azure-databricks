@@ -1,0 +1,308 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TaskSettings",
+  "title": "TaskSettings",
+  "type": "object",
+  "required": [
+    "task_key"
+  ],
+  "properties": {
+    "task_key": {
+      "type": "string",
+      "description": "Unique key for the task within the job. Must be unique among all tasks in the same job.",
+      "maxLength": 100,
+      "example": "example_value"
+    },
+    "description": {
+      "type": "string",
+      "description": "Optional description for the task",
+      "example": "A sample description."
+    },
+    "depends_on": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "task_key": {
+            "type": "string",
+            "description": "Key of the task this task depends on"
+          },
+          "outcome": {
+            "type": "string",
+            "description": "Expected outcome of the dependency"
+          }
+        }
+      },
+      "description": "Tasks this task depends on. The task will not start until all dependent tasks complete successfully.",
+      "example": []
+    },
+    "existing_cluster_id": {
+      "type": "string",
+      "description": "ID of an existing cluster to use for this task",
+      "example": "500123"
+    },
+    "new_cluster": {
+      "$ref": "#/components/schemas/CreateClusterRequest"
+    },
+    "job_cluster_key": {
+      "type": "string",
+      "description": "Key of a job cluster specification to use. Refers to a cluster defined in the job's job_clusters field.",
+      "example": "example_value"
+    },
+    "notebook_task": {
+      "type": "object",
+      "properties": {
+        "notebook_path": {
+          "type": "string",
+          "description": "The path of the notebook to run in the Databricks workspace or remote repository"
+        },
+        "base_parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Base parameters for the notebook"
+        },
+        "source": {
+          "type": "string",
+          "enum": [
+            "WORKSPACE",
+            "GIT"
+          ],
+          "description": "Location source of the notebook"
+        }
+      },
+      "example": "example_value"
+    },
+    "spark_jar_task": {
+      "type": "object",
+      "properties": {
+        "main_class_name": {
+          "type": "string",
+          "description": "Full name of the main class to execute"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Parameters passed to the main method"
+        },
+        "jar_uri": {
+          "type": "string",
+          "description": "Deprecated. URI of the JAR to execute.",
+          "deprecated": true
+        }
+      },
+      "example": "example_value"
+    },
+    "spark_python_task": {
+      "type": "object",
+      "properties": {
+        "python_file": {
+          "type": "string",
+          "description": "URI of the Python file to execute"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Command line parameters for the Python file"
+        },
+        "source": {
+          "type": "string",
+          "enum": [
+            "WORKSPACE",
+            "GIT"
+          ]
+        }
+      },
+      "example": "example_value"
+    },
+    "spark_submit_task": {
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Parameters for spark-submit"
+        }
+      },
+      "example": "example_value"
+    },
+    "pipeline_task": {
+      "type": "object",
+      "properties": {
+        "pipeline_id": {
+          "type": "string",
+          "description": "ID of the Delta Live Tables pipeline"
+        },
+        "full_refresh": {
+          "type": "boolean",
+          "description": "Whether to perform a full refresh"
+        }
+      },
+      "example": "example_value"
+    },
+    "python_wheel_task": {
+      "type": "object",
+      "properties": {
+        "package_name": {
+          "type": "string",
+          "description": "Name of the Python wheel package"
+        },
+        "entry_point": {
+          "type": "string",
+          "description": "Named entry point to use"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "named_parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "example": "example_value"
+    },
+    "sql_task": {
+      "type": "object",
+      "properties": {
+        "warehouse_id": {
+          "type": "string",
+          "description": "ID of the SQL warehouse"
+        },
+        "query": {
+          "type": "object",
+          "properties": {
+            "query_id": {
+              "type": "string"
+            }
+          }
+        },
+        "dashboard": {
+          "type": "object",
+          "properties": {
+            "dashboard_id": {
+              "type": "string"
+            }
+          }
+        },
+        "alert": {
+          "type": "object",
+          "properties": {
+            "alert_id": {
+              "type": "string"
+            }
+          }
+        },
+        "file": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "source": {
+              "type": "string",
+              "enum": [
+                "WORKSPACE",
+                "GIT"
+              ]
+            }
+          }
+        }
+      },
+      "example": "example_value"
+    },
+    "dbt_task": {
+      "type": "object",
+      "properties": {
+        "commands": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "dbt commands to execute"
+        },
+        "project_directory": {
+          "type": "string",
+          "description": "Path to the dbt project directory"
+        },
+        "schema": {
+          "type": "string",
+          "description": "dbt schema name"
+        },
+        "warehouse_id": {
+          "type": "string",
+          "description": "SQL warehouse ID for dbt"
+        },
+        "profiles_directory": {
+          "type": "string"
+        },
+        "catalog": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string",
+          "enum": [
+            "WORKSPACE",
+            "GIT"
+          ]
+        }
+      },
+      "example": "example_value"
+    },
+    "run_if": {
+      "type": "string",
+      "enum": [
+        "ALL_SUCCESS",
+        "AT_LEAST_ONE_SUCCESS",
+        "NONE_FAILED",
+        "ALL_DONE",
+        "AT_LEAST_ONE_FAILED",
+        "ALL_FAILED"
+      ],
+      "description": "Condition for running this task based on dependencies",
+      "example": "ALL_SUCCESS"
+    },
+    "timeout_seconds": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Timeout in seconds for this individual task",
+      "example": 10
+    },
+    "max_retries": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Maximum number of retries for this task",
+      "example": 10
+    },
+    "min_retry_interval_millis": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Minimum interval between retries in milliseconds",
+      "example": 10
+    },
+    "retry_on_timeout": {
+      "type": "boolean",
+      "description": "Whether to retry the task if it times out",
+      "example": true
+    },
+    "libraries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Library"
+      },
+      "description": "Libraries to install on the task cluster",
+      "example": []
+    }
+  }
+}

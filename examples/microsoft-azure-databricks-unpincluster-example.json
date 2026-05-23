@@ -1,0 +1,23 @@
+{
+  "operationId": "unpinCluster",
+  "method": "POST",
+  "path": "/2.0/clusters/unpin",
+  "summary": "Azure Databricks Unpin a Cluster",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "UnpinclusterRequestExample",
+      "example": {
+        "cluster_id": "500123"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Unpincluster200Example",
+      "example": {}
+    }
+  ]
+}

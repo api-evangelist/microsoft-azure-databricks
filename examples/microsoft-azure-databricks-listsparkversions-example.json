@@ -1,0 +1,22 @@
+{
+  "operationId": "listSparkVersions",
+  "method": "GET",
+  "path": "/2.0/clusters/spark-versions",
+  "summary": "Azure Databricks List Available Spark Versions",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listsparkversions200Example",
+      "example": {
+        "versions": [
+          {
+            "key": "example_value",
+            "name": "Example Title"
+          }
+        ]
+      }
+    }
+  ]
+}

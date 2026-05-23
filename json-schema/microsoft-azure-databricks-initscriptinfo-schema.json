@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/InitScriptInfo",
+  "title": "InitScriptInfo",
+  "type": "object",
+  "description": "Configuration for a cluster init script",
+  "properties": {
+    "workspace": {
+      "type": "object",
+      "properties": {
+        "destination": {
+          "type": "string",
+          "description": "Workspace path for the init script"
+        }
+      },
+      "example": "example_value"
+    },
+    "volumes": {
+      "type": "object",
+      "properties": {
+        "destination": {
+          "type": "string",
+          "description": "Unity Catalog Volumes path for the init script"
+        }
+      },
+      "example": "example_value"
+    },
+    "dbfs": {
+      "type": "object",
+      "properties": {
+        "destination": {
+          "type": "string",
+          "description": "DBFS path for the init script"
+        }
+      },
+      "deprecated": true,
+      "example": "example_value"
+    },
+    "abfss": {
+      "type": "object",
+      "properties": {
+        "destination": {
+          "type": "string",
+          "description": "Azure Blob Storage (ABFSS) path for the init script"
+        }
+      },
+      "example": "example_value"
+    }
+  }
+}

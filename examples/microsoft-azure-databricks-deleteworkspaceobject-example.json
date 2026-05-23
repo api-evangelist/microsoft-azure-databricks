@@ -1,0 +1,24 @@
+{
+  "operationId": "deleteWorkspaceObject",
+  "method": "POST",
+  "path": "/2.0/workspace/delete",
+  "summary": "Azure Databricks Delete a Workspace Object",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "DeleteworkspaceobjectRequestExample",
+      "example": {
+        "path": "example_value",
+        "recursive": true
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Deleteworkspaceobject200Example",
+      "example": {}
+    }
+  ]
+}

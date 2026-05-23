@@ -1,0 +1,69 @@
+{
+  "operationId": "createCluster",
+  "method": "POST",
+  "path": "/2.0/clusters/create",
+  "summary": "Azure Databricks Create a New Cluster",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "CreateclusterRequestExample",
+      "example": {
+        "cluster_name": "example_value",
+        "spark_version": "example_value",
+        "node_type_id": "500123",
+        "driver_node_type_id": "500123",
+        "num_workers": 10,
+        "autoscale": {
+          "min_workers": 10,
+          "max_workers": 10
+        },
+        "spark_conf": "example_value",
+        "azure_attributes": {
+          "first_on_demand": 10,
+          "availability": "SPOT_AZURE",
+          "spot_bid_max_price": 42.5
+        },
+        "ssh_public_keys": [
+          "example_value"
+        ],
+        "custom_tags": "example_value",
+        "cluster_log_conf": {
+          "dbfs": {
+            "destination": "example_value"
+          },
+          "s3": {
+            "destination": "example_value",
+            "region": "example_value",
+            "endpoint": "example_value"
+          }
+        },
+        "init_scripts": [
+          {
+            "workspace": {},
+            "volumes": {},
+            "dbfs": {},
+            "abfss": {}
+          }
+        ],
+        "spark_env_vars": "example_value",
+        "enable_elastic_disk": true,
+        "instance_pool_id": "500123",
+        "policy_id": "500123",
+        "enable_local_disk_encryption": true,
+        "runtime_engine": "STANDARD",
+        "data_security_mode": "NONE",
+        "single_user_name": "example_value"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Createcluster200Example",
+      "example": {
+        "cluster_id": "500123"
+      }
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "operationId": "deleteJobRun",
+  "method": "POST",
+  "path": "/2.1/jobs/runs/delete",
+  "summary": "Azure Databricks Delete a Job Run",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "DeletejobrunRequestExample",
+      "example": {
+        "run_id": "500123"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Deletejobrun200Example",
+      "example": {}
+    }
+  ]
+}

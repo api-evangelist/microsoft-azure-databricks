@@ -1,0 +1,88 @@
+{
+  "operationId": "resetJob",
+  "method": "POST",
+  "path": "/2.1/jobs/reset",
+  "summary": "Azure Databricks Overwrite All Job Settings",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "ResetjobRequestExample",
+      "example": {
+        "job_id": "500123",
+        "new_settings": {
+          "name": "Example Title",
+          "tags": "example_value",
+          "tasks": [
+            {}
+          ],
+          "job_clusters": [
+            {}
+          ],
+          "email_notifications": {
+            "on_start": {},
+            "on_success": {},
+            "on_failure": {},
+            "on_duration_warning_threshold_exceeded": {},
+            "no_alert_for_skipped_runs": true
+          },
+          "webhook_notifications": {
+            "on_start": {},
+            "on_success": {},
+            "on_failure": {},
+            "on_duration_warning_threshold_exceeded": {}
+          },
+          "notification_settings": {
+            "no_alert_for_skipped_runs": true,
+            "no_alert_for_canceled_runs": true
+          },
+          "timeout_seconds": 10,
+          "max_concurrent_runs": 10,
+          "schedule": {
+            "quartz_cron_expression": "example_value",
+            "timezone_id": "500123",
+            "pause_status": "PAUSED"
+          },
+          "trigger": {
+            "file_arrival": {
+              "url": "https://www.example.com",
+              "min_time_between_triggers_seconds": 10,
+              "wait_after_last_change_seconds": 10
+            }
+          },
+          "continuous": {
+            "pause_status": "PAUSED"
+          },
+          "git_source": {
+            "git_url": "https://www.example.com",
+            "git_provider": "gitHub",
+            "git_branch": "example_value",
+            "git_tag": "example_value",
+            "git_commit": "example_value"
+          },
+          "format": "SINGLE_TASK",
+          "queue": {
+            "enabled": true
+          },
+          "parameters": [
+            {
+              "name": "Example Title",
+              "default": "example_value"
+            }
+          ],
+          "run_as": {
+            "user_name": "example_value",
+            "service_principal_name": "example_value"
+          }
+        }
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Resetjob200Example",
+      "example": {}
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "operationId": "runJobNow",
+  "method": "POST",
+  "path": "/2.1/jobs/run-now",
+  "summary": "Azure Databricks Trigger a New Job Run",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "RunjobnowRequestExample",
+      "example": {
+        "job_id": "500123",
+        "idempotency_token": "example_value",
+        "notebook_params": "example_value",
+        "python_params": [
+          "example_value"
+        ],
+        "spark_submit_params": [
+          "example_value"
+        ],
+        "jar_params": [
+          "example_value"
+        ],
+        "pipeline_params": {
+          "full_refresh": true
+        }
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Runjobnow200Example",
+      "example": {
+        "run_id": "500123",
+        "number_in_job": 10
+      }
+    }
+  ]
+}

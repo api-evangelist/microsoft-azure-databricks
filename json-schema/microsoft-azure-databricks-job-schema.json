@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Job",
+  "title": "Job",
+  "type": "object",
+  "properties": {
+    "job_id": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Canonical identifier of the job",
+      "example": "500123"
+    },
+    "creator_user_name": {
+      "type": "string",
+      "description": "Username of the job creator",
+      "example": "example_value"
+    },
+    "run_as_user_name": {
+      "type": "string",
+      "description": "User the job runs as",
+      "example": "example_value"
+    },
+    "settings": {
+      "$ref": "#/components/schemas/JobSettings"
+    },
+    "created_time": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Time the job was created (epoch milliseconds)",
+      "example": 10
+    }
+  }
+}

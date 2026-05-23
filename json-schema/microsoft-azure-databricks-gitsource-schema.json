@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/GitSource",
+  "title": "GitSource",
+  "type": "object",
+  "required": [
+    "git_url",
+    "git_provider"
+  ],
+  "properties": {
+    "git_url": {
+      "type": "string",
+      "description": "URL of the Git repository",
+      "example": "https://www.example.com"
+    },
+    "git_provider": {
+      "type": "string",
+      "enum": [
+        "gitHub",
+        "bitbucketCloud",
+        "azureDevOpsServices",
+        "gitHubEnterprise",
+        "bitbucketServer",
+        "gitLab",
+        "gitLabEnterpriseEdition",
+        "awsCodeCommit"
+      ],
+      "description": "Git provider type",
+      "example": "gitHub"
+    },
+    "git_branch": {
+      "type": "string",
+      "description": "Branch to check out",
+      "example": "example_value"
+    },
+    "git_tag": {
+      "type": "string",
+      "description": "Tag to check out",
+      "example": "example_value"
+    },
+    "git_commit": {
+      "type": "string",
+      "description": "Commit hash to check out",
+      "example": "example_value"
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RunState",
+  "title": "RunState",
+  "type": "object",
+  "properties": {
+    "life_cycle_state": {
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "QUEUED",
+        "RUNNING",
+        "TERMINATING",
+        "TERMINATED",
+        "SKIPPED",
+        "INTERNAL_ERROR",
+        "BLOCKED",
+        "WAITING_FOR_RETRY"
+      ],
+      "description": "Life cycle state of the run",
+      "example": "PENDING"
+    },
+    "result_state": {
+      "type": "string",
+      "enum": [
+        "SUCCESS",
+        "FAILED",
+        "TIMEDOUT",
+        "CANCELED",
+        "MAXIMUM_CONCURRENT_RUNS_REACHED",
+        "EXCLUDED",
+        "SUCCESS_WITH_FAILURES",
+        "UPSTREAM_FAILED",
+        "UPSTREAM_CANCELED"
+      ],
+      "description": "Result state of the run (available after completion)",
+      "example": "SUCCESS"
+    },
+    "state_message": {
+      "type": "string",
+      "description": "Descriptive message for the current state",
+      "example": "example_value"
+    },
+    "user_cancelled_or_timedout": {
+      "type": "boolean",
+      "description": "Whether the run was cancelled by a user or timed out",
+      "example": true
+    }
+  }
+}

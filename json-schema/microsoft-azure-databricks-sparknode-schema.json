@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SparkNode",
+  "title": "SparkNode",
+  "type": "object",
+  "properties": {
+    "private_ip": {
+      "type": "string",
+      "description": "Private IP address of the node",
+      "example": "example_value"
+    },
+    "public_dns": {
+      "type": "string",
+      "description": "Public DNS name of the node",
+      "example": "example_value"
+    },
+    "node_id": {
+      "type": "string",
+      "description": "Unique identifier for the node",
+      "example": "500123"
+    },
+    "instance_id": {
+      "type": "string",
+      "description": "Azure instance identifier",
+      "example": "500123"
+    },
+    "start_timestamp": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Start time of the node (epoch milliseconds)",
+      "example": 10
+    },
+    "host_private_ip": {
+      "type": "string",
+      "description": "Private IP address of the host",
+      "example": "example_value"
+    }
+  }
+}

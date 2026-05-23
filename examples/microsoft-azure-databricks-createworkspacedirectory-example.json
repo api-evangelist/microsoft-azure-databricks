@@ -1,0 +1,23 @@
+{
+  "operationId": "createWorkspaceDirectory",
+  "method": "POST",
+  "path": "/2.0/workspace/mkdirs",
+  "summary": "Azure Databricks Create a Directory",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "CreateworkspacedirectoryRequestExample",
+      "example": {
+        "path": "example_value"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Createworkspacedirectory200Example",
+      "example": {}
+    }
+  ]
+}

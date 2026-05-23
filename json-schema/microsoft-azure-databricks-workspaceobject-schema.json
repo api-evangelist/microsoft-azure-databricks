@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/WorkspaceObject",
+  "title": "WorkspaceObject",
+  "type": "object",
+  "properties": {
+    "object_type": {
+      "type": "string",
+      "enum": [
+        "NOTEBOOK",
+        "DIRECTORY",
+        "LIBRARY",
+        "FILE",
+        "REPO",
+        "DASHBOARD"
+      ],
+      "description": "Type of the workspace object",
+      "example": "NOTEBOOK"
+    },
+    "path": {
+      "type": "string",
+      "description": "Absolute path of the object in the workspace",
+      "example": "example_value"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "SCALA",
+        "PYTHON",
+        "SQL",
+        "R"
+      ],
+      "description": "Programming language of the object. Only applicable for notebooks.",
+      "example": "SCALA"
+    },
+    "object_id": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Unique identifier for the object",
+      "example": "500123"
+    },
+    "created_at": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Creation timestamp in epoch milliseconds",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "modified_at": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Last modification timestamp in epoch milliseconds",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "resource_id": {
+      "type": "string",
+      "description": "Resource ID for the object",
+      "example": "500123"
+    }
+  }
+}
