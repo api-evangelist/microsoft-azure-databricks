@@ -561,6 +561,8 @@ common:
   - Power BI for business intelligence dashboards
   - Terraform for infrastructure as code
   - Apache Kafka for streaming data ingestion
+- type: LLMsTxt
+  url: https://docs.databricks.com/llms.txt
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
