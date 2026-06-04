@@ -1,0 +1,145 @@
+arazzo: 1.0.1
+info:
+  title: Azure Databricks Create a Job and Run It to Completion
+  summary: Create a notebook job, trigger a run, and poll until TERMINATED.
+  description: >-
+    Defines a new notebook job and executes it once end to end. The workflow
+    creates the job from a single notebook task running on an existing cluster,
+    triggers a run, then polls the run get endpoint until the run life cycle
+    state is TERMINATED, branching on the result state to a success or failure
+    end. Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: azureDatabricksApi
+  url: ../openapi/azure-databricks-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-job-and-run
+  summary: Create a notebook job, run it now, and wait for the run to finish.
+  description: >-
+    Creates a job with a single notebook task, triggers runJobNow, then polls
+    getJobRun until life_cycle_state is TERMINATED, branching on result_state.
+  inputs:
+    type: object
+    required:
+    - token
+    - jobName
+    - taskKey
+    - notebookPath
+    - existingClusterId
+    properties:
+      token:
+        type: string
+        description: Databricks personal access token for the Authorization header.
+      jobName:
+        type: string
+        description: Name for the new job.
+      taskKey:
+        type: string
+        description: Unique key identifying the single task within the job.
+      notebookPath:
+        type: string
+        description: Absolute workspace path of the notebook to run.
+      existingClusterId:
+        type: string
+        description: Id of an existing all-purpose cluster to run the task on.
+  steps:
+  - stepId: createJob
+    description: >-
+      Create a job containing a single notebook task bound to an existing
+      cluster. The canonical job_id is returned.
+    operationId: createJob
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.jobName
+        tasks:
+        - task_key: $inputs.taskKey
+          existing_cluster_id: $inputs.existingClusterId
+          notebook_task:
+            notebook_path: $inputs.notebookPath
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      jobId: $response.body#/job_id
+  - stepId: runJobNow
+    description: >-
+      Trigger an immediate run of the newly created job and capture the run_id
+      for polling.
+    operationId: runJobNow
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    requestBody:
+      contentType: application/json
+      payload:
+        job_id: $steps.createJob.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      runId: $response.body#/run_id
+  - stepId: pollRun
+    description: >-
+      Retrieve the run state. Repeat until the run life_cycle_state is
+      TERMINATED, then branch on the result_state.
+    operationId: getJobRun
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: run_id
+      in: query
+      value: $steps.runJobNow.outputs.runId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      lifeCycleState: $response.body#/state/life_cycle_state
+      resultState: $response.body#/state/result_state
+    onSuccess:
+    - name: succeeded
+      type: goto
+      stepId: fetchOutput
+      criteria:
+      - context: $response.body
+        condition: $.state.life_cycle_state == "TERMINATED" && $.state.result_state == "SUCCESS"
+        type: jsonpath
+    - name: finishedNotSuccess
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.state.life_cycle_state == "TERMINATED" || $.state.life_cycle_state == "INTERNAL_ERROR"
+        type: jsonpath
+    - name: stillRunning
+      type: goto
+      stepId: pollRun
+      criteria:
+      - context: $response.body
+        condition: $.state.life_cycle_state == "PENDING" || $.state.life_cycle_state == "RUNNING" || $.state.life_cycle_state == "TERMINATING"
+        type: jsonpath
+  - stepId: fetchOutput
+    description: >-
+      Retrieve the notebook output for the successful run, capturing the value
+      passed to dbutils.notebook.exit().
+    operationId: getJobRunOutput
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: run_id
+      in: query
+      value: $steps.runJobNow.outputs.runId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      notebookResult: $response.body#/notebook_output/result
+  outputs:
+    jobId: $steps.createJob.outputs.jobId
+    runId: $steps.runJobNow.outputs.runId
+    resultState: $steps.pollRun.outputs.resultState
+    notebookResult: $steps.fetchOutput.outputs.notebookResult

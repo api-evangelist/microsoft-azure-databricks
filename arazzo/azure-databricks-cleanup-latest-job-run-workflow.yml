@@ -1,0 +1,92 @@
+arazzo: 1.0.1
+info:
+  title: Azure Databricks Clean Up the Latest Completed Job Run
+  summary: Find a job's latest completed run, confirm it, and delete it.
+  description: >-
+    Removes run history for a job once a run has finished. The workflow lists
+    the completed runs for a job, selects the most recent one, confirms it is
+    no longer active by reading its state, and then deletes the run. Deleting an
+    active run is rejected by the API, so the confirm step guards the delete.
+    Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: azureDatabricksApi
+  url: ../openapi/azure-databricks-openapi.yml
+  type: openapi
+workflows:
+- workflowId: cleanup-latest-job-run
+  summary: Delete a job's most recent completed run after confirming it ended.
+  description: >-
+    Lists completed runs for a job, captures the latest run_id, confirms it is
+    TERMINATED via getJobRun, then deletes it.
+  inputs:
+    type: object
+    required:
+    - token
+    - jobId
+    properties:
+      token:
+        type: string
+        description: Databricks personal access token for the Authorization header.
+      jobId:
+        type: integer
+        description: The canonical identifier of the job whose run is cleaned up.
+  steps:
+  - stepId: listCompletedRuns
+    description: >-
+      List the completed runs for the job, ordered newest first, and capture
+      the run_id of the most recent run.
+    operationId: listJobRuns
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: job_id
+      in: query
+      value: $inputs.jobId
+    - name: completed_only
+      in: query
+      value: true
+    - name: limit
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      latestRunId: $response.body#/runs/0/run_id
+  - stepId: confirmTerminated
+    description: >-
+      Read the latest run and confirm its life_cycle_state is TERMINATED before
+      deleting, since active runs cannot be deleted.
+    operationId: getJobRun
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: run_id
+      in: query
+      value: $steps.listCompletedRuns.outputs.latestRunId
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $response.body#/state/life_cycle_state == "TERMINATED"
+    outputs:
+      lifeCycleState: $response.body#/state/life_cycle_state
+  - stepId: deleteRun
+    description: >-
+      Delete the confirmed non-active run, removing it from the job's run
+      history.
+    operationId: deleteJobRun
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    requestBody:
+      contentType: application/json
+      payload:
+        run_id: $steps.listCompletedRuns.outputs.latestRunId
+    successCriteria:
+    - condition: $statusCode == 200
+  outputs:
+    jobId: $inputs.jobId
+    deletedRunId: $steps.listCompletedRuns.outputs.latestRunId

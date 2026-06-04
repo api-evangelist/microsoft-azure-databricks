@@ -1,0 +1,110 @@
+arazzo: 1.0.1
+info:
+  title: Azure Databricks Overwrite Job Settings and Verify
+  summary: Reset all of a job's settings, then read the job back to confirm.
+  description: >-
+    Replaces every setting on an existing job with a fresh definition. The
+    workflow reads the job to confirm it exists, overwrites all of its settings
+    with a new single notebook task definition via the reset endpoint, and then
+    reads the job back to verify the new name and configuration took effect.
+    Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: azureDatabricksApi
+  url: ../openapi/azure-databricks-openapi.yml
+  type: openapi
+workflows:
+- workflowId: reset-job-and-verify
+  summary: Overwrite all settings of a job and verify the new configuration.
+  description: >-
+    Reads the job, calls resetJob with new_settings, then reads getJob again to
+    confirm the overwrite.
+  inputs:
+    type: object
+    required:
+    - token
+    - jobId
+    - newName
+    - taskKey
+    - notebookPath
+    - existingClusterId
+    properties:
+      token:
+        type: string
+        description: Databricks personal access token for the Authorization header.
+      jobId:
+        type: integer
+        description: The canonical identifier of the job to reset.
+      newName:
+        type: string
+        description: New name for the job after the reset.
+      taskKey:
+        type: string
+        description: Unique key identifying the single task in the new settings.
+      notebookPath:
+        type: string
+        description: Absolute workspace path of the notebook task.
+      existingClusterId:
+        type: string
+        description: Id of an existing cluster the new task should run on.
+  steps:
+  - stepId: readBefore
+    description: >-
+      Read the job to confirm it exists and capture its current name before
+      overwriting its settings.
+    operationId: getJob
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: job_id
+      in: query
+      value: $inputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      previousName: $response.body#/settings/name
+  - stepId: resetJob
+    description: >-
+      Overwrite all settings for the job with a new single notebook task
+      definition.
+    operationId: resetJob
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    requestBody:
+      contentType: application/json
+      payload:
+        job_id: $inputs.jobId
+        new_settings:
+          name: $inputs.newName
+          tasks:
+          - task_key: $inputs.taskKey
+            existing_cluster_id: $inputs.existingClusterId
+            notebook_task:
+              notebook_path: $inputs.notebookPath
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: readAfter
+    description: >-
+      Read the job back to verify the new name and settings took effect after
+      the reset.
+    operationId: getJob
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: job_id
+      in: query
+      value: $inputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $response.body#/settings/name == $inputs.newName
+    outputs:
+      newName: $response.body#/settings/name
+  outputs:
+    jobId: $inputs.jobId
+    previousName: $steps.readBefore.outputs.previousName
+    newName: $steps.readAfter.outputs.newName

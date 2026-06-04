@@ -1,0 +1,85 @@
+arazzo: 1.0.1
+info:
+  title: Azure Databricks Safely Delete a Workspace Directory
+  summary: List a directory, confirm it is a directory, then recursively delete it.
+  description: >-
+    Removes a workspace directory and its contents after inspecting it. The
+    workflow lists the directory to capture what will be removed, confirms via a
+    status check that the path is a DIRECTORY, and then recursively deletes it.
+    Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: azureDatabricksApi
+  url: ../openapi/azure-databricks-openapi.yml
+  type: openapi
+workflows:
+- workflowId: delete-workspace-directory
+  summary: Inspect a directory, confirm its type, then recursively delete it.
+  description: >-
+    Lists the directory, confirms object_type is DIRECTORY via
+    getWorkspaceObjectStatus, then deletes it recursively.
+  inputs:
+    type: object
+    required:
+    - token
+    - directoryPath
+    properties:
+      token:
+        type: string
+        description: Databricks personal access token for the Authorization header.
+      directoryPath:
+        type: string
+        description: Absolute path of the workspace directory to delete.
+  steps:
+  - stepId: listDirectory
+    description: >-
+      List the directory contents to capture what will be removed before
+      deleting.
+    operationId: listWorkspaceObjects
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: path
+      in: query
+      value: $inputs.directoryPath
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      objects: $response.body#/objects
+  - stepId: confirmDirectory
+    description: >-
+      Confirm the path is a DIRECTORY before issuing a recursive delete so a
+      single object is not removed unexpectedly.
+    operationId: getWorkspaceObjectStatus
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: path
+      in: query
+      value: $inputs.directoryPath
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $response.body#/object_type == "DIRECTORY"
+    outputs:
+      objectType: $response.body#/object_type
+  - stepId: deleteDirectory
+    description: >-
+      Recursively delete the confirmed directory and all of its contents.
+    operationId: deleteWorkspaceObject
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    requestBody:
+      contentType: application/json
+      payload:
+        path: $inputs.directoryPath
+        recursive: true
+    successCriteria:
+    - condition: $statusCode == 200
+  outputs:
+    directoryPath: $inputs.directoryPath
+    deletedContents: $steps.listDirectory.outputs.objects

@@ -1,0 +1,190 @@
+arazzo: 1.0.1
+info:
+  title: Azure Databricks Provision a Cluster and Run a Job on It
+  summary: Create a cluster, wait until RUNNING, create a job on it, then run it.
+  description: >-
+    Stands up dedicated compute and immediately runs a notebook job against it.
+    The workflow creates a cluster, polls until the cluster state is RUNNING,
+    creates a notebook job bound to that cluster, triggers a run, and polls the
+    run until its life cycle state is TERMINATED. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: azureDatabricksApi
+  url: ../openapi/azure-databricks-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provision-cluster-and-run-job
+  summary: Create a cluster, wait for RUNNING, then create and run a notebook job.
+  description: >-
+    Chains createCluster, a getCluster poll to RUNNING, createJob bound to the
+    new cluster, runJobNow, and a getJobRun poll to TERMINATED.
+  inputs:
+    type: object
+    required:
+    - token
+    - clusterName
+    - sparkVersion
+    - nodeTypeId
+    - numWorkers
+    - jobName
+    - taskKey
+    - notebookPath
+    properties:
+      token:
+        type: string
+        description: Databricks personal access token for the Authorization header.
+      clusterName:
+        type: string
+        description: Name for the new cluster.
+      sparkVersion:
+        type: string
+        description: Databricks Runtime version key for the cluster.
+      nodeTypeId:
+        type: string
+        description: Azure VM node type id for the cluster.
+      numWorkers:
+        type: integer
+        description: Number of worker nodes for the cluster.
+      jobName:
+        type: string
+        description: Name for the job to create.
+      taskKey:
+        type: string
+        description: Unique key identifying the single task within the job.
+      notebookPath:
+        type: string
+        description: Absolute workspace path of the notebook to run.
+  steps:
+  - stepId: createCluster
+    description: >-
+      Create the cluster that will host the job. The cluster starts in PENDING
+      and the cluster_id is returned.
+    operationId: createCluster
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    requestBody:
+      contentType: application/json
+      payload:
+        cluster_name: $inputs.clusterName
+        spark_version: $inputs.sparkVersion
+        node_type_id: $inputs.nodeTypeId
+        num_workers: $inputs.numWorkers
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      clusterId: $response.body#/cluster_id
+  - stepId: pollCluster
+    description: >-
+      Retrieve the cluster state. Repeat until the cluster is RUNNING, then
+      create the job; branch to failure if it terminates.
+    operationId: getCluster
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: cluster_id
+      in: query
+      value: $steps.createCluster.outputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      state: $response.body#/state
+    onSuccess:
+    - name: running
+      type: goto
+      stepId: createJob
+      criteria:
+      - context: $response.body
+        condition: $.state == "RUNNING"
+        type: jsonpath
+    - name: failed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.state == "TERMINATED" || $.state == "ERROR"
+        type: jsonpath
+    - name: pending
+      type: goto
+      stepId: pollCluster
+      criteria:
+      - context: $response.body
+        condition: $.state == "PENDING" || $.state == "RESTARTING"
+        type: jsonpath
+  - stepId: createJob
+    description: >-
+      Create a notebook job bound to the newly provisioned cluster and capture
+      the job_id.
+    operationId: createJob
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.jobName
+        tasks:
+        - task_key: $inputs.taskKey
+          existing_cluster_id: $steps.createCluster.outputs.clusterId
+          notebook_task:
+            notebook_path: $inputs.notebookPath
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      jobId: $response.body#/job_id
+  - stepId: runJobNow
+    description: >-
+      Trigger an immediate run of the job and capture the run_id for polling.
+    operationId: runJobNow
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    requestBody:
+      contentType: application/json
+      payload:
+        job_id: $steps.createJob.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      runId: $response.body#/run_id
+  - stepId: pollRun
+    description: >-
+      Retrieve the run state. Repeat until the run life_cycle_state is
+      TERMINATED, then end with the final result_state.
+    operationId: getJobRun
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: run_id
+      in: query
+      value: $steps.runJobNow.outputs.runId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      lifeCycleState: $response.body#/state/life_cycle_state
+      resultState: $response.body#/state/result_state
+    onSuccess:
+    - name: finished
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.state.life_cycle_state == "TERMINATED" || $.state.life_cycle_state == "INTERNAL_ERROR"
+        type: jsonpath
+    - name: stillRunning
+      type: goto
+      stepId: pollRun
+      criteria:
+      - context: $response.body
+        condition: $.state.life_cycle_state == "PENDING" || $.state.life_cycle_state == "RUNNING" || $.state.life_cycle_state == "TERMINATING"
+        type: jsonpath
+  outputs:
+    clusterId: $steps.createCluster.outputs.clusterId
+    jobId: $steps.createJob.outputs.jobId
+    runId: $steps.runJobNow.outputs.runId
+    resultState: $steps.pollRun.outputs.resultState

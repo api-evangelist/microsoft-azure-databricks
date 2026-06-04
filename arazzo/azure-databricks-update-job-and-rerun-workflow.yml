@@ -1,0 +1,124 @@
+arazzo: 1.0.1
+info:
+  title: Azure Databricks Update a Job and Re-run It
+  summary: Partially update a job's settings, then trigger and poll a fresh run.
+  description: >-
+    Applies a configuration change to an existing job and validates it by
+    running the job. The workflow reads the job, partially updates its settings
+    with a new timeout, triggers a fresh run, then polls the run get endpoint
+    until the life cycle state is TERMINATED. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: azureDatabricksApi
+  url: ../openapi/azure-databricks-openapi.yml
+  type: openapi
+workflows:
+- workflowId: update-job-and-rerun
+  summary: Partially update a job, then run it and wait for the run to finish.
+  description: >-
+    Reads the job, calls updateJob to change the timeout, triggers runJobNow,
+    then polls getJobRun until life_cycle_state is TERMINATED.
+  inputs:
+    type: object
+    required:
+    - token
+    - jobId
+    - newTimeoutSeconds
+    properties:
+      token:
+        type: string
+        description: Databricks personal access token for the Authorization header.
+      jobId:
+        type: integer
+        description: The canonical identifier of the job to update and re-run.
+      newTimeoutSeconds:
+        type: integer
+        description: New timeout in seconds to apply to the job settings.
+  steps:
+  - stepId: getJob
+    description: >-
+      Read the job to capture its current name and confirm it exists before
+      updating.
+    operationId: getJob
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: job_id
+      in: query
+      value: $inputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      jobName: $response.body#/settings/name
+  - stepId: updateJob
+    description: >-
+      Partially update the job settings with a new timeout. Only the supplied
+      settings are changed; all others are left intact.
+    operationId: updateJob
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    requestBody:
+      contentType: application/json
+      payload:
+        job_id: $inputs.jobId
+        new_settings:
+          timeout_seconds: $inputs.newTimeoutSeconds
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: runJobNow
+    description: >-
+      Trigger a fresh run of the updated job and capture the run_id for
+      polling.
+    operationId: runJobNow
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    requestBody:
+      contentType: application/json
+      payload:
+        job_id: $inputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      runId: $response.body#/run_id
+  - stepId: pollRun
+    description: >-
+      Retrieve the run state. Repeat until the run life_cycle_state is
+      TERMINATED, then end with the final result_state.
+    operationId: getJobRun
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: run_id
+      in: query
+      value: $steps.runJobNow.outputs.runId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      lifeCycleState: $response.body#/state/life_cycle_state
+      resultState: $response.body#/state/result_state
+    onSuccess:
+    - name: finished
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.state.life_cycle_state == "TERMINATED" || $.state.life_cycle_state == "INTERNAL_ERROR"
+        type: jsonpath
+    - name: stillRunning
+      type: goto
+      stepId: pollRun
+      criteria:
+      - context: $response.body
+        condition: $.state.life_cycle_state == "PENDING" || $.state.life_cycle_state == "RUNNING" || $.state.life_cycle_state == "TERMINATING"
+        type: jsonpath
+  outputs:
+    jobId: $inputs.jobId
+    runId: $steps.runJobNow.outputs.runId
+    resultState: $steps.pollRun.outputs.resultState

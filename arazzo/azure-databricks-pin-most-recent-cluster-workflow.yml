@@ -1,0 +1,84 @@
+arazzo: 1.0.1
+info:
+  title: Azure Databricks Pin the First Listed Cluster
+  summary: List clusters, pick the first, and pin it so it is always retained.
+  description: >-
+    Pins a cluster so it is never removed from the list clusters results after
+    termination. The workflow lists the workspace clusters, selects the first
+    cluster returned, pins it, and then verifies the pin by reading the cluster
+    back. Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: azureDatabricksApi
+  url: ../openapi/azure-databricks-openapi.yml
+  type: openapi
+workflows:
+- workflowId: pin-most-recent-cluster
+  summary: List clusters and pin the first one returned.
+  description: >-
+    Lists clusters, captures the first cluster_id, pins it, and reads the
+    cluster back to confirm.
+  inputs:
+    type: object
+    required:
+    - token
+    properties:
+      token:
+        type: string
+        description: Databricks personal access token for the Authorization header.
+      canUseClient:
+        type: string
+        description: Optional client filter, either NOTEBOOKS or JOBS.
+  steps:
+  - stepId: listClusters
+    description: >-
+      List the workspace clusters and capture the id of the first cluster in
+      the response to pin.
+    operationId: listClusters
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: can_use_client
+      in: query
+      value: $inputs.canUseClient
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstClusterId: $response.body#/clusters/0/cluster_id
+  - stepId: pinCluster
+    description: >-
+      Pin the selected cluster so it is always returned by the list clusters
+      API even after it is terminated.
+    operationId: pinCluster
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    requestBody:
+      contentType: application/json
+      payload:
+        cluster_id: $steps.listClusters.outputs.firstClusterId
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: confirmPin
+    description: >-
+      Read the cluster back to confirm it still resolves after pinning and to
+      capture its current state for the workflow outputs.
+    operationId: getCluster
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: cluster_id
+      in: query
+      value: $steps.listClusters.outputs.firstClusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      clusterId: $response.body#/cluster_id
+      state: $response.body#/state
+  outputs:
+    pinnedClusterId: $steps.confirmPin.outputs.clusterId
+    state: $steps.confirmPin.outputs.state

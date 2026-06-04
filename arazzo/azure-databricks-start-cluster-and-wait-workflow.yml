@@ -1,0 +1,109 @@
+arazzo: 1.0.1
+info:
+  title: Azure Databricks Start a Terminated Cluster and Wait
+  summary: Start a terminated cluster and poll its state until RUNNING.
+  description: >-
+    Brings an existing terminated cluster back online. The workflow issues a
+    start request for the cluster, then polls the cluster get endpoint until
+    the state transitions from PENDING to RUNNING, branching to a failure end
+    if the cluster returns to a TERMINATED or ERROR state. Every step spells
+    out its request inline so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: azureDatabricksApi
+  url: ../openapi/azure-databricks-openapi.yml
+  type: openapi
+workflows:
+- workflowId: start-cluster-and-wait
+  summary: Start a terminated cluster and wait until it is RUNNING.
+  description: >-
+    Starts a terminated cluster by id, then polls getCluster until the state is
+    RUNNING, branching to a failure end if it becomes TERMINATED.
+  inputs:
+    type: object
+    required:
+    - token
+    - clusterId
+    properties:
+      token:
+        type: string
+        description: Databricks personal access token for the Authorization header.
+      clusterId:
+        type: string
+        description: The id of the terminated cluster to start.
+  steps:
+  - stepId: startCluster
+    description: >-
+      Issue a start request for the terminated cluster. The cluster begins
+      transitioning to a PENDING then RUNNING state using its last config.
+    operationId: startCluster
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    requestBody:
+      contentType: application/json
+      payload:
+        cluster_id: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: pollCluster
+    description: >-
+      Retrieve the current cluster state. Repeat until the cluster reports
+      RUNNING; branch to failure if it reports TERMINATED or ERROR.
+    operationId: getCluster
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: cluster_id
+      in: query
+      value: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      state: $response.body#/state
+      stateMessage: $response.body#/state_message
+    onSuccess:
+    - name: clusterRunning
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.state == "RUNNING"
+        type: jsonpath
+    - name: clusterFailed
+      type: goto
+      stepId: reportFailure
+      criteria:
+      - context: $response.body
+        condition: $.state == "TERMINATED" || $.state == "ERROR"
+        type: jsonpath
+    - name: stillPending
+      type: goto
+      stepId: pollCluster
+      criteria:
+      - context: $response.body
+        condition: $.state == "PENDING" || $.state == "RESTARTING"
+        type: jsonpath
+  - stepId: reportFailure
+    description: >-
+      Read the cluster once more to capture the termination reason when the
+      start did not reach RUNNING.
+    operationId: getCluster
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: cluster_id
+      in: query
+      value: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      state: $response.body#/state
+      terminationReason: $response.body#/termination_reason
+  outputs:
+    clusterId: $inputs.clusterId
+    finalState: $steps.pollCluster.outputs.state
+    failureState: $steps.reportFailure.outputs.state

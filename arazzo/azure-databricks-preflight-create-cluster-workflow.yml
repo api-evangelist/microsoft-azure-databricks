@@ -1,0 +1,90 @@
+arazzo: 1.0.1
+info:
+  title: Azure Databricks Preflight and Create a Cluster
+  summary: Resolve a valid Spark version and node type, then create a cluster.
+  description: >-
+    Discovers valid cluster configuration values before provisioning. The
+    workflow lists the available Databricks Runtime versions and supported node
+    types, selects the first of each as defaults, and creates a cluster using
+    those resolved values. This avoids hard-coding version or node identifiers
+    that may not exist in the target workspace. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: azureDatabricksApi
+  url: ../openapi/azure-databricks-openapi.yml
+  type: openapi
+workflows:
+- workflowId: preflight-create-cluster
+  summary: Resolve a Spark version and node type, then create a cluster.
+  description: >-
+    Lists spark versions and node types, picks the first of each, then calls
+    createCluster with those resolved values.
+  inputs:
+    type: object
+    required:
+    - token
+    - clusterName
+    - numWorkers
+    properties:
+      token:
+        type: string
+        description: Databricks personal access token for the Authorization header.
+      clusterName:
+        type: string
+        description: Name for the new cluster.
+      numWorkers:
+        type: integer
+        description: Number of worker nodes for the cluster.
+  steps:
+  - stepId: listSparkVersions
+    description: >-
+      List the available Databricks Runtime versions and capture the first
+      version key to use for the cluster.
+    operationId: listSparkVersions
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      sparkVersion: $response.body#/versions/0/key
+  - stepId: listNodeTypes
+    description: >-
+      List the supported Azure VM node types and capture the first node type id
+      to use for the cluster.
+    operationId: listNodeTypes
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      nodeTypeId: $response.body#/node_types/0/node_type_id
+  - stepId: createCluster
+    description: >-
+      Create the cluster using the resolved Spark version and node type,
+      capturing the returned cluster_id.
+    operationId: createCluster
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    requestBody:
+      contentType: application/json
+      payload:
+        cluster_name: $inputs.clusterName
+        spark_version: $steps.listSparkVersions.outputs.sparkVersion
+        node_type_id: $steps.listNodeTypes.outputs.nodeTypeId
+        num_workers: $inputs.numWorkers
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      clusterId: $response.body#/cluster_id
+  outputs:
+    clusterId: $steps.createCluster.outputs.clusterId
+    sparkVersion: $steps.listSparkVersions.outputs.sparkVersion
+    nodeTypeId: $steps.listNodeTypes.outputs.nodeTypeId

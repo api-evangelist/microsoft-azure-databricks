@@ -1,0 +1,101 @@
+arazzo: 1.0.1
+info:
+  title: Azure Databricks Back Up a Notebook by Export and Re-import
+  summary: Confirm a notebook, export its content, and re-import it to a backup path.
+  description: >-
+    Copies a notebook to a backup location inside the workspace. The workflow
+    confirms the source notebook exists, exports it in SOURCE format to capture
+    its base64-encoded content, and re-imports that content to a backup path.
+    Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: azureDatabricksApi
+  url: ../openapi/azure-databricks-openapi.yml
+  type: openapi
+workflows:
+- workflowId: backup-notebook
+  summary: Export a notebook and re-import it to a backup path.
+  description: >-
+    Confirms the source via getWorkspaceObjectStatus, exports it with
+    exportWorkspaceObject, then imports the content to a backup path.
+  inputs:
+    type: object
+    required:
+    - token
+    - sourcePath
+    - backupPath
+    - language
+    properties:
+      token:
+        type: string
+        description: Databricks personal access token for the Authorization header.
+      sourcePath:
+        type: string
+        description: Absolute path of the source notebook to back up.
+      backupPath:
+        type: string
+        description: Absolute path to write the backup copy to.
+      language:
+        type: string
+        description: Notebook language, one of SCALA, PYTHON, SQL, or R.
+  steps:
+  - stepId: confirmSource
+    description: >-
+      Confirm the source object exists and is a NOTEBOOK before exporting it.
+    operationId: getWorkspaceObjectStatus
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: path
+      in: query
+      value: $inputs.sourcePath
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $response.body#/object_type == "NOTEBOOK"
+    outputs:
+      objectType: $response.body#/object_type
+  - stepId: exportNotebook
+    description: >-
+      Export the source notebook in SOURCE format and capture the
+      base64-encoded content.
+    operationId: exportWorkspaceObject
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: path
+      in: query
+      value: $inputs.sourcePath
+    - name: format
+      in: query
+      value: SOURCE
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      content: $response.body#/content
+      fileType: $response.body#/file_type
+  - stepId: importBackup
+    description: >-
+      Import the exported content to the backup path, overwriting any existing
+      backup.
+    operationId: importWorkspaceObject
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    requestBody:
+      contentType: application/json
+      payload:
+        path: $inputs.backupPath
+        format: SOURCE
+        language: $inputs.language
+        content: $steps.exportNotebook.outputs.content
+        overwrite: true
+    successCriteria:
+    - condition: $statusCode == 200
+  outputs:
+    sourcePath: $inputs.sourcePath
+    backupPath: $inputs.backupPath
+    fileType: $steps.exportNotebook.outputs.fileType

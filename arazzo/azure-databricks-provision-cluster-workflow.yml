@@ -1,0 +1,154 @@
+arazzo: 1.0.1
+info:
+  title: Azure Databricks Provision and Wait for Cluster
+  summary: Create a cluster and poll its state until it reaches RUNNING.
+  description: >-
+    Provisions a new Apache Spark cluster and waits for it to become ready.
+    The workflow creates the cluster from the supplied configuration, captures
+    the returned cluster_id, then polls the cluster get endpoint until its
+    state transitions out of PENDING into RUNNING. If the cluster reports a
+    TERMINATED or ERROR state the flow branches to a failure end. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: azureDatabricksApi
+  url: ../openapi/azure-databricks-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provision-cluster
+  summary: Create a Databricks cluster and wait until it is RUNNING.
+  description: >-
+    Creates a Spark cluster, then polls getCluster until the cluster state is
+    RUNNING, branching to a failure end if it becomes TERMINATED.
+  inputs:
+    type: object
+    required:
+    - token
+    - clusterName
+    - sparkVersion
+    - nodeTypeId
+    - numWorkers
+    properties:
+      token:
+        type: string
+        description: Databricks personal access token for the Authorization header.
+      clusterName:
+        type: string
+        description: Human-readable name for the new cluster.
+      sparkVersion:
+        type: string
+        description: Databricks Runtime version key (from listSparkVersions).
+      nodeTypeId:
+        type: string
+        description: Azure VM node type id for the workers and driver.
+      numWorkers:
+        type: integer
+        description: Number of worker nodes for a fixed-size cluster.
+      autoterminationMinutes:
+        type: integer
+        description: Idle minutes before the cluster auto-terminates.
+        default: 30
+  steps:
+  - stepId: createCluster
+    description: >-
+      Create the cluster from the supplied configuration. The cluster starts
+      in a PENDING state and the canonical cluster_id is returned.
+    operationId: createCluster
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    requestBody:
+      contentType: application/json
+      payload:
+        cluster_name: $inputs.clusterName
+        spark_version: $inputs.sparkVersion
+        node_type_id: $inputs.nodeTypeId
+        num_workers: $inputs.numWorkers
+        autotermination_minutes: $inputs.autoterminationMinutes
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      clusterId: $response.body#/cluster_id
+  - stepId: pollCluster
+    description: >-
+      Retrieve the current cluster state. Repeat this step until the cluster
+      reports RUNNING; branch to failure if it reports TERMINATED.
+    operationId: getCluster
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: cluster_id
+      in: query
+      value: $steps.createCluster.outputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      state: $response.body#/state
+      stateMessage: $response.body#/state_message
+    onSuccess:
+    - name: clusterRunning
+      type: goto
+      stepId: confirmRunning
+      criteria:
+      - context: $response.body
+        condition: $.state == "RUNNING"
+        type: jsonpath
+    - name: clusterFailed
+      type: goto
+      stepId: reportFailure
+      criteria:
+      - context: $response.body
+        condition: $.state == "TERMINATED" || $.state == "ERROR"
+        type: jsonpath
+    - name: stillPending
+      type: goto
+      stepId: pollCluster
+      criteria:
+      - context: $response.body
+        condition: $.state == "PENDING" || $.state == "RESTARTING" || $.state == "RESIZING"
+        type: jsonpath
+  - stepId: confirmRunning
+    description: >-
+      Re-read the cluster once it is RUNNING to capture its final metadata for
+      the workflow outputs.
+    operationId: getCluster
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: cluster_id
+      in: query
+      value: $steps.createCluster.outputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $response.body#/state == "RUNNING"
+    outputs:
+      clusterId: $response.body#/cluster_id
+      state: $response.body#/state
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: reportFailure
+    description: >-
+      Read the cluster one last time to capture the termination reason when
+      provisioning did not reach RUNNING.
+    operationId: getCluster
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: cluster_id
+      in: query
+      value: $steps.createCluster.outputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      state: $response.body#/state
+      terminationReason: $response.body#/termination_reason
+  outputs:
+    clusterId: $steps.createCluster.outputs.clusterId
+    finalState: $steps.confirmRunning.outputs.state
+    failureState: $steps.reportFailure.outputs.state

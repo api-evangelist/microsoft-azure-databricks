@@ -1,0 +1,113 @@
+arazzo: 1.0.1
+info:
+  title: Azure Databricks Run an Existing Job and Wait
+  summary: Trigger an existing job with parameters and poll the run to completion.
+  description: >-
+    Executes a previously defined job and waits for the result. The workflow
+    confirms the job exists, triggers a run with optional notebook parameters
+    and an idempotency token, then polls the run get endpoint until the life
+    cycle state is TERMINATED, branching on the result state to a success or
+    failure end. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: azureDatabricksApi
+  url: ../openapi/azure-databricks-openapi.yml
+  type: openapi
+workflows:
+- workflowId: run-existing-job-and-wait
+  summary: Trigger an existing job with parameters and wait for the run to finish.
+  description: >-
+    Confirms the job, triggers runJobNow with notebook_params, then polls
+    getJobRun until life_cycle_state is TERMINATED.
+  inputs:
+    type: object
+    required:
+    - token
+    - jobId
+    properties:
+      token:
+        type: string
+        description: Databricks personal access token for the Authorization header.
+      jobId:
+        type: integer
+        description: The canonical identifier of the job to run.
+      idempotencyToken:
+        type: string
+        description: Optional token guaranteeing idempotency of the run request.
+      notebookParams:
+        type: object
+        description: Map of name-value pairs passed to notebook tasks.
+  steps:
+  - stepId: getJob
+    description: >-
+      Confirm the job exists and capture its name before triggering a run.
+    operationId: getJob
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: job_id
+      in: query
+      value: $inputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      jobName: $response.body#/settings/name
+  - stepId: runJobNow
+    description: >-
+      Trigger an immediate run of the job, passing any notebook parameters and
+      idempotency token, and capture the run_id.
+    operationId: runJobNow
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    requestBody:
+      contentType: application/json
+      payload:
+        job_id: $inputs.jobId
+        idempotency_token: $inputs.idempotencyToken
+        notebook_params: $inputs.notebookParams
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      runId: $response.body#/run_id
+      numberInJob: $response.body#/number_in_job
+  - stepId: pollRun
+    description: >-
+      Retrieve the run state. Repeat until the run life_cycle_state is
+      TERMINATED, then branch on the result_state.
+    operationId: getJobRun
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: run_id
+      in: query
+      value: $steps.runJobNow.outputs.runId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      lifeCycleState: $response.body#/state/life_cycle_state
+      resultState: $response.body#/state/result_state
+      runPageUrl: $response.body#/run_page_url
+    onSuccess:
+    - name: finished
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.state.life_cycle_state == "TERMINATED" || $.state.life_cycle_state == "INTERNAL_ERROR"
+        type: jsonpath
+    - name: stillRunning
+      type: goto
+      stepId: pollRun
+      criteria:
+      - context: $response.body
+        condition: $.state.life_cycle_state == "PENDING" || $.state.life_cycle_state == "RUNNING" || $.state.life_cycle_state == "TERMINATING"
+        type: jsonpath
+  outputs:
+    jobId: $inputs.jobId
+    runId: $steps.runJobNow.outputs.runId
+    resultState: $steps.pollRun.outputs.resultState
+    runPageUrl: $steps.pollRun.outputs.runPageUrl

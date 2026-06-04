@@ -1,0 +1,125 @@
+arazzo: 1.0.1
+info:
+  title: Azure Databricks Restart a Running Cluster and Wait
+  summary: Restart a running cluster and poll until it returns to RUNNING.
+  description: >-
+    Cycles a running cluster and confirms it comes back healthy. The workflow
+    confirms the cluster is RUNNING, issues a restart, then polls the cluster
+    get endpoint until the state settles back to RUNNING, branching to a
+    failure end if it terminates instead. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: azureDatabricksApi
+  url: ../openapi/azure-databricks-openapi.yml
+  type: openapi
+workflows:
+- workflowId: restart-cluster-and-wait
+  summary: Restart a running cluster and wait until it is RUNNING again.
+  description: >-
+    Verifies the cluster is RUNNING, restarts it, then polls getCluster until
+    the state returns to RUNNING, branching to a failure end on TERMINATED.
+  inputs:
+    type: object
+    required:
+    - token
+    - clusterId
+    properties:
+      token:
+        type: string
+        description: Databricks personal access token for the Authorization header.
+      clusterId:
+        type: string
+        description: The id of the running cluster to restart.
+  steps:
+  - stepId: confirmRunning
+    description: >-
+      Confirm the cluster is currently RUNNING before issuing a restart, since
+      restart is only valid for a running cluster.
+    operationId: getCluster
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: cluster_id
+      in: query
+      value: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $response.body#/state == "RUNNING"
+    outputs:
+      state: $response.body#/state
+  - stepId: restartCluster
+    description: >-
+      Issue the restart. The cluster transitions to RESTARTING and then back to
+      RUNNING when the restart completes.
+    operationId: restartCluster
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    requestBody:
+      contentType: application/json
+      payload:
+        cluster_id: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: pollCluster
+    description: >-
+      Retrieve the current cluster state. Repeat until the cluster reports
+      RUNNING again; branch to failure if it reports TERMINATED or ERROR.
+    operationId: getCluster
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: cluster_id
+      in: query
+      value: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      state: $response.body#/state
+    onSuccess:
+    - name: backToRunning
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.state == "RUNNING"
+        type: jsonpath
+    - name: failed
+      type: goto
+      stepId: reportFailure
+      criteria:
+      - context: $response.body
+        condition: $.state == "TERMINATED" || $.state == "ERROR"
+        type: jsonpath
+    - name: stillRestarting
+      type: goto
+      stepId: pollCluster
+      criteria:
+      - context: $response.body
+        condition: $.state == "RESTARTING" || $.state == "PENDING"
+        type: jsonpath
+  - stepId: reportFailure
+    description: >-
+      Read the cluster once more to capture the termination reason when the
+      restart did not return to RUNNING.
+    operationId: getCluster
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: cluster_id
+      in: query
+      value: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      state: $response.body#/state
+      terminationReason: $response.body#/termination_reason
+  outputs:
+    clusterId: $inputs.clusterId
+    finalState: $steps.pollCluster.outputs.state
+    failureState: $steps.reportFailure.outputs.state

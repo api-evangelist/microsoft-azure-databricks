@@ -1,0 +1,89 @@
+arazzo: 1.0.1
+info:
+  title: Azure Databricks Cluster Health Diagnostics
+  summary: Read a cluster's state then pull its recent events for diagnosis.
+  description: >-
+    Gathers diagnostic context for a single cluster. The workflow reads the
+    cluster to capture its current state and termination reason, then retrieves
+    the most recent cluster events filtered to the failure and lifecycle event
+    types so an operator can understand why the cluster is in its current
+    state. Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: azureDatabricksApi
+  url: ../openapi/azure-databricks-openapi.yml
+  type: openapi
+workflows:
+- workflowId: cluster-health-diagnostics
+  summary: Inspect a cluster's state and recent events for diagnosis.
+  description: >-
+    Reads the cluster state, then lists its recent events to surface lifecycle
+    and failure activity.
+  inputs:
+    type: object
+    required:
+    - token
+    - clusterId
+    properties:
+      token:
+        type: string
+        description: Databricks personal access token for the Authorization header.
+      clusterId:
+        type: string
+        description: The id of the cluster to diagnose.
+      eventLimit:
+        type: integer
+        description: Maximum number of events to return (max 50).
+        default: 50
+  steps:
+  - stepId: readCluster
+    description: >-
+      Read the cluster to capture its current state, state message, and any
+      termination reason.
+    operationId: getCluster
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: cluster_id
+      in: query
+      value: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      state: $response.body#/state
+      stateMessage: $response.body#/state_message
+      terminationReason: $response.body#/termination_reason
+  - stepId: listEvents
+    description: >-
+      Retrieve the most recent cluster events in descending order, filtered to
+      key lifecycle and failure event types.
+    operationId: listClusterEvents
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    requestBody:
+      contentType: application/json
+      payload:
+        cluster_id: $inputs.clusterId
+        order: DESC
+        limit: $inputs.eventLimit
+        event_types:
+        - TERMINATING
+        - DRIVER_NOT_RESPONDING
+        - DRIVER_UNAVAILABLE
+        - SPARK_EXCEPTION
+        - NODES_LOST
+        - RUNNING
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      events: $response.body#/events
+      totalCount: $response.body#/total_count
+  outputs:
+    clusterState: $steps.readCluster.outputs.state
+    terminationReason: $steps.readCluster.outputs.terminationReason
+    events: $steps.listEvents.outputs.events
+    eventCount: $steps.listEvents.outputs.totalCount

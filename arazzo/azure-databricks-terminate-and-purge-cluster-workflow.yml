@@ -1,0 +1,98 @@
+arazzo: 1.0.1
+info:
+  title: Azure Databricks Terminate and Permanently Delete a Cluster
+  summary: Terminate a cluster, wait until TERMINATED, then permanently delete it.
+  description: >-
+    Cleanly decommissions a cluster. The workflow terminates the cluster,
+    polls the cluster get endpoint until its state is TERMINATED, and only then
+    issues a permanent delete so the cluster configuration is fully removed.
+    Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: azureDatabricksApi
+  url: ../openapi/azure-databricks-openapi.yml
+  type: openapi
+workflows:
+- workflowId: terminate-and-purge-cluster
+  summary: Terminate a cluster, wait for TERMINATED, then permanently delete it.
+  description: >-
+    Terminates the cluster, polls getCluster until the state is TERMINATED,
+    then permanently deletes the cluster.
+  inputs:
+    type: object
+    required:
+    - token
+    - clusterId
+    properties:
+      token:
+        type: string
+        description: Databricks personal access token for the Authorization header.
+      clusterId:
+        type: string
+        description: The id of the cluster to terminate and permanently delete.
+  steps:
+  - stepId: terminateCluster
+    description: >-
+      Terminate the cluster. The cluster is removed from the running state but
+      its configuration is preserved until permanent deletion.
+    operationId: terminateCluster
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    requestBody:
+      contentType: application/json
+      payload:
+        cluster_id: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: pollCluster
+    description: >-
+      Retrieve the current cluster state. Repeat until the cluster reports
+      TERMINATED, then proceed to permanent deletion.
+    operationId: getCluster
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: cluster_id
+      in: query
+      value: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      state: $response.body#/state
+    onSuccess:
+    - name: terminated
+      type: goto
+      stepId: permanentDeleteCluster
+      criteria:
+      - context: $response.body
+        condition: $.state == "TERMINATED"
+        type: jsonpath
+    - name: stillTerminating
+      type: goto
+      stepId: pollCluster
+      criteria:
+      - context: $response.body
+        condition: $.state == "TERMINATING" || $.state == "RUNNING" || $.state == "PENDING"
+        type: jsonpath
+  - stepId: permanentDeleteCluster
+    description: >-
+      Permanently delete the terminated cluster, removing its configuration so
+      it can never be restarted.
+    operationId: permanentDeleteCluster
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    requestBody:
+      contentType: application/json
+      payload:
+        cluster_id: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+  outputs:
+    clusterId: $inputs.clusterId
+    finalState: $steps.pollCluster.outputs.state

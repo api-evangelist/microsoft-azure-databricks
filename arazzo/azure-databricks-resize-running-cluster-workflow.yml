@@ -1,0 +1,135 @@
+arazzo: 1.0.1
+info:
+  title: Azure Databricks Resize a Running Cluster and Wait
+  summary: Edit a running cluster's worker count and poll until it is RUNNING.
+  description: >-
+    Scales a running cluster up or down by editing its configuration. The
+    workflow reads the cluster to capture the configuration required by the
+    edit endpoint, applies the new worker count, then polls the cluster get
+    endpoint until the resize completes and the state is RUNNING again. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: azureDatabricksApi
+  url: ../openapi/azure-databricks-openapi.yml
+  type: openapi
+workflows:
+- workflowId: resize-running-cluster
+  summary: Resize a running cluster's worker count and wait for it to settle.
+  description: >-
+    Reads the current cluster config, edits it with a new num_workers value,
+    then polls getCluster until the state returns to RUNNING.
+  inputs:
+    type: object
+    required:
+    - token
+    - clusterId
+    - numWorkers
+    properties:
+      token:
+        type: string
+        description: Databricks personal access token for the Authorization header.
+      clusterId:
+        type: string
+        description: The id of the running cluster to resize.
+      numWorkers:
+        type: integer
+        description: The new number of worker nodes to scale the cluster to.
+  steps:
+  - stepId: readCluster
+    description: >-
+      Read the cluster to capture the cluster_name, spark_version, and
+      node_type_id required as part of the edit request body.
+    operationId: getCluster
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: cluster_id
+      in: query
+      value: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      clusterName: $response.body#/cluster_name
+      sparkVersion: $response.body#/spark_version
+      nodeTypeId: $response.body#/node_type_id
+  - stepId: editCluster
+    description: >-
+      Edit the cluster with the new worker count. A running cluster is
+      restarted with the new configuration applied.
+    operationId: editCluster
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    requestBody:
+      contentType: application/json
+      payload:
+        cluster_id: $inputs.clusterId
+        cluster_name: $steps.readCluster.outputs.clusterName
+        spark_version: $steps.readCluster.outputs.sparkVersion
+        node_type_id: $steps.readCluster.outputs.nodeTypeId
+        num_workers: $inputs.numWorkers
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: pollCluster
+    description: >-
+      Retrieve the current cluster state. Repeat until the cluster is RUNNING
+      again after the resize; branch to failure if it terminates.
+    operationId: getCluster
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: cluster_id
+      in: query
+      value: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      state: $response.body#/state
+      numWorkers: $response.body#/num_workers
+    onSuccess:
+    - name: resized
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.state == "RUNNING"
+        type: jsonpath
+    - name: failed
+      type: goto
+      stepId: reportFailure
+      criteria:
+      - context: $response.body
+        condition: $.state == "TERMINATED" || $.state == "ERROR"
+        type: jsonpath
+    - name: stillResizing
+      type: goto
+      stepId: pollCluster
+      criteria:
+      - context: $response.body
+        condition: $.state == "RESIZING" || $.state == "RESTARTING" || $.state == "PENDING"
+        type: jsonpath
+  - stepId: reportFailure
+    description: >-
+      Read the cluster once more to capture the termination reason when the
+      resize did not return to RUNNING.
+    operationId: getCluster
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: cluster_id
+      in: query
+      value: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      state: $response.body#/state
+      terminationReason: $response.body#/termination_reason
+  outputs:
+    clusterId: $inputs.clusterId
+    finalState: $steps.pollCluster.outputs.state
+    finalWorkers: $steps.pollCluster.outputs.numWorkers

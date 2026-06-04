@@ -1,0 +1,124 @@
+arazzo: 1.0.1
+info:
+  title: Azure Databricks Submit a One-time Run and Wait
+  summary: Submit a one-time notebook run without a job and poll to completion.
+  description: >-
+    Runs an ad-hoc workload without defining a persistent job. The workflow
+    submits a one-time run consisting of a single notebook task on an existing
+    cluster, then polls the run get endpoint until the life cycle state is
+    TERMINATED, and finally retrieves the run output. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: azureDatabricksApi
+  url: ../openapi/azure-databricks-openapi.yml
+  type: openapi
+workflows:
+- workflowId: submit-one-time-run
+  summary: Submit a one-time notebook run and wait for it to finish.
+  description: >-
+    Submits a one-time run with a single notebook task, polls getJobRun until
+    TERMINATED, then fetches the run output.
+  inputs:
+    type: object
+    required:
+    - token
+    - runName
+    - taskKey
+    - notebookPath
+    - existingClusterId
+    properties:
+      token:
+        type: string
+        description: Databricks personal access token for the Authorization header.
+      runName:
+        type: string
+        description: Name for the one-time run.
+      taskKey:
+        type: string
+        description: Unique key identifying the single task within the run.
+      notebookPath:
+        type: string
+        description: Absolute workspace path of the notebook to run.
+      existingClusterId:
+        type: string
+        description: Id of an existing all-purpose cluster to run the task on.
+  steps:
+  - stepId: submitRun
+    description: >-
+      Submit a one-time run with a single notebook task on the existing
+      cluster, capturing the run_id for polling.
+    operationId: submitRun
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    requestBody:
+      contentType: application/json
+      payload:
+        run_name: $inputs.runName
+        tasks:
+        - task_key: $inputs.taskKey
+          existing_cluster_id: $inputs.existingClusterId
+          notebook_task:
+            notebook_path: $inputs.notebookPath
+            source: WORKSPACE
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      runId: $response.body#/run_id
+  - stepId: pollRun
+    description: >-
+      Retrieve the run state. Repeat until the run life_cycle_state is
+      TERMINATED, then proceed to fetch the output.
+    operationId: getJobRun
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: run_id
+      in: query
+      value: $steps.submitRun.outputs.runId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      lifeCycleState: $response.body#/state/life_cycle_state
+      resultState: $response.body#/state/result_state
+    onSuccess:
+    - name: finished
+      type: goto
+      stepId: fetchOutput
+      criteria:
+      - context: $response.body
+        condition: $.state.life_cycle_state == "TERMINATED" || $.state.life_cycle_state == "INTERNAL_ERROR"
+        type: jsonpath
+    - name: stillRunning
+      type: goto
+      stepId: pollRun
+      criteria:
+      - context: $response.body
+        condition: $.state.life_cycle_state == "PENDING" || $.state.life_cycle_state == "RUNNING" || $.state.life_cycle_state == "TERMINATING"
+        type: jsonpath
+  - stepId: fetchOutput
+    description: >-
+      Retrieve the output of the finished run, capturing the notebook result
+      and any error message.
+    operationId: getJobRunOutput
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: run_id
+      in: query
+      value: $steps.submitRun.outputs.runId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      notebookResult: $response.body#/notebook_output/result
+      error: $response.body#/error
+  outputs:
+    runId: $steps.submitRun.outputs.runId
+    resultState: $steps.pollRun.outputs.resultState
+    notebookResult: $steps.fetchOutput.outputs.notebookResult
+    error: $steps.fetchOutput.outputs.error

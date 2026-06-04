@@ -1,0 +1,101 @@
+arazzo: 1.0.1
+info:
+  title: Azure Databricks Cancel an Active Job Run
+  summary: Cancel a run and poll until its life cycle state is TERMINATED.
+  description: >-
+    Stops an in-flight job run and confirms it has actually stopped. Because
+    cancellation is asynchronous, the workflow issues the cancel request and
+    then polls the run get endpoint until the life cycle state reaches
+    TERMINATED, confirming the run is no longer active. Every step spells out
+    its request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: azureDatabricksApi
+  url: ../openapi/azure-databricks-openapi.yml
+  type: openapi
+workflows:
+- workflowId: cancel-active-run
+  summary: Cancel a job run and wait until it is fully TERMINATED.
+  description: >-
+    Reads the run to confirm it is active, cancels it, then polls getJobRun
+    until life_cycle_state is TERMINATED.
+  inputs:
+    type: object
+    required:
+    - token
+    - runId
+    properties:
+      token:
+        type: string
+        description: Databricks personal access token for the Authorization header.
+      runId:
+        type: integer
+        description: The canonical identifier of the run to cancel.
+  steps:
+  - stepId: readRun
+    description: >-
+      Read the run to confirm it is currently active before issuing a cancel
+      request.
+    operationId: getJobRun
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: run_id
+      in: query
+      value: $inputs.runId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      lifeCycleState: $response.body#/state/life_cycle_state
+  - stepId: cancelRun
+    description: >-
+      Issue the cancel request. Cancellation is asynchronous so the run may
+      still be running immediately afterwards.
+    operationId: cancelJobRun
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    requestBody:
+      contentType: application/json
+      payload:
+        run_id: $inputs.runId
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: pollRun
+    description: >-
+      Retrieve the run state. Repeat until the run life_cycle_state is
+      TERMINATED, confirming the cancellation took effect.
+    operationId: getJobRun
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: run_id
+      in: query
+      value: $inputs.runId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      lifeCycleState: $response.body#/state/life_cycle_state
+      resultState: $response.body#/state/result_state
+    onSuccess:
+    - name: cancelled
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.state.life_cycle_state == "TERMINATED" || $.state.life_cycle_state == "INTERNAL_ERROR"
+        type: jsonpath
+    - name: stillActive
+      type: goto
+      stepId: pollRun
+      criteria:
+      - context: $response.body
+        condition: $.state.life_cycle_state == "RUNNING" || $.state.life_cycle_state == "TERMINATING" || $.state.life_cycle_state == "PENDING"
+        type: jsonpath
+  outputs:
+    runId: $inputs.runId
+    finalLifeCycleState: $steps.pollRun.outputs.lifeCycleState
+    resultState: $steps.pollRun.outputs.resultState

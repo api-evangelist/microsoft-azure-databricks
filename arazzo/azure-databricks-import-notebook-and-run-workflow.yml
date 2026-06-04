@@ -1,0 +1,147 @@
+arazzo: 1.0.1
+info:
+  title: Azure Databricks Import a Notebook and Run It
+  summary: Import a notebook, confirm it landed, then submit a run of it.
+  description: >-
+    Deploys notebook source into the workspace and immediately executes it.
+    The workflow imports base64-encoded notebook content to a workspace path,
+    confirms the object exists with a status check, submits a one-time run of
+    the imported notebook, and polls the run until its life cycle state is
+    TERMINATED. Every step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: azureDatabricksApi
+  url: ../openapi/azure-databricks-openapi.yml
+  type: openapi
+workflows:
+- workflowId: import-notebook-and-run
+  summary: Import a notebook into the workspace, confirm it, and run it.
+  description: >-
+    Imports notebook content, verifies it with getWorkspaceObjectStatus,
+    submits a one-time run, then polls getJobRun until TERMINATED.
+  inputs:
+    type: object
+    required:
+    - token
+    - notebookPath
+    - content
+    - language
+    - taskKey
+    - existingClusterId
+    properties:
+      token:
+        type: string
+        description: Databricks personal access token for the Authorization header.
+      notebookPath:
+        type: string
+        description: Absolute workspace path to import the notebook to.
+      content:
+        type: string
+        description: Base64-encoded notebook source content (max 10 MB).
+      language:
+        type: string
+        description: Notebook language, one of SCALA, PYTHON, SQL, or R.
+      taskKey:
+        type: string
+        description: Unique key identifying the single task in the run.
+      existingClusterId:
+        type: string
+        description: Id of an existing cluster to run the imported notebook on.
+  steps:
+  - stepId: importNotebook
+    description: >-
+      Import the base64-encoded notebook content to the target path in SOURCE
+      format, overwriting any existing object.
+    operationId: importWorkspaceObject
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    requestBody:
+      contentType: application/json
+      payload:
+        path: $inputs.notebookPath
+        format: SOURCE
+        language: $inputs.language
+        content: $inputs.content
+        overwrite: true
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: confirmImport
+    description: >-
+      Confirm the imported object exists at the path and is a NOTEBOOK before
+      attempting to run it.
+    operationId: getWorkspaceObjectStatus
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: path
+      in: query
+      value: $inputs.notebookPath
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $response.body#/object_type == "NOTEBOOK"
+    outputs:
+      objectId: $response.body#/object_id
+      objectType: $response.body#/object_type
+  - stepId: submitRun
+    description: >-
+      Submit a one-time run of the imported notebook on the existing cluster
+      and capture the run_id.
+    operationId: submitRun
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    requestBody:
+      contentType: application/json
+      payload:
+        run_name: import-and-run
+        tasks:
+        - task_key: $inputs.taskKey
+          existing_cluster_id: $inputs.existingClusterId
+          notebook_task:
+            notebook_path: $inputs.notebookPath
+            source: WORKSPACE
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      runId: $response.body#/run_id
+  - stepId: pollRun
+    description: >-
+      Retrieve the run state. Repeat until the run life_cycle_state is
+      TERMINATED, then end with the final result_state.
+    operationId: getJobRun
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.token
+    - name: run_id
+      in: query
+      value: $steps.submitRun.outputs.runId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      lifeCycleState: $response.body#/state/life_cycle_state
+      resultState: $response.body#/state/result_state
+    onSuccess:
+    - name: finished
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.state.life_cycle_state == "TERMINATED" || $.state.life_cycle_state == "INTERNAL_ERROR"
+        type: jsonpath
+    - name: stillRunning
+      type: goto
+      stepId: pollRun
+      criteria:
+      - context: $response.body
+        condition: $.state.life_cycle_state == "PENDING" || $.state.life_cycle_state == "RUNNING" || $.state.life_cycle_state == "TERMINATING"
+        type: jsonpath
+  outputs:
+    notebookPath: $inputs.notebookPath
+    objectId: $steps.confirmImport.outputs.objectId
+    runId: $steps.submitRun.outputs.runId
+    resultState: $steps.pollRun.outputs.resultState

@@ -481,6 +481,69 @@ apis:
   - type: APIReference
     url: https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/scim/scim-groups
 common:
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/azure-databricks-backup-notebook-workflow.yml
+    name: Azure Databricks Back Up a Notebook by Export and Re-import
+    summary: Confirm a notebook, export its content, and re-import it to a backup path.
+  - url: arazzo/azure-databricks-cancel-active-run-workflow.yml
+    name: Azure Databricks Cancel an Active Job Run
+    summary: Cancel a run and poll until its life cycle state is TERMINATED.
+  - url: arazzo/azure-databricks-cleanup-latest-job-run-workflow.yml
+    name: Azure Databricks Clean Up the Latest Completed Job Run
+    summary: Find a job's latest completed run, confirm it, and delete it.
+  - url: arazzo/azure-databricks-cluster-health-diagnostics-workflow.yml
+    name: Azure Databricks Cluster Health Diagnostics
+    summary: Read a cluster's state then pull its recent events for diagnosis.
+  - url: arazzo/azure-databricks-create-directory-and-import-notebook-workflow.yml
+    name: Azure Databricks Create a Directory and Import a Notebook
+    summary: Make a workspace directory, import a notebook into it, then verify it.
+  - url: arazzo/azure-databricks-create-job-and-run-workflow.yml
+    name: Azure Databricks Create a Job and Run It to Completion
+    summary: Create a notebook job, trigger a run, and poll until TERMINATED.
+  - url: arazzo/azure-databricks-delete-workspace-directory-workflow.yml
+    name: Azure Databricks Safely Delete a Workspace Directory
+    summary: List a directory, confirm it is a directory, then recursively delete it.
+  - url: arazzo/azure-databricks-import-notebook-and-run-workflow.yml
+    name: Azure Databricks Import a Notebook and Run It
+    summary: Import a notebook, confirm it landed, then submit a run of it.
+  - url: arazzo/azure-databricks-pin-most-recent-cluster-workflow.yml
+    name: Azure Databricks Pin the First Listed Cluster
+    summary: List clusters, pick the first, and pin it so it is always retained.
+  - url: arazzo/azure-databricks-preflight-create-cluster-workflow.yml
+    name: Azure Databricks Preflight and Create a Cluster
+    summary: Resolve a valid Spark version and node type, then create a cluster.
+  - url: arazzo/azure-databricks-provision-cluster-and-run-job-workflow.yml
+    name: Azure Databricks Provision a Cluster and Run a Job on It
+    summary: Create a cluster, wait until RUNNING, create a job on it, then run it.
+  - url: arazzo/azure-databricks-provision-cluster-workflow.yml
+    name: Azure Databricks Provision and Wait for Cluster
+    summary: Create a cluster and poll its state until it reaches RUNNING.
+  - url: arazzo/azure-databricks-reset-job-and-verify-workflow.yml
+    name: Azure Databricks Overwrite Job Settings and Verify
+    summary: Reset all of a job's settings, then read the job back to confirm.
+  - url: arazzo/azure-databricks-resize-running-cluster-workflow.yml
+    name: Azure Databricks Resize a Running Cluster and Wait
+    summary: Edit a running cluster's worker count and poll until it is RUNNING.
+  - url: arazzo/azure-databricks-restart-cluster-and-wait-workflow.yml
+    name: Azure Databricks Restart a Running Cluster and Wait
+    summary: Restart a running cluster and poll until it returns to RUNNING.
+  - url: arazzo/azure-databricks-run-existing-job-and-wait-workflow.yml
+    name: Azure Databricks Run an Existing Job and Wait
+    summary: Trigger an existing job with parameters and poll the run to completion.
+  - url: arazzo/azure-databricks-start-cluster-and-wait-workflow.yml
+    name: Azure Databricks Start a Terminated Cluster and Wait
+    summary: Start a terminated cluster and poll its state until RUNNING.
+  - url: arazzo/azure-databricks-submit-one-time-run-workflow.yml
+    name: Azure Databricks Submit a One-time Run and Wait
+    summary: Submit a one-time notebook run without a job and poll to completion.
+  - url: arazzo/azure-databricks-terminate-and-purge-cluster-workflow.yml
+    name: Azure Databricks Terminate and Permanently Delete a Cluster
+    summary: Terminate a cluster, wait until TERMINATED, then permanently delete it.
+  - url: arazzo/azure-databricks-update-job-and-rerun-workflow.yml
+    name: Azure Databricks Update a Job and Re-run It
+    summary: Partially update a job's settings, then trigger and poll a fresh run.
 - type: GettingStarted
   url: https://learn.microsoft.com/azure/databricks/getting-started/
 - type: Pricing
