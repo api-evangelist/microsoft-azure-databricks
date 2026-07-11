@@ -491,6 +491,8 @@ apis:
       - type: APIReference
         url: https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/scim/scim-groups
 common:
+  - type: OAuthScopes
+    url: scopes/azure-databricks-scopes.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/azure-databricks/overview
   - type: Arazzo
@@ -635,6 +637,8 @@ common:
       - Apache Kafka for streaming data ingestion
   - type: LlmsText
     url: https://docs.databricks.com/llms.txt
+  - url: https://www.databricks.com/feed
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
