@@ -1,0 +1,28 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/azure-databricks-openapi.yml
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  description: Databricks personal access token. Pass the token in the Authorization header
+    as Bearer <token>.
+  sources:
+  - openapi/azure-databricks-openapi.yml
+- name: AzureADToken
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/authorize
+    tokenUrl: https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token
+    scopes: 1
+  description: Azure Active Directory token for authenticating with Azure Databricks. Supports
+    both user and service principal authentication.
+  sources:
+  - openapi/azure-databricks-openapi.yml

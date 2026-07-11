@@ -491,6 +491,12 @@ apis:
       - type: APIReference
         url: https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/scim/scim-groups
 common:
+  - type: VulnerabilityDisclosure
+    url: security/azure-databricks-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/azure-databricks-domain-security.yml
+  - type: Authentication
+    url: authentication/azure-databricks-authentication.yml
   - type: OAuthScopes
     url: scopes/azure-databricks-scopes.yml
   - type: PostmanWorkspace
