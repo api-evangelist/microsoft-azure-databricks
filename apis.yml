@@ -491,6 +491,7 @@ apis:
       - type: APIReference
         url: https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/scim/scim-groups
 common:
+<<<<<<< HEAD
   - type: VulnerabilityDisclosure
     url: security/azure-databricks-vulnerability-disclosure.yml
   - type: DomainSecurity
@@ -499,6 +500,10 @@ common:
     url: authentication/azure-databricks-authentication.yml
   - type: OAuthScopes
     url: scopes/azure-databricks-scopes.yml
+=======
+  - type: OAuthScopes
+    url: scopes/microsoft-azure-databricks-scopes.yml
+>>>>>>> eea38d6 (Add OAuth scopes artifact (enrichment pipeline 2026-07-11))
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/azure-databricks/overview
   - type: Arazzo
@@ -648,3 +653,5 @@ common:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+  - url: https://www.databricks.com/feed
+    type: Blog
