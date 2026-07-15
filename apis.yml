@@ -491,6 +491,8 @@ apis:
       - type: APIReference
         url: https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/scim/scim-groups
 common:
+  - type: AgenticAccess
+    url: agentic-access/microsoft-azure-databricks-agentic-access.yml
 <<<<<<< HEAD
   - type: VulnerabilityDisclosure
     url: security/azure-databricks-vulnerability-disclosure.yml
