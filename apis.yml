@@ -31,7 +31,7 @@ apis:
       - type: Documentation
         url: https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/
       - type: OpenAPI
-        url: openapi/azure-databricks-openapi.yml
+        url: openapi/_original/azure-databricks-openapi.yml
       - type: Authentication
         url: https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/authentication
       - type: APIReference
@@ -55,7 +55,7 @@ apis:
       - type: Documentation
         url: https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/clusters
       - type: OpenAPI
-        url: openapi/azure-databricks-openapi.yml
+        url: openapi/_original/azure-databricks-openapi.yml
       - type: JSONSchema
         url: json-schema/azure-databricks-cluster-schema.json
       - type: APIReference
@@ -73,7 +73,7 @@ apis:
       - type: Documentation
         url: https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/jobs
       - type: OpenAPI
-        url: openapi/azure-databricks-openapi.yml
+        url: openapi/_original/azure-databricks-openapi.yml
       - type: APIReference
         url: https://docs.databricks.com/api/azure/workspace/jobs
   - name: Workspace API
@@ -89,7 +89,7 @@ apis:
       - type: Documentation
         url: https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/workspace
       - type: OpenAPI
-        url: openapi/azure-databricks-openapi.yml
+        url: openapi/_original/azure-databricks-openapi.yml
       - type: APIReference
         url: https://docs.databricks.com/api/azure/workspace/workspace
   - name: DBFS API
@@ -491,6 +491,19 @@ apis:
       - type: APIReference
         url: https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/scim/scim-groups
 common:
+  - type: IssueTracker
+    url: https://github.com/Azure/azure-databricks-client/issues
+  - type: Releases
+    url: https://github.com/Azure/azure-databricks-client/releases
+  - type: SecurityPolicy
+    url: https://github.com/Azure/azure-databricks-client/blob/master/SECURITY.md
+  - type: CodeOfConduct
+    url: https://github.com/Azure/.github/blob/main/CODE_OF_CONDUCT.md
+  - type: ContributionGuide
+    url: https://github.com/Azure/azure-databricks-client/blob/master/CONTRIBUTING.md
+  - type: License
+    name: MIT
+    url: https://github.com/Azure/azure-databricks-client/blob/master/LICENSE
   - type: AgenticAccess
     url: agentic-access/microsoft-azure-databricks-agentic-access.yml
   - type: VulnerabilityDisclosure
@@ -600,7 +613,7 @@ common:
   - type: GitHubRepository
     url: https://github.com/Azure/azure-databricks-client
   - type: OpenAPI
-    url: openapi/azure-databricks-openapi.yml
+    url: openapi/_original/azure-databricks-openapi.yml
   - type: JSONSchema
     url: json-schema/azure-databricks-cluster-schema.json
   - type: JSONLD
