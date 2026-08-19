@@ -1,0 +1,219 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Azure Databricks REST Clusters API",
+    "version": "2.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Clusters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Azure Databricks Create a New Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.0/clusters/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Apache Spark cluster. Returns the ID of the newly created cluster. The cluster starts in a PENDING state and transitions to RUNNING when ready. Optionally, you can attach libraries to the cluster after creation."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks Edit a Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.0/clusters/edit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edits the configuration of an existing cluster. The cluster must be in a RUNNING or TERMINATED state. If the cluster is running, it will be restarted with the new configuration."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks Start a Terminated Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.0/clusters/start",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Starts a terminated cluster given its ID. Works only for clusters in a TERMINATED state. Uses the last specified cluster configuration."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks Restart a Running Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.0/clusters/restart",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Restarts a running cluster given its ID. The cluster must be in a RUNNING state."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks Terminate a Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.0/clusters/delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Terminates a cluster given its ID. The cluster is removed from the running state but its configuration is preserved so it can be restarted. Use permanent-delete to fully remove a cluster."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks Permanently Delete a Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.0/clusters/permanent-delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Permanently deletes a Spark cluster. If the cluster is running, it is terminated and its resources freed. The cluster is removed permanently and cannot be restarted."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks Get Cluster Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.0/clusters/get",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "500123",
+                "type": "query",
+                "description": "The cluster about which to retrieve information"
+              }
+            ]
+          },
+          "docs": "Retrieves the information for a cluster given its identifier. Returns the current state, configuration, and metadata for the cluster."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks List All Clusters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.0/clusters/list",
+            "params": [
+              {
+                "name": "can_use_client",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter clusters based on what type of client can use the cluster. Possible values are NOTEBOOKS and JOBS."
+              }
+            ]
+          },
+          "docs": "Returns information about all pinned and active clusters, and up to 200 of the most recently terminated all-purpose clusters in the past 30 days, and up to 30 of the most recently terminated job clusters in the past 30 days."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks Pin a Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.0/clusters/pin",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Pins a cluster to ensure it is always returned by the list clusters API. Pinning a cluster that is already pinned has no effect."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks Unpin a Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.0/clusters/unpin",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Unpins a cluster. Unpinning a cluster that is not pinned has no effect."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks List Cluster Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.0/clusters/events",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves a list of events about the activity of a cluster. Events are returned in reverse chronological order. This endpoint allows paginating through cluster events using the next_page field."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks List Available Spark Versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.0/clusters/spark-versions"
+          },
+          "docs": "Returns the list of available Databricks Runtime versions. These versions can be used to launch clusters."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks List Available Node Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.0/clusters/list-node-types"
+          },
+          "docs": "Returns a list of supported Azure VM node types. These node types can be used to launch clusters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

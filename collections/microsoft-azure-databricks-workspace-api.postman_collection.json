@@ -1,0 +1,2779 @@
+{
+  "item": [
+    {
+      "id": "a18c47cf-4a10-4f5c-b26f-1ac06743e2b5",
+      "name": "Workspace",
+      "description": {
+        "content": "Manage workspace objects such as notebooks, folders, files, and repos. Import, export, list, and delete workspace objects.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "18ad1b5a-da47-4539-837b-736a9ff5d16b",
+          "name": "Azure Databricks List Workspace Objects",
+          "request": {
+            "name": "Azure Databricks List Workspace Objects",
+            "description": {
+              "content": "Lists the contents of a directory in the workspace, or the object if it is not a directory. If the input path does not exist, this call returns an error RESOURCE_DOES_NOT_EXIST.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "2.0",
+                "workspace",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>",
+                  "description": "(Required) The absolute path of the workspace directory to list. A path of / lists the root directory."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                  "type": "any",
+                  "value": "{{databricks_instance}}",
+                  "key": "databricks_instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "97ff672e-96d8-482b-b6d0-d8b10ea70d89",
+              "name": "Workspace objects listed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"objects\": [\n    {\n      \"object_type\": \"NOTEBOOK\",\n      \"path\": \"example_value\",\n      \"language\": \"SCALA\",\n      \"object_id\": \"500123\",\n      \"created_at\": \"2026-01-15T10:30:00Z\",\n      \"modified_at\": \"2026-01-15T10:30:00Z\",\n      \"resource_id\": \"500123\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c719532d-c4a8-4f1a-9b2c-fa7a1b365b5c",
+              "name": "The request is malformed or contains invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "642a39eb-7fe3-4cfc-a845-fda1d4faf550",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee0c325b-2635-4aa1-993f-b5c33a5e6604",
+              "name": "The caller does not have permission to perform the operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4456e9f4-ad28-48bb-9559-1ca23eba4b56",
+              "name": "The requested resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b3023c7-5a23-4532-9169-11e4c7827ba0",
+              "name": "The request has been rate-limited",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0673b11a-a222-473d-bdd8-8a09db01f3ce",
+              "name": "An internal server error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "561da803-eaaf-4bed-a6b1-c00b5728da65",
+          "name": "Azure Databricks Get Workspace Object Status",
+          "request": {
+            "name": "Azure Databricks Get Workspace Object Status",
+            "description": {
+              "content": "Gets the status of an object or a directory. If the object is a directory, its contents are not included in the response.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "2.0",
+                "workspace",
+                "get-status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>",
+                  "description": "(Required) The absolute path of the workspace object"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                  "type": "any",
+                  "value": "{{databricks_instance}}",
+                  "key": "databricks_instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6955bb9a-0d8e-4471-ae97-0f1b96b575ef",
+              "name": "Object status retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "get-status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object_type\": \"NOTEBOOK\",\n  \"path\": \"example_value\",\n  \"language\": \"SCALA\",\n  \"object_id\": \"500123\",\n  \"created_at\": \"2026-01-15T10:30:00Z\",\n  \"modified_at\": \"2026-01-15T10:30:00Z\",\n  \"resource_id\": \"500123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "497da8d2-6b1d-4b0e-92e5-45df7ffc8889",
+              "name": "The request is malformed or contains invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "get-status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f0a106c-7ad8-4e84-b12e-ea2dabaa79bd",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "get-status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7cc2cf2-d57d-41eb-8326-cf636747dd88",
+              "name": "The caller does not have permission to perform the operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "get-status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b8b9667-5c77-4542-affe-30f2c68b9363",
+              "name": "The requested resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "get-status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6aea6eb2-78c6-4d5b-a361-f2852854a50b",
+              "name": "The request has been rate-limited",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "get-status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c87172ce-8567-4380-90e0-03fd776c7c88",
+              "name": "An internal server error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "get-status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c0f72898-6840-4279-9980-a1b18d41f9dd",
+          "name": "Azure Databricks Create a Directory",
+          "request": {
+            "name": "Azure Databricks Create a Directory",
+            "description": {
+              "content": "Creates the specified directory and all necessary parent directories if they do not exist. If there is an object (not a directory) at any prefix of the input path, this call returns an error RESOURCE_ALREADY_EXISTS.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "2.0",
+                "workspace",
+                "mkdirs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                  "type": "any",
+                  "value": "{{databricks_instance}}",
+                  "key": "databricks_instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"path\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aae021db-945e-4c91-82a1-1eb638595f4d",
+              "name": "Directory created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "mkdirs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42d02c68-d22b-4d24-b5c2-6b1b5a0de2e5",
+              "name": "The request is malformed or contains invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "mkdirs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca4afe96-7389-4837-8472-803645d5b86e",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "mkdirs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf0c4648-9b8d-4003-a636-af4816282591",
+              "name": "The caller does not have permission to perform the operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "mkdirs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc458587-e724-41c8-bbfe-9a70ebec74b7",
+              "name": "The request has been rate-limited",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "mkdirs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "642a9398-290e-4625-ac41-3ec41aa6e6e9",
+              "name": "An internal server error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "mkdirs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9d9f4995-dfa8-43aa-bd46-316d15d7f7b1",
+          "name": "Azure Databricks Delete a Workspace Object",
+          "request": {
+            "name": "Azure Databricks Delete a Workspace Object",
+            "description": {
+              "content": "Deletes an object or a directory (and optionally its contents recursively). If the path does not exist, this call returns an error RESOURCE_DOES_NOT_EXIST. If path is a non-empty directory and recursive is set to false, this call returns an error DIRECTORY_NOT_EMPTY.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "2.0",
+                "workspace",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                  "type": "any",
+                  "value": "{{databricks_instance}}",
+                  "key": "databricks_instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"path\": \"<string>\",\n  \"recursive\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a3ace91f-9eaf-45f8-831d-7a10ca0f51e0",
+              "name": "Object deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"recursive\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97efc67a-67db-46f6-b532-dbd5f0be2eab",
+              "name": "The request is malformed or contains invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"recursive\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bad947cb-fc6f-4f75-974f-080981af0123",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"recursive\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "580be5dd-7349-46a2-99ff-af1318ab2b98",
+              "name": "The caller does not have permission to perform the operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"recursive\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "27a95e96-85f7-4fbb-a473-031851aca812",
+              "name": "The requested resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"recursive\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b63daea-637e-496f-84ad-d70bdd887667",
+              "name": "The request has been rate-limited",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"recursive\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5238f324-ab04-47db-88f4-8ecc407ed8c6",
+              "name": "An internal server error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"recursive\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e1fd917-f88e-4268-9b62-b071b2511ef6",
+          "name": "Azure Databricks Import a Workspace Object",
+          "request": {
+            "name": "Azure Databricks Import a Workspace Object",
+            "description": {
+              "content": "Imports a notebook or the contents of an entire directory. If the path already exists and overwrite is set to false, this call returns an error RESOURCE_ALREADY_EXISTS. Content can be provided inline as base64-encoded bytes or from a file.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "2.0",
+                "workspace",
+                "import"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                  "type": "any",
+                  "value": "{{databricks_instance}}",
+                  "key": "databricks_instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"path\": \"<string>\",\n  \"format\": \"<string>\",\n  \"language\": \"<string>\",\n  \"content\": \"<string>\",\n  \"overwrite\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "baca0801-5597-403a-9e7b-7e65aa2d8d10",
+              "name": "Object imported successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"format\": \"SOURCE\",\n  \"language\": \"SCALA\",\n  \"content\": \"example_value\",\n  \"overwrite\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39829645-f1d7-4677-9501-b46dbfa581d5",
+              "name": "The request is malformed or contains invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"format\": \"SOURCE\",\n  \"language\": \"SCALA\",\n  \"content\": \"example_value\",\n  \"overwrite\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "128a0635-f955-44f2-b5d9-12a3134a9f3f",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"format\": \"SOURCE\",\n  \"language\": \"SCALA\",\n  \"content\": \"example_value\",\n  \"overwrite\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11822b9d-2d6f-44d1-a72e-f2207bfc88c2",
+              "name": "The caller does not have permission to perform the operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"format\": \"SOURCE\",\n  \"language\": \"SCALA\",\n  \"content\": \"example_value\",\n  \"overwrite\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c148252-a8c9-4c1d-9d5d-c77e2982810e",
+              "name": "The request has been rate-limited",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"format\": \"SOURCE\",\n  \"language\": \"SCALA\",\n  \"content\": \"example_value\",\n  \"overwrite\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aab051b6-eb23-4b0e-be78-3da3ad14487e",
+              "name": "An internal server error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"format\": \"SOURCE\",\n  \"language\": \"SCALA\",\n  \"content\": \"example_value\",\n  \"overwrite\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "61427db8-d289-40a7-90ad-dd08491c2575",
+          "name": "Azure Databricks Export a Workspace Object",
+          "request": {
+            "name": "Azure Databricks Export a Workspace Object",
+            "description": {
+              "content": "Exports a notebook or the contents of an entire directory. The notebook is exported in the requested format (default is SOURCE). A directory is always exported as a DBC archive.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "2.0",
+                "workspace",
+                "export"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>",
+                  "description": "(Required) The absolute path of the object to export"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "SOURCE",
+                  "description": "Format of the exported content"
+                },
+                {
+                  "disabled": false,
+                  "key": "direct_download",
+                  "value": "false",
+                  "description": "Whether to download the exported file directly. Default is false."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                  "type": "any",
+                  "value": "{{databricks_instance}}",
+                  "key": "databricks_instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "729aa671-c890-4cf4-8a82-ea3812ac8e07",
+              "name": "Object exported successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "format",
+                      "value": "SOURCE"
+                    },
+                    {
+                      "key": "direct_download",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": \"example_value\",\n  \"file_type\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ebb5567e-a758-46bf-943f-8238f38b481f",
+              "name": "The request is malformed or contains invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "format",
+                      "value": "SOURCE"
+                    },
+                    {
+                      "key": "direct_download",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36066b8b-5180-47a0-afbc-f172d98064ca",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "format",
+                      "value": "SOURCE"
+                    },
+                    {
+                      "key": "direct_download",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ba758ef-03c1-453f-9b62-7fc1a7fd0b0b",
+              "name": "The caller does not have permission to perform the operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "format",
+                      "value": "SOURCE"
+                    },
+                    {
+                      "key": "direct_download",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "129d3073-b64d-410b-ba40-77a941066e4e",
+              "name": "The requested resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "format",
+                      "value": "SOURCE"
+                    },
+                    {
+                      "key": "direct_download",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dbd9b445-221c-4337-a296-1d08dbee61ad",
+              "name": "The request has been rate-limited",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "format",
+                      "value": "SOURCE"
+                    },
+                    {
+                      "key": "direct_download",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "837b482e-5888-44e9-841a-5172ebd4f899",
+              "name": "An internal server error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "workspace",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "format",
+                      "value": "SOURCE"
+                    },
+                    {
+                      "key": "direct_download",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "adb-1234567890123456.1",
+      "key": "databricks_instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{databricks_instance}}.azuredatabricks.net/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4464cae3-ee9c-4a50-8586-475fcea8c5ee",
+    "name": "Azure Databricks REST Clusters Workspace API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Core REST API for managing Azure Databricks workspaces, clusters, jobs, and workspace objects programmatically. This specification covers the Clusters API (2.0), Jobs API (2.1), and Workspace API (2.0) endpoints available on Azure Databricks instances.\n\nContact Support:\n Name: Azure Databricks Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,5093 @@
+{
+  "item": [
+    {
+      "id": "5911b6aa-9f04-4471-9409-82ad6cb2e832",
+      "name": "Clusters",
+      "description": {
+        "content": "Manage Databricks clusters for running Apache Spark workloads. Create, start, restart, resize, terminate, and permanently delete clusters.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "799e3550-2ae5-461a-b4b7-c9d4eba7737f",
+          "name": "Azure Databricks Create a New Cluster",
+          "request": {
+            "name": "Azure Databricks Create a New Cluster",
+            "description": {
+              "content": "Creates a new Apache Spark cluster. Returns the ID of the newly created cluster. The cluster starts in a PENDING state and transitions to RUNNING when ready. Optionally, you can attach libraries to the cluster after creation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "2.0",
+                "clusters",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                  "type": "any",
+                  "value": "{{databricks_instance}}",
+                  "key": "databricks_instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"spark_version\": \"<string>\",\n  \"cluster_name\": \"<string>\",\n  \"node_type_id\": \"<string>\",\n  \"driver_node_type_id\": \"<string>\",\n  \"num_workers\": \"<integer>\",\n  \"autoscale\": {\n    \"min_workers\": \"<integer>\",\n    \"max_workers\": \"<integer>\"\n  },\n  \"spark_conf\": {\n    \"key_0\": \"<string>\"\n  },\n  \"azure_attributes\": {\n    \"first_on_demand\": \"<integer>\",\n    \"availability\": \"<string>\",\n    \"spot_bid_max_price\": \"<double>\"\n  },\n  \"ssh_public_keys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"custom_tags\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"cluster_log_conf\": {\n    \"dbfs\": {\n      \"destination\": \"<string>\"\n    },\n    \"s3\": {\n      \"destination\": \"<string>\",\n      \"region\": \"<string>\",\n      \"endpoint\": \"<string>\"\n    }\n  },\n  \"init_scripts\": [\n    {\n      \"workspace\": {\n        \"destination\": \"<string>\"\n      },\n      \"volumes\": {\n        \"destination\": \"<string>\"\n      },\n      \"dbfs\": {\n        \"destination\": \"<string>\"\n      },\n      \"abfss\": {\n        \"destination\": \"<string>\"\n      }\n    },\n    {\n      \"workspace\": {\n        \"destination\": \"<string>\"\n      },\n      \"volumes\": {\n        \"destination\": \"<string>\"\n      },\n      \"dbfs\": {\n        \"destination\": \"<string>\"\n      },\n      \"abfss\": {\n        \"destination\": \"<string>\"\n      }\n    }\n  ],\n  \"spark_env_vars\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"enable_elastic_disk\": \"<boolean>\",\n  \"instance_pool_id\": \"<string>\",\n  \"policy_id\": \"<string>\",\n  \"enable_local_disk_encryption\": \"<boolean>\",\n  \"runtime_engine\": \"<string>\",\n  \"data_security_mode\": \"<string>\",\n  \"single_user_name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b7758036-ad3b-4765-9f18-ef67b68c9cdb",
+              "name": "Cluster created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_name\": \"example_value\",\n  \"spark_version\": \"example_value\",\n  \"node_type_id\": \"500123\",\n  \"driver_node_type_id\": \"500123\",\n  \"num_workers\": 10,\n  \"autoscale\": {\n    \"min_workers\": 10,\n    \"max_workers\": 10\n  },\n  \"spark_conf\": \"example_value\",\n  \"azure_attributes\": {\n    \"first_on_demand\": 10,\n    \"availability\": \"SPOT_AZURE\",\n    \"spot_bid_max_price\": 42.5\n  },\n  \"ssh_public_keys\": [\n    \"example_value\"\n  ],\n  \"custom_tags\": \"example_value\",\n  \"cluster_log_conf\": {\n    \"dbfs\": {\n      \"destination\": \"example_value\"\n    },\n    \"s3\": {\n      \"destination\": \"example_value\",\n      \"region\": \"example_value\",\n      \"endpoint\": \"example_value\"\n    }\n  },\n  \"init_scripts\": [\n    {\n      \"workspace\": {},\n      \"volumes\": {},\n      \"dbfs\": {},\n      \"abfss\": {}\n    }\n  ],\n  \"spark_env_vars\": \"example_value\",\n  \"enable_elastic_disk\": true,\n  \"instance_pool_id\": \"500123\",\n  \"policy_id\": \"500123\",\n  \"enable_local_disk_encryption\": true,\n  \"runtime_engine\": \"STANDARD\",\n  \"data_security_mode\": \"NONE\",\n  \"single_user_name\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cluster_id\": \"500123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1aab704f-3157-4bb8-9878-d84bd10a40d5",
+              "name": "The request is malformed or contains invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_name\": \"example_value\",\n  \"spark_version\": \"example_value\",\n  \"node_type_id\": \"500123\",\n  \"driver_node_type_id\": \"500123\",\n  \"num_workers\": 10,\n  \"autoscale\": {\n    \"min_workers\": 10,\n    \"max_workers\": 10\n  },\n  \"spark_conf\": \"example_value\",\n  \"azure_attributes\": {\n    \"first_on_demand\": 10,\n    \"availability\": \"SPOT_AZURE\",\n    \"spot_bid_max_price\": 42.5\n  },\n  \"ssh_public_keys\": [\n    \"example_value\"\n  ],\n  \"custom_tags\": \"example_value\",\n  \"cluster_log_conf\": {\n    \"dbfs\": {\n      \"destination\": \"example_value\"\n    },\n    \"s3\": {\n      \"destination\": \"example_value\",\n      \"region\": \"example_value\",\n      \"endpoint\": \"example_value\"\n    }\n  },\n  \"init_scripts\": [\n    {\n      \"workspace\": {},\n      \"volumes\": {},\n      \"dbfs\": {},\n      \"abfss\": {}\n    }\n  ],\n  \"spark_env_vars\": \"example_value\",\n  \"enable_elastic_disk\": true,\n  \"instance_pool_id\": \"500123\",\n  \"policy_id\": \"500123\",\n  \"enable_local_disk_encryption\": true,\n  \"runtime_engine\": \"STANDARD\",\n  \"data_security_mode\": \"NONE\",\n  \"single_user_name\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8df3346f-ab9a-48f9-b9c0-b449fd607004",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_name\": \"example_value\",\n  \"spark_version\": \"example_value\",\n  \"node_type_id\": \"500123\",\n  \"driver_node_type_id\": \"500123\",\n  \"num_workers\": 10,\n  \"autoscale\": {\n    \"min_workers\": 10,\n    \"max_workers\": 10\n  },\n  \"spark_conf\": \"example_value\",\n  \"azure_attributes\": {\n    \"first_on_demand\": 10,\n    \"availability\": \"SPOT_AZURE\",\n    \"spot_bid_max_price\": 42.5\n  },\n  \"ssh_public_keys\": [\n    \"example_value\"\n  ],\n  \"custom_tags\": \"example_value\",\n  \"cluster_log_conf\": {\n    \"dbfs\": {\n      \"destination\": \"example_value\"\n    },\n    \"s3\": {\n      \"destination\": \"example_value\",\n      \"region\": \"example_value\",\n      \"endpoint\": \"example_value\"\n    }\n  },\n  \"init_scripts\": [\n    {\n      \"workspace\": {},\n      \"volumes\": {},\n      \"dbfs\": {},\n      \"abfss\": {}\n    }\n  ],\n  \"spark_env_vars\": \"example_value\",\n  \"enable_elastic_disk\": true,\n  \"instance_pool_id\": \"500123\",\n  \"policy_id\": \"500123\",\n  \"enable_local_disk_encryption\": true,\n  \"runtime_engine\": \"STANDARD\",\n  \"data_security_mode\": \"NONE\",\n  \"single_user_name\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83537de9-f12e-44a7-b8e3-4da355d96722",
+              "name": "The caller does not have permission to perform the operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_name\": \"example_value\",\n  \"spark_version\": \"example_value\",\n  \"node_type_id\": \"500123\",\n  \"driver_node_type_id\": \"500123\",\n  \"num_workers\": 10,\n  \"autoscale\": {\n    \"min_workers\": 10,\n    \"max_workers\": 10\n  },\n  \"spark_conf\": \"example_value\",\n  \"azure_attributes\": {\n    \"first_on_demand\": 10,\n    \"availability\": \"SPOT_AZURE\",\n    \"spot_bid_max_price\": 42.5\n  },\n  \"ssh_public_keys\": [\n    \"example_value\"\n  ],\n  \"custom_tags\": \"example_value\",\n  \"cluster_log_conf\": {\n    \"dbfs\": {\n      \"destination\": \"example_value\"\n    },\n    \"s3\": {\n      \"destination\": \"example_value\",\n      \"region\": \"example_value\",\n      \"endpoint\": \"example_value\"\n    }\n  },\n  \"init_scripts\": [\n    {\n      \"workspace\": {},\n      \"volumes\": {},\n      \"dbfs\": {},\n      \"abfss\": {}\n    }\n  ],\n  \"spark_env_vars\": \"example_value\",\n  \"enable_elastic_disk\": true,\n  \"instance_pool_id\": \"500123\",\n  \"policy_id\": \"500123\",\n  \"enable_local_disk_encryption\": true,\n  \"runtime_engine\": \"STANDARD\",\n  \"data_security_mode\": \"NONE\",\n  \"single_user_name\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79c9dbe8-5a1a-430d-8c24-c1547f6ba6d1",
+              "name": "The request has been rate-limited",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_name\": \"example_value\",\n  \"spark_version\": \"example_value\",\n  \"node_type_id\": \"500123\",\n  \"driver_node_type_id\": \"500123\",\n  \"num_workers\": 10,\n  \"autoscale\": {\n    \"min_workers\": 10,\n    \"max_workers\": 10\n  },\n  \"spark_conf\": \"example_value\",\n  \"azure_attributes\": {\n    \"first_on_demand\": 10,\n    \"availability\": \"SPOT_AZURE\",\n    \"spot_bid_max_price\": 42.5\n  },\n  \"ssh_public_keys\": [\n    \"example_value\"\n  ],\n  \"custom_tags\": \"example_value\",\n  \"cluster_log_conf\": {\n    \"dbfs\": {\n      \"destination\": \"example_value\"\n    },\n    \"s3\": {\n      \"destination\": \"example_value\",\n      \"region\": \"example_value\",\n      \"endpoint\": \"example_value\"\n    }\n  },\n  \"init_scripts\": [\n    {\n      \"workspace\": {},\n      \"volumes\": {},\n      \"dbfs\": {},\n      \"abfss\": {}\n    }\n  ],\n  \"spark_env_vars\": \"example_value\",\n  \"enable_elastic_disk\": true,\n  \"instance_pool_id\": \"500123\",\n  \"policy_id\": \"500123\",\n  \"enable_local_disk_encryption\": true,\n  \"runtime_engine\": \"STANDARD\",\n  \"data_security_mode\": \"NONE\",\n  \"single_user_name\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ef1c4d2-3b9f-42b9-a46d-62597340e544",
+              "name": "An internal server error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_name\": \"example_value\",\n  \"spark_version\": \"example_value\",\n  \"node_type_id\": \"500123\",\n  \"driver_node_type_id\": \"500123\",\n  \"num_workers\": 10,\n  \"autoscale\": {\n    \"min_workers\": 10,\n    \"max_workers\": 10\n  },\n  \"spark_conf\": \"example_value\",\n  \"azure_attributes\": {\n    \"first_on_demand\": 10,\n    \"availability\": \"SPOT_AZURE\",\n    \"spot_bid_max_price\": 42.5\n  },\n  \"ssh_public_keys\": [\n    \"example_value\"\n  ],\n  \"custom_tags\": \"example_value\",\n  \"cluster_log_conf\": {\n    \"dbfs\": {\n      \"destination\": \"example_value\"\n    },\n    \"s3\": {\n      \"destination\": \"example_value\",\n      \"region\": \"example_value\",\n      \"endpoint\": \"example_value\"\n    }\n  },\n  \"init_scripts\": [\n    {\n      \"workspace\": {},\n      \"volumes\": {},\n      \"dbfs\": {},\n      \"abfss\": {}\n    }\n  ],\n  \"spark_env_vars\": \"example_value\",\n  \"enable_elastic_disk\": true,\n  \"instance_pool_id\": \"500123\",\n  \"policy_id\": \"500123\",\n  \"enable_local_disk_encryption\": true,\n  \"runtime_engine\": \"STANDARD\",\n  \"data_security_mode\": \"NONE\",\n  \"single_user_name\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "983cf928-35be-4fff-9700-01a9cc8d300e",
+          "name": "Azure Databricks Edit a Cluster",
+          "request": {
+            "name": "Azure Databricks Edit a Cluster",
+            "description": {
+              "content": "Edits the configuration of an existing cluster. The cluster must be in a RUNNING or TERMINATED state. If the cluster is running, it will be restarted with the new configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "2.0",
+                "clusters",
+                "edit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                  "type": "any",
+                  "value": "{{databricks_instance}}",
+                  "key": "databricks_instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cluster_id\": \"<string>\",\n  \"spark_version\": \"<string>\",\n  \"cluster_name\": \"<string>\",\n  \"node_type_id\": \"<string>\",\n  \"driver_node_type_id\": \"<string>\",\n  \"num_workers\": \"<integer>\",\n  \"autoscale\": {\n    \"min_workers\": \"<integer>\",\n    \"max_workers\": \"<integer>\"\n  },\n  \"spark_conf\": {\n    \"key_0\": \"<string>\"\n  },\n  \"azure_attributes\": {\n    \"first_on_demand\": \"<integer>\",\n    \"availability\": \"<string>\",\n    \"spot_bid_max_price\": \"<double>\"\n  },\n  \"ssh_public_keys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"custom_tags\": {\n    \"key_0\": \"<string>\"\n  },\n  \"cluster_log_conf\": {\n    \"dbfs\": {\n      \"destination\": \"<string>\"\n    },\n    \"s3\": {\n      \"destination\": \"<string>\",\n      \"region\": \"<string>\",\n      \"endpoint\": \"<string>\"\n    }\n  },\n  \"init_scripts\": [\n    {\n      \"workspace\": {\n        \"destination\": \"<string>\"\n      },\n      \"volumes\": {\n        \"destination\": \"<string>\"\n      },\n      \"dbfs\": {\n        \"destination\": \"<string>\"\n      },\n      \"abfss\": {\n        \"destination\": \"<string>\"\n      }\n    },\n    {\n      \"workspace\": {\n        \"destination\": \"<string>\"\n      },\n      \"volumes\": {\n        \"destination\": \"<string>\"\n      },\n      \"dbfs\": {\n        \"destination\": \"<string>\"\n      },\n      \"abfss\": {\n        \"destination\": \"<string>\"\n      }\n    }\n  ],\n  \"spark_env_vars\": {\n    \"key_0\": \"<string>\"\n  },\n  \"enable_elastic_disk\": \"<boolean>\",\n  \"instance_pool_id\": \"<string>\",\n  \"policy_id\": \"<string>\",\n  \"enable_local_disk_encryption\": \"<boolean>\",\n  \"runtime_engine\": \"<string>\",\n  \"data_security_mode\": \"<string>\",\n  \"single_user_name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c4892e71-fec2-4f4e-b8e7-89350d4e1db1",
+              "name": "Cluster edited successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "edit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "048d08e7-94a8-4113-abc9-d261cf9c86c2",
+              "name": "The request is malformed or contains invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "edit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f3ed316-9a1b-4316-89c0-2da37fcafe40",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "edit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34dd8067-3589-4e67-9746-339eb8af1a48",
+              "name": "The caller does not have permission to perform the operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "edit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82ae9822-d5b8-446f-a1dd-292ecefe6508",
+              "name": "The request has been rate-limited",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "edit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a74f2bf-62f3-4920-a891-5ebdb337f383",
+              "name": "An internal server error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "edit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee972d28-eddc-4cd8-9dce-bf4e18808adf",
+          "name": "Azure Databricks Start a Terminated Cluster",
+          "request": {
+            "name": "Azure Databricks Start a Terminated Cluster",
+            "description": {
+              "content": "Starts a terminated cluster given its ID. Works only for clusters in a TERMINATED state. Uses the last specified cluster configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "2.0",
+                "clusters",
+                "start"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                  "type": "any",
+                  "value": "{{databricks_instance}}",
+                  "key": "databricks_instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cluster_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "25228deb-fb24-4ac8-a22a-c0ad56c95143",
+              "name": "Cluster start initiated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8dc73450-9bb6-435c-8bd9-e0d2f7af568d",
+              "name": "The request is malformed or contains invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e399477e-6b5e-4393-8cfc-fff9856833c6",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6ddb9dc-4498-4023-a6d7-e1b2108d513f",
+              "name": "The caller does not have permission to perform the operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53308943-713e-4808-bc35-bf641a582bfd",
+              "name": "The request has been rate-limited",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea27123a-1040-4fe1-b382-43aff7d44af1",
+              "name": "An internal server error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "713313e9-07db-4282-86d7-5882d74cf18b",
+          "name": "Azure Databricks Restart a Running Cluster",
+          "request": {
+            "name": "Azure Databricks Restart a Running Cluster",
+            "description": {
+              "content": "Restarts a running cluster given its ID. The cluster must be in a RUNNING state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "2.0",
+                "clusters",
+                "restart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                  "type": "any",
+                  "value": "{{databricks_instance}}",
+                  "key": "databricks_instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cluster_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "70ca09cc-757d-4515-80a0-e5de61a82bf3",
+              "name": "Cluster restart initiated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "restart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "beeb30fd-740b-413a-80f7-e364b4c9a6ba",
+              "name": "The request is malformed or contains invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "restart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f61dc59c-1212-4c89-9130-d63e58af4436",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "restart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c86ef8e-b8fb-43a7-96f9-b4fb82295a52",
+              "name": "The caller does not have permission to perform the operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "restart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6560a3ba-6659-4f0d-a7fd-f93b0c02c8d0",
+              "name": "The request has been rate-limited",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "restart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f6d4fa7-9671-4358-8b49-f11dab2cfda0",
+              "name": "An internal server error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "restart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "436b3ef5-8eca-4119-b9ad-2de73519c69d",
+          "name": "Azure Databricks Terminate a Cluster",
+          "request": {
+            "name": "Azure Databricks Terminate a Cluster",
+            "description": {
+              "content": "Terminates a cluster given its ID. The cluster is removed from the running state but its configuration is preserved so it can be restarted. Use permanent-delete to fully remove a cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "2.0",
+                "clusters",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                  "type": "any",
+                  "value": "{{databricks_instance}}",
+                  "key": "databricks_instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cluster_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "de4cd72f-3ee1-45ab-aa54-9317417c757e",
+              "name": "Cluster termination initiated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "452bdd25-9bf4-4b1e-99c4-0c6a4ef1f075",
+              "name": "The request is malformed or contains invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f109219c-8ecc-4e91-adf0-d52bc87bffd3",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f035ede7-c1e7-42e6-9d97-f3be686f5956",
+              "name": "The caller does not have permission to perform the operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8bd4fc8d-9e4d-4b8f-ad17-1102e462f2e7",
+              "name": "The request has been rate-limited",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd5ed774-ff48-48c9-ab3f-a0ad5f235176",
+              "name": "An internal server error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e86c53c5-4ed7-4d23-98f5-b54c7f9b8deb",
+          "name": "Azure Databricks Permanently Delete a Cluster",
+          "request": {
+            "name": "Azure Databricks Permanently Delete a Cluster",
+            "description": {
+              "content": "Permanently deletes a Spark cluster. If the cluster is running, it is terminated and its resources freed. The cluster is removed permanently and cannot be restarted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "2.0",
+                "clusters",
+                "permanent-delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                  "type": "any",
+                  "value": "{{databricks_instance}}",
+                  "key": "databricks_instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cluster_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b3f61587-d6f4-44e8-8c1f-1afaacfd85a6",
+              "name": "Cluster permanently deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "permanent-delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c8e91a35-446b-42c5-8482-35b4fa3e71df",
+              "name": "The request is malformed or contains invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "permanent-delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2ffccc1-fd4d-45e0-8436-2bed58e3b35b",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "permanent-delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6bd2d77-6538-420f-841a-10bf4059812c",
+              "name": "The caller does not have permission to perform the operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "permanent-delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0a27845-fa7a-49a1-bc79-d800811668e7",
+              "name": "The request has been rate-limited",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "permanent-delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74ee626c-2e79-4103-80ac-e2b3f184c462",
+              "name": "An internal server error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "permanent-delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1a243978-e3dc-4e30-abff-ff50b45958e0",
+          "name": "Azure Databricks Get Cluster Information",
+          "request": {
+            "name": "Azure Databricks Get Cluster Information",
+            "description": {
+              "content": "Retrieves the information for a cluster given its identifier. Returns the current state, configuration, and metadata for the cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "2.0",
+                "clusters",
+                "get"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cluster_id",
+                  "value": "<string>",
+                  "description": "(Required) The cluster about which to retrieve information"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                  "type": "any",
+                  "value": "{{databricks_instance}}",
+                  "key": "databricks_instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "98904723-b76c-4553-a65b-1a95d0124f7c",
+              "name": "Cluster information retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cluster_id",
+                      "value": "500123"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cluster_id\": \"500123\",\n  \"cluster_name\": \"example_value\",\n  \"spark_version\": \"example_value\",\n  \"node_type_id\": \"500123\",\n  \"driver_node_type_id\": \"500123\",\n  \"num_workers\": 10,\n  \"autoscale\": {\n    \"min_workers\": 10,\n    \"max_workers\": 10\n  },\n  \"state\": \"PENDING\",\n  \"state_message\": \"example_value\",\n  \"creator_user_name\": \"example_value\",\n  \"start_time\": 10,\n  \"terminated_time\": 10,\n  \"last_state_loss_time\": 10,\n  \"last_activity_time\": 10,\n  \"autotermination_minutes\": 10,\n  \"cluster_source\": \"UI\",\n  \"spark_conf\": \"example_value\",\n  \"azure_attributes\": {\n    \"first_on_demand\": 10,\n    \"availability\": \"SPOT_AZURE\",\n    \"spot_bid_max_price\": 42.5\n  },\n  \"custom_tags\": \"example_value\",\n  \"cluster_log_conf\": {\n    \"dbfs\": {\n      \"destination\": \"example_value\"\n    },\n    \"s3\": {\n      \"destination\": \"example_value\",\n      \"region\": \"example_value\",\n      \"endpoint\": \"example_value\"\n    }\n  },\n  \"init_scripts\": [\n    {\n      \"workspace\": {},\n      \"volumes\": {},\n      \"dbfs\": {},\n      \"abfss\": {}\n    }\n  ],\n  \"spark_env_vars\": \"example_value\",\n  \"enable_elastic_disk\": true,\n  \"instance_pool_id\": \"500123\",\n  \"policy_id\": \"500123\",\n  \"default_tags\": \"example_value\",\n  \"cluster_log_status\": {\n    \"last_attempted\": 10,\n    \"last_exception\": \"example_value\"\n  },\n  \"termination_reason\": {\n    \"code\": \"example_value\",\n    \"type\": \"example_value\",\n    \"parameters\": \"example_value\"\n  },\n  \"data_security_mode\": \"example_value\",\n  \"single_user_name\": \"example_value\",\n  \"runtime_engine\": \"example_value\",\n  \"disk_spec\": {\n    \"disk_count\": 10,\n    \"disk_size\": 10,\n    \"disk_type\": {\n      \"azure_disk_volume_type\": \"example_value\"\n    }\n  },\n  \"executors\": [\n    {\n      \"private_ip\": \"example_value\",\n      \"public_dns\": \"example_value\",\n      \"node_id\": \"500123\",\n      \"instance_id\": \"500123\",\n      \"start_timestamp\": 10,\n      \"host_private_ip\": \"example_value\"\n    }\n  ],\n  \"driver\": {\n    \"private_ip\": \"example_value\",\n    \"public_dns\": \"example_value\",\n    \"node_id\": \"500123\",\n    \"instance_id\": \"500123\",\n    \"start_timestamp\": 10,\n    \"host_private_ip\": \"example_value\"\n  },\n  \"jdbc_port\": 10,\n  \"cluster_memory_mb\": 10,\n  \"cluster_cores\": 42.5\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2885799-d906-4c65-a419-9be3e03a861e",
+              "name": "The request is malformed or contains invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cluster_id",
+                      "value": "500123"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1db52f3c-f406-4ed2-b08f-b1318496588e",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cluster_id",
+                      "value": "500123"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4093c462-9050-492b-b896-4be95e86efeb",
+              "name": "The caller does not have permission to perform the operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cluster_id",
+                      "value": "500123"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cabde328-c089-41b8-85a8-1ad7f9111030",
+              "name": "The requested resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cluster_id",
+                      "value": "500123"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f4da635-c43b-47bc-97f8-7fdb597ade0e",
+              "name": "The request has been rate-limited",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cluster_id",
+                      "value": "500123"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "528d2d6c-ea1e-4467-8a61-0f68183f85f3",
+              "name": "An internal server error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cluster_id",
+                      "value": "500123"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "712cf753-3c37-404a-a245-7c98ca8838b7",
+          "name": "Azure Databricks List All Clusters",
+          "request": {
+            "name": "Azure Databricks List All Clusters",
+            "description": {
+              "content": "Returns information about all pinned and active clusters, and up to 200 of the most recently terminated all-purpose clusters in the past 30 days, and up to 30 of the most recently terminated job clusters in the past 30 days.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "2.0",
+                "clusters",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "can_use_client",
+                  "value": "<string>",
+                  "description": "Filter clusters based on what type of client can use the cluster. Possible values are NOTEBOOKS and JOBS."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                  "type": "any",
+                  "value": "{{databricks_instance}}",
+                  "key": "databricks_instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "86e42d07-95b2-43ab-b0c5-799858a1be9a",
+              "name": "List of clusters retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "can_use_client",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"clusters\": [\n    {\n      \"cluster_id\": \"500123\",\n      \"cluster_name\": \"example_value\",\n      \"spark_version\": \"example_value\",\n      \"node_type_id\": \"500123\",\n      \"driver_node_type_id\": \"500123\",\n      \"num_workers\": 10,\n      \"state\": \"PENDING\",\n      \"state_message\": \"example_value\",\n      \"creator_user_name\": \"example_value\",\n      \"start_time\": 10,\n      \"terminated_time\": 10,\n      \"last_state_loss_time\": 10,\n      \"last_activity_time\": 10,\n      \"autotermination_minutes\": 10,\n      \"cluster_source\": \"UI\",\n      \"spark_conf\": \"example_value\",\n      \"custom_tags\": \"example_value\",\n      \"init_scripts\": [\n        {}\n      ],\n      \"spark_env_vars\": \"example_value\",\n      \"enable_elastic_disk\": true,\n      \"instance_pool_id\": \"500123\",\n      \"policy_id\": \"500123\",\n      \"default_tags\": \"example_value\",\n      \"cluster_log_status\": {\n        \"last_attempted\": 10,\n        \"last_exception\": \"example_value\"\n      },\n      \"termination_reason\": {\n        \"code\": \"example_value\",\n        \"type\": \"example_value\",\n        \"parameters\": \"example_value\"\n      },\n      \"data_security_mode\": \"example_value\",\n      \"single_user_name\": \"example_value\",\n      \"runtime_engine\": \"example_value\",\n      \"disk_spec\": {\n        \"disk_count\": 10,\n        \"disk_size\": 10,\n        \"disk_type\": {}\n      },\n      \"executors\": [\n        {}\n      ],\n      \"jdbc_port\": 10,\n      \"cluster_memory_mb\": 10,\n      \"cluster_cores\": 42.5\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c06f05ea-5868-4f96-a3a3-6f16393e1002",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "can_use_client",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9eed36e-b1b6-4b0c-bbd8-0d69d5f199e2",
+              "name": "The caller does not have permission to perform the operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "can_use_client",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0bb8dcf2-61d2-443a-b0cb-3064fedfdc07",
+              "name": "The request has been rate-limited",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "can_use_client",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da974fe1-afac-465c-b47c-9ae3ee95b84c",
+              "name": "An internal server error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "can_use_client",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "43b5b9ca-0739-48cc-8273-4767eb3501f2",
+          "name": "Azure Databricks Pin a Cluster",
+          "request": {
+            "name": "Azure Databricks Pin a Cluster",
+            "description": {
+              "content": "Pins a cluster to ensure it is always returned by the list clusters API. Pinning a cluster that is already pinned has no effect.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "2.0",
+                "clusters",
+                "pin"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                  "type": "any",
+                  "value": "{{databricks_instance}}",
+                  "key": "databricks_instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cluster_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fd3cbfec-dfa5-499b-9f2e-5327f79252a5",
+              "name": "Cluster pinned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "pin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ed3819e-caae-4665-8b80-f01d58a52296",
+              "name": "The request is malformed or contains invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "pin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1c97388-c895-4314-b62b-50425ef88927",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "pin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d1f76d1-a94d-4d4c-b5a3-76dcbd34c0f7",
+              "name": "The caller does not have permission to perform the operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "pin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b03e8760-195e-4998-af7f-280a9a1d6f3f",
+              "name": "The request has been rate-limited",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "pin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c389b438-002f-406e-bf14-3c934af6a42f",
+              "name": "An internal server error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "pin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "331cbac6-0b30-406a-bffd-0b668eb07731",
+          "name": "Azure Databricks Unpin a Cluster",
+          "request": {
+            "name": "Azure Databricks Unpin a Cluster",
+            "description": {
+              "content": "Unpins a cluster. Unpinning a cluster that is not pinned has no effect.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "2.0",
+                "clusters",
+                "unpin"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                  "type": "any",
+                  "value": "{{databricks_instance}}",
+                  "key": "databricks_instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cluster_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a42072b6-5982-4e73-bb68-ee676b0c2531",
+              "name": "Cluster unpinned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "unpin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d5081a0-233b-44e1-b3a9-e0f616cf70e6",
+              "name": "The request is malformed or contains invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "unpin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c615bec0-b674-4f7d-b299-2777e1dcf6e8",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "unpin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef492494-bc2d-4400-8988-2a7b7af2a636",
+              "name": "The caller does not have permission to perform the operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "unpin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "858c79c6-20d9-4f39-810e-f85912d91729",
+              "name": "The request has been rate-limited",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "unpin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd19482a-22f0-42fe-9044-d61081f97bdd",
+              "name": "An internal server error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "unpin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "86918bd4-a4ac-48ef-8d0f-946ffb9371ca",
+          "name": "Azure Databricks List Cluster Events",
+          "request": {
+            "name": "Azure Databricks List Cluster Events",
+            "description": {
+              "content": "Retrieves a list of events about the activity of a cluster. Events are returned in reverse chronological order. This endpoint allows paginating through cluster events using the next_page field.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "2.0",
+                "clusters",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                  "type": "any",
+                  "value": "{{databricks_instance}}",
+                  "key": "databricks_instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cluster_id\": \"<string>\",\n  \"start_time\": \"<long>\",\n  \"end_time\": \"<long>\",\n  \"order\": \"<string>\",\n  \"event_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"offset\": \"<long>\",\n  \"limit\": \"<long>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e57a5529-7cd0-4a5a-aefb-0e571c7642e0",
+              "name": "Cluster events retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\",\n  \"start_time\": 10,\n  \"end_time\": 10,\n  \"order\": \"DESC\",\n  \"event_types\": [\n    \"CREATING\"\n  ],\n  \"offset\": 10,\n  \"limit\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"events\": [\n    {\n      \"cluster_id\": \"500123\",\n      \"timestamp\": 10,\n      \"type\": \"example_value\",\n      \"details\": \"example_value\"\n    }\n  ],\n  \"next_page\": \"example_value\",\n  \"total_count\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f763223-3aaa-4cba-8ec4-f80d2d782e13",
+              "name": "The request is malformed or contains invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\",\n  \"start_time\": 10,\n  \"end_time\": 10,\n  \"order\": \"DESC\",\n  \"event_types\": [\n    \"CREATING\"\n  ],\n  \"offset\": 10,\n  \"limit\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b4be966-e4b7-44e2-92fd-53d89051ec53",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\",\n  \"start_time\": 10,\n  \"end_time\": 10,\n  \"order\": \"DESC\",\n  \"event_types\": [\n    \"CREATING\"\n  ],\n  \"offset\": 10,\n  \"limit\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf851fa5-8cea-40ce-ad86-1dee4d4832ca",
+              "name": "The caller does not have permission to perform the operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\",\n  \"start_time\": 10,\n  \"end_time\": 10,\n  \"order\": \"DESC\",\n  \"event_types\": [\n    \"CREATING\"\n  ],\n  \"offset\": 10,\n  \"limit\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07c7aba7-2009-4387-af8d-37393b775d83",
+              "name": "The request has been rate-limited",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\",\n  \"start_time\": 10,\n  \"end_time\": 10,\n  \"order\": \"DESC\",\n  \"event_types\": [\n    \"CREATING\"\n  ],\n  \"offset\": 10,\n  \"limit\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43629f54-c31c-4a07-bf7b-bdec655b757b",
+              "name": "An internal server error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_id\": \"500123\",\n  \"start_time\": 10,\n  \"end_time\": 10,\n  \"order\": \"DESC\",\n  \"event_types\": [\n    \"CREATING\"\n  ],\n  \"offset\": 10,\n  \"limit\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d56d1d99-b87d-4543-8912-515f1869ece3",
+          "name": "Azure Databricks List Available Spark Versions",
+          "request": {
+            "name": "Azure Databricks List Available Spark Versions",
+            "description": {
+              "content": "Returns the list of available Databricks Runtime versions. These versions can be used to launch clusters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "2.0",
+                "clusters",
+                "spark-versions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                  "type": "any",
+                  "value": "{{databricks_instance}}",
+                  "key": "databricks_instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d0899acc-2b3c-4387-8bfd-19f9a07fc3aa",
+              "name": "Spark versions retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "spark-versions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"versions\": [\n    {\n      \"key\": \"example_value\",\n      \"name\": \"Example Title\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c8493f5-ce5b-4f70-9c70-4c8d658e2d9d",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "spark-versions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9989998-8937-4fca-b2f9-cf4c177b5efa",
+              "name": "The request has been rate-limited",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "spark-versions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73d22d33-c69c-4981-97aa-fc180a2ab04b",
+              "name": "An internal server error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "spark-versions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c38e349d-9e6d-49ab-9606-a8e9a14727bc",
+          "name": "Azure Databricks List Available Node Types",
+          "request": {
+            "name": "Azure Databricks List Available Node Types",
+            "description": {
+              "content": "Returns a list of supported Azure VM node types. These node types can be used to launch clusters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "2.0",
+                "clusters",
+                "list-node-types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                  "type": "any",
+                  "value": "{{databricks_instance}}",
+                  "key": "databricks_instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1bddb620-ce91-4c03-a51b-c32ec80f85bf",
+              "name": "Node types retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "list-node-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"node_types\": [\n    {\n      \"node_type_id\": \"500123\",\n      \"memory_mb\": 10,\n      \"num_cores\": 42.5,\n      \"description\": \"A sample description.\",\n      \"instance_type_id\": \"500123\",\n      \"is_deprecated\": true,\n      \"num_gpus\": 10,\n      \"category\": \"example_value\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc2574b4-bc60-4400-b00e-5fada49c11c4",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "list-node-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7827d10-e2e1-40e7-a73d-ee99515fb729",
+              "name": "The request has been rate-limited",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "list-node-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6b06da3-340f-440e-9d2c-796fadfdb0ce",
+              "name": "An internal server error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2.0",
+                    "clusters",
+                    "list-node-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+                      "type": "any",
+                      "value": "{{databricks_instance}}",
+                      "key": "databricks_instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The unique identifier for your Azure Databricks workspace instance. Found in the workspace URL.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "adb-1234567890123456.1",
+      "key": "databricks_instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{databricks_instance}}.azuredatabricks.net/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f6b85013-0d68-47b7-afae-fc9933fb99fe",
+    "name": "Azure Databricks REST Clusters API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Core REST API for managing Azure Databricks workspaces, clusters, jobs, and workspace objects programmatically. This specification covers the Clusters API (2.0), Jobs API (2.1), and Workspace API (2.0) endpoints available on Azure Databricks instances.\n\nContact Support:\n Name: Azure Databricks Support",
+      "type": "text/plain"
+    }
+  }
+}

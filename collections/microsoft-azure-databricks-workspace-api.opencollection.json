@@ -1,0 +1,138 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Azure Databricks REST Clusters Workspace API",
+    "version": "2.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workspace",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Azure Databricks List Workspace Objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.0/workspace/list",
+            "params": [
+              {
+                "name": "path",
+                "value": "example_value",
+                "type": "query",
+                "description": "The absolute path of the workspace directory to list. A path of / lists the root directory."
+              }
+            ]
+          },
+          "docs": "Lists the contents of a directory in the workspace, or the object if it is not a directory. If the input path does not exist, this call returns an error RESOURCE_DOES_NOT_EXIST."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks Get Workspace Object Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.0/workspace/get-status",
+            "params": [
+              {
+                "name": "path",
+                "value": "example_value",
+                "type": "query",
+                "description": "The absolute path of the workspace object"
+              }
+            ]
+          },
+          "docs": "Gets the status of an object or a directory. If the object is a directory, its contents are not included in the response."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks Create a Directory",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.0/workspace/mkdirs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates the specified directory and all necessary parent directories if they do not exist. If there is an object (not a directory) at any prefix of the input path, this call returns an error RESOURCE_ALREADY_EXISTS."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks Delete a Workspace Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.0/workspace/delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes an object or a directory (and optionally its contents recursively). If the path does not exist, this call returns an error RESOURCE_DOES_NOT_EXIST. If path is a non-empty directory and recursive is set to false, this call returns an error DIRECTORY_NOT_EMPTY."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks Import a Workspace Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.0/workspace/import",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Imports a notebook or the contents of an entire directory. If the path already exists and overwrite is set to false, this call returns an error RESOURCE_ALREADY_EXISTS. Content can be provided inline as base64-encoded bytes or from a file."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks Export a Workspace Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.0/workspace/export",
+            "params": [
+              {
+                "name": "path",
+                "value": "example_value",
+                "type": "query",
+                "description": "The absolute path of the object to export"
+              },
+              {
+                "name": "format",
+                "value": "SOURCE",
+                "type": "query",
+                "description": "Format of the exported content"
+              },
+              {
+                "name": "direct_download",
+                "value": "true",
+                "type": "query",
+                "description": "Whether to download the exported file directly. Default is false."
+              }
+            ]
+          },
+          "docs": "Exports a notebook or the contents of an entire directory. The notebook is exported in the requested format (default is SOURCE). A directory is always exported as a DBC archive."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

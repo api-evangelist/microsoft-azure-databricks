@@ -1,0 +1,317 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Azure Databricks REST Clusters Jobs API",
+    "version": "2.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Azure Databricks Create a New Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.1/jobs/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new job with the provided settings. Returns the job_id of the newly created job."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks List All Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.1/jobs/list",
+            "params": [
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "Number of jobs to return. Default is 20 and maximum is 25."
+              },
+              {
+                "name": "offset",
+                "value": "10",
+                "type": "query",
+                "description": "Offset of the first job to return"
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "query",
+                "description": "A filter on the list based on the exact (case-insensitive) job name"
+              },
+              {
+                "name": "expand_tasks",
+                "value": "true",
+                "type": "query",
+                "description": "Whether to include task and cluster details in the response"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of jobs defined in the workspace. Results are paginated with a default limit of 20 jobs per page."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks Get a Single Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.1/jobs/get",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "500123",
+                "type": "query",
+                "description": "The canonical identifier of the job to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieves the details for a single job, including its settings and most recent run information."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks Partially Update a Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.1/jobs/update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds, changes, or removes specific settings of an existing job. Use reset to overwrite all settings."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks Overwrite All Job Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.1/jobs/reset",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Overwrites all settings for a specific job. Use update to change individual settings."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks Delete a Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.1/jobs/delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes a job and sends an email to the addresses specified in email_notifications. No action occurs if the job has already been removed."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks Trigger a New Job Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.1/jobs/run-now",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs the job now and returns the run_id of the triggered run. A job can have at most one active run at a time unless max_concurrent_runs is set."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks Submit a One-time Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.1/jobs/runs/submit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits a one-time run without creating a job. This endpoint allows you to submit a workload directly without defining a job. Returns the run_id of the submitted run."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks List Runs for a Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.1/jobs/runs/list",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "500123",
+                "type": "query",
+                "description": "Filter runs by the specified job ID"
+              },
+              {
+                "name": "active_only",
+                "value": "true",
+                "type": "query",
+                "description": "Show only active (running or pending) runs"
+              },
+              {
+                "name": "completed_only",
+                "value": "true",
+                "type": "query",
+                "description": "Show only completed runs"
+              },
+              {
+                "name": "offset",
+                "value": "10",
+                "type": "query",
+                "description": "Offset for pagination"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "Number of runs to return. Maximum is 25."
+              },
+              {
+                "name": "run_type",
+                "value": "JOB_RUN",
+                "type": "query",
+                "description": "Filter by run type"
+              },
+              {
+                "name": "expand_tasks",
+                "value": "true",
+                "type": "query",
+                "description": "Whether to include task details in the response"
+              },
+              {
+                "name": "start_time_from",
+                "value": "10",
+                "type": "query",
+                "description": "Filter runs starting after this timestamp (epoch ms)"
+              },
+              {
+                "name": "start_time_to",
+                "value": "10",
+                "type": "query",
+                "description": "Filter runs starting before this timestamp (epoch ms)"
+              }
+            ]
+          },
+          "docs": "Lists runs in descending order by start time for a specific job or all jobs."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks Get a Single Job Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.1/jobs/runs/get",
+            "params": [
+              {
+                "name": "run_id",
+                "value": "500123",
+                "type": "query",
+                "description": "The canonical identifier of the run"
+              },
+              {
+                "name": "include_history",
+                "value": "true",
+                "type": "query",
+                "description": "Whether to include the repair history in the response"
+              },
+              {
+                "name": "include_resolved_values",
+                "value": "true",
+                "type": "query",
+                "description": "Whether to include resolved parameter values in the response"
+              }
+            ]
+          },
+          "docs": "Retrieves the metadata of a run including its status, timing, cluster information, and task details."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks Cancel a Job Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.1/jobs/runs/cancel",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels a run. The run is canceled asynchronously, so when this request completes, the run may still be running. The run is terminated shortly after the cancellation request."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks Delete a Job Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.1/jobs/runs/delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes a non-active run. Returns an HTTP 400 error if the run is still active."
+        },
+        {
+          "info": {
+            "name": "Azure Databricks Get Job Run Output",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{databricks_instance}.azuredatabricks.net/api/2.1/jobs/runs/get-output",
+            "params": [
+              {
+                "name": "run_id",
+                "value": "500123",
+                "type": "query",
+                "description": "The canonical identifier of the run"
+              }
+            ]
+          },
+          "docs": "Retrieves the output and metadata of a single task run. When a notebook task returns a value through dbutils.notebook.exit(), this endpoint can be used to retrieve that value."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
