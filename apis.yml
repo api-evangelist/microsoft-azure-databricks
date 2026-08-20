@@ -9,6 +9,12 @@ tags:
   - Apache Spark
   - Big Data
   - Data Engineering
+  - Machine-Learning
+tags_raw:
+  - Analytics
+  - Apache Spark
+  - Big Data
+  - Data Engineering
   - Machine Learning
 created: '2024-01-01'
 modified: '2026-05-19'
@@ -23,6 +29,11 @@ apis:
     humanURL: https://learn.microsoft.com/azure/databricks/
     baseURL: https://<databricks-instance>.azuredatabricks.net/api
     tags:
+      - Cluster
+      - Job
+      - Notebooks
+      - Workspace
+    tags_raw:
       - Clusters
       - Jobs
       - Notebooks
@@ -49,6 +60,9 @@ apis:
       deleting clusters.
     baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/clusters
     tags:
+      - Cluster
+      - Compute
+    tags_raw:
       - Clusters
       - Compute
     properties:
@@ -66,6 +80,10 @@ apis:
       permissions.
     baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.1/jobs
     tags:
+      - Automation
+      - Job
+      - Scheduling
+    tags_raw:
       - Automation
       - Jobs
       - Scheduling
@@ -98,6 +116,9 @@ apis:
       files and directories.
     baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/dbfs
     tags:
+      - File
+      - Storage
+    tags_raw:
       - Files
       - Storage
     properties:
@@ -147,6 +168,11 @@ apis:
     baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/sql
     tags:
       - Analytics
+      - Query
+      - SQL
+      - Warehouses
+    tags_raw:
+      - Analytics
       - Queries
       - Sql
       - Warehouses
@@ -159,6 +185,11 @@ apis:
     description: Track experiments, log metrics, and manage ML models using the MLflow tracking and registry APIs.
     baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/mlflow
     tags:
+      - Experiments
+      - Machine-Learning
+      - MLOps
+      - Model Tracking
+    tags_raw:
       - Experiments
       - Machine Learning
       - Mlops
@@ -174,6 +205,10 @@ apis:
       ready-to-use cloud instances.
     baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/instance-pools
     tags:
+      - Cluster
+      - Compute
+      - Instance Pools
+    tags_raw:
       - Clusters
       - Compute
       - Instance Pools
@@ -188,6 +223,10 @@ apis:
       clusters based on a set of rules.
     baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/policies/clusters
     tags:
+      - Cluster
+      - Governance
+      - Policies
+    tags_raw:
       - Clusters
       - Governance
       - Policies
@@ -338,6 +377,11 @@ apis:
     tags:
       - Deployment
       - Inference
+      - Machine-Learning
+      - Model Serving
+    tags_raw:
+      - Deployment
+      - Inference
       - Machine Learning
       - Model Serving
     properties:
@@ -349,6 +393,10 @@ apis:
     description: Manage registered models and model versions in the Databricks Model Registry for model lifecycle management.
     baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/mlflow/databricks
     tags:
+      - Machine-Learning
+      - MLOps
+      - Model Registry
+    tags_raw:
       - Machine Learning
       - Mlops
       - Model Registry
@@ -359,6 +407,10 @@ apis:
     description: Manage registered models in Unity Catalog for centralized model governance and sharing.
     baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.1/unity-catalog/models
     tags:
+      - Machine-Learning
+      - Model Registry
+      - Unity Catalog
+    tags_raw:
       - Machine Learning
       - Model Registry
       - Unity Catalog
@@ -369,6 +421,10 @@ apis:
     description: Manage global cluster initialization scripts that run on every cluster in the workspace.
     baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/global-init-scripts
     tags:
+      - Administration
+      - Cluster
+      - Initialization
+    tags_raw:
       - Administration
       - Clusters
       - Initialization
@@ -390,6 +446,10 @@ apis:
     baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/sql/statements
     tags:
       - Query Execution
+      - SQL
+      - Warehouses
+    tags_raw:
+      - Query Execution
       - Sql
       - Warehouses
     properties:
@@ -399,6 +459,10 @@ apis:
     description: Execute commands on running clusters and retrieve results programmatically.
     baseURL: https://<databricks-instance>.azuredatabricks.net/api/1.2
     tags:
+      - Cluster
+      - Commands
+      - Execution
+    tags_raw:
       - Clusters
       - Commands
       - Execution
@@ -411,6 +475,10 @@ apis:
       deleting files.
     baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/fs/files
     tags:
+      - File
+      - Storage
+      - Unity Catalog
+    tags_raw:
       - Files
       - Storage
       - Unity Catalog
@@ -421,6 +489,9 @@ apis:
     description: Deploy and manage Databricks Apps including creating, starting, stopping, and listing custom applications.
     baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/apps
     tags:
+      - Application
+      - Deployment
+    tags_raw:
       - Applications
       - Deployment
     properties:
@@ -441,6 +512,10 @@ apis:
     baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/online-tables
     tags:
       - Feature Serving
+      - Machine-Learning
+      - Online Tables
+    tags_raw:
+      - Feature Serving
       - Machine Learning
       - Online Tables
     properties:
@@ -450,6 +525,11 @@ apis:
     description: Manage vector search indexes for similarity search and retrieval-augmented generation workloads.
     baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/vector-search/indexes
     tags:
+      - Artificial Intelligence
+      - RAG
+      - Similarity Search
+      - Vector Search
+    tags_raw:
       - AI
       - RAG
       - Similarity Search
@@ -461,6 +541,9 @@ apis:
     description: Manage vector search endpoints for hosting vector search indexes.
     baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/vector-search/endpoints
     tags:
+      - Artificial Intelligence
+      - Vector Search
+    tags_raw:
       - AI
       - Endpoints
       - Vector Search
@@ -473,6 +556,10 @@ apis:
     tags:
       - Monitoring
       - Query History
+      - SQL
+    tags_raw:
+      - Monitoring
+      - Query History
       - Sql
     properties:
       - type: APIReference
@@ -481,6 +568,11 @@ apis:
     description: Manage users, groups, and service principals across the Databricks account using SCIM 2.0 protocol.
     baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/account/scim/v2
     tags:
+      - Group
+      - Identity Management
+      - SCIM
+      - User
+    tags_raw:
       - Groups
       - Identity Management
       - SCIM
