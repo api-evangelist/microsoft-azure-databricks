@@ -12,8 +12,8 @@ info:
     underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: azureDatabricksApi
-  url: ../openapi/azure-databricks-openapi.yml
+- name: clustersApi
+  url: ../openapi/microsoft-azure-databricks-clusters-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: preflight-create-cluster
