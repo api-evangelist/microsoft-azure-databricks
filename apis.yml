@@ -3,6 +3,20 @@ description: >-
   Azure Databricks is an Apache Spark-based analytics platform optimized for Microsoft Azure. It provides a
   collaborative workspace for data engineers, data scientists, and analysts to work together on big data and machine
   learning workloads.
+deliveryModel:
+  model: open-core
+  license: MIT
+  open_source: true
+  commercial: true
+  callable_host: true
+  label: Open core · an OSS project plus a commercial hosted product
+  confidence: high
+  source:
+  - license
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://azure.microsoft.com/svghandler/databricks/
 tags:
   - Analytics
