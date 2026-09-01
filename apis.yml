@@ -98,7 +98,7 @@ apis:
   tags:
   - Analytics
   - Query
-  - Sql
+  - SQL
   - Warehouses
   tags_raw:
   - Analytics
@@ -117,7 +117,7 @@ apis:
   tags:
   - Experiments
   - Machine-Learning
-  - Mlops
+  - MLOps
   - Model Tracking
   tags_raw:
   - Experiments
@@ -336,7 +336,7 @@ apis:
   baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/mlflow/databricks
   tags:
   - Machine-Learning
-  - Mlops
+  - MLOps
   - Model Registry
   tags_raw:
   - Machine Learning
@@ -389,7 +389,7 @@ apis:
   baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/sql/statements
   tags:
   - Query Execution
-  - Sql
+  - SQL
   - Warehouses
   tags_raw:
   - Query Execution
@@ -503,7 +503,7 @@ apis:
   tags:
   - Monitoring
   - Query History
-  - Sql
+  - SQL
   tags_raw:
   - Monitoring
   - Query History
