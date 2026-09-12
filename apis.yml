@@ -46,7 +46,7 @@ tags_raw:
   - Machine Learning
 created: '2024-01-01'
 modified: '2026-05-19'
-url: https://raw.githubusercontent.com/api-evangelist/azure-databricks/refs/heads/main/apis.yml
+url: https://learn.microsoft.com/azure/databricks/getting-started/
 specificationVersion: '0.23'
 apis:
 - name: DBFS API
