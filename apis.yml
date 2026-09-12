@@ -651,6 +651,8 @@ apis:
   - type: APIReference
     url: https://docs.databricks.com/api/azure/workspace/workspace
 common:
+  - type: Website
+    url: https://www.microsoft.com/
   - type: IssueTracker
     url: https://github.com/Azure/azure-databricks-client/issues
   - type: Releases
@@ -825,3 +827,5 @@ maintainers:
     email: kin@apievangelist.com
   - url: https://www.databricks.com/feed
     type: Blog
+x-parent: microsoft-azure
+x-relationship: product

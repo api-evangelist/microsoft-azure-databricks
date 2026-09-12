@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Azure Databricks REST Clusters Workspace API
   description: Core REST API for managing Azure Databricks workspaces, clusters, jobs, and workspace objects programmatically. This specification covers the Clusters API (2.0), Jobs API (2.1), and Workspace API (2.0) endpoints available on Azure Databricks instances.
@@ -391,58 +391,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Forbidden:
-      description: The caller does not have permission to perform the operation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request is malformed or contains invalid parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    InternalError:
-      description: An internal server error occurred
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: The request has been rate-limited
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        error_code:
-          type: string
-          description: Databricks error code (e.g., RESOURCE_DOES_NOT_EXIST, INVALID_PARAMETER_VALUE)
-          example: example_value
-        message:
-          type: string
-          description: Human-readable error message
-          example: example_value
-      required:
-      - error_code
-      - message
     WorkspaceObject:
       type: object
       properties:
@@ -489,6 +438,57 @@ components:
           type: string
           description: Resource ID for the object
           example: '500123'
+    Error:
+      type: object
+      properties:
+        error_code:
+          type: string
+          description: Databricks error code (e.g., RESOURCE_DOES_NOT_EXIST, INVALID_PARAMETER_VALUE)
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message
+          example: example_value
+      required:
+      - error_code
+      - message
+  responses:
+    TooManyRequests:
+      description: The request has been rate-limited
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalError:
+      description: An internal server error occurred
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request is malformed or contains invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: The caller does not have permission to perform the operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     BearerAuth:
       type: http
