@@ -113,7 +113,7 @@ apis:
   - Analytics
   - Query
   - SQL
-  - Warehouses
+  - Warehouse
   tags_raw:
   - Analytics
   - Queries
@@ -237,6 +237,10 @@ apis:
     Manage Unity Catalog catalogs for organizing and governing data assets across workspaces.
   baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.1/unity-catalog/catalogs
   tags:
+  - Catalog
+  - Data Governance
+  - Unity Catalog
+  tags_raw:
   - Catalogs
   - Data Governance
   - Unity Catalog
@@ -250,6 +254,10 @@ apis:
     Manage schemas within Unity Catalog catalogs for organizing tables, views, and functions.
   baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.1/unity-catalog/schemas
   tags:
+  - Data Governance
+  - Schema
+  - Unity Catalog
+  tags_raw:
   - Data Governance
   - Schemas
   - Unity Catalog
@@ -404,7 +412,7 @@ apis:
   tags:
   - Query Execution
   - SQL
-  - Warehouses
+  - Warehouse
   tags_raw:
   - Query Execution
   - Sql
