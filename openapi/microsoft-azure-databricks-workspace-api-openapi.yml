@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Azure Databricks REST Clusters Workspace API
+  title: Azure Databricks REST Workspace API
   description: Core REST API for managing Azure Databricks workspaces, clusters, jobs, and workspace objects programmatically. This specification covers the Clusters API (2.0), Jobs API (2.1), and Workspace API (2.0) endpoints available on Azure Databricks instances.
   version: 2.1.0
   contact:
@@ -391,6 +391,43 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    TooManyRequests:
+      description: The request has been rate-limited
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalError:
+      description: An internal server error occurred
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: The caller does not have permission to perform the operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request is malformed or contains invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     WorkspaceObject:
       type: object
@@ -452,43 +489,6 @@ components:
       required:
       - error_code
       - message
-  responses:
-    TooManyRequests:
-      description: The request has been rate-limited
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    InternalError:
-      description: An internal server error occurred
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request is malformed or contains invalid parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: The caller does not have permission to perform the operation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     BearerAuth:
       type: http

@@ -877,104 +877,66 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    TooManyRequests:
+      description: The request has been rate-limited
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalError:
+      description: An internal server error occurred
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: The caller does not have permission to perform the operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request is malformed or contains invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    AutoScale:
+    AzureAttributes:
       type: object
+      description: Attributes specific to Azure Databricks clusters
       properties:
-        min_workers:
+        first_on_demand:
           type: integer
           format: int32
-          description: Minimum number of workers
+          description: The first nodes provisioned as on-demand instances. Remaining nodes will be spot instances.
           example: 10
-        max_workers:
-          type: integer
-          format: int32
-          description: Maximum number of workers
-          example: 10
-      required:
-      - min_workers
-      - max_workers
-    SparkNode:
-      type: object
-      properties:
-        private_ip:
+        availability:
           type: string
-          description: Private IP address of the node
-          example: example_value
-        public_dns:
-          type: string
-          description: Public DNS name of the node
-          example: example_value
-        node_id:
-          type: string
-          description: Unique identifier for the node
-          example: '500123'
-        instance_id:
-          type: string
-          description: Azure instance identifier
-          example: '500123'
-        start_timestamp:
-          type: integer
-          format: int64
-          description: Start time of the node (epoch milliseconds)
-          example: 10
-        host_private_ip:
-          type: string
-          description: Private IP address of the host
-          example: example_value
-    ClusterEvent:
-      type: object
-      properties:
-        cluster_id:
-          type: string
-          description: Cluster ID associated with the event
-          example: '500123'
-        timestamp:
-          type: integer
-          format: int64
-          description: Timestamp of the event in epoch milliseconds
-          example: 10
-        type:
-          type: string
-          description: Type of event
-          example: example_value
-        details:
-          type: object
-          description: Event-specific details
-          example: example_value
-    InitScriptInfo:
-      type: object
-      description: Configuration for a cluster init script
-      properties:
-        workspace:
-          type: object
-          properties:
-            destination:
-              type: string
-              description: Workspace path for the init script
-          example: example_value
-        volumes:
-          type: object
-          properties:
-            destination:
-              type: string
-              description: Unity Catalog Volumes path for the init script
-          example: example_value
-        dbfs:
-          type: object
-          properties:
-            destination:
-              type: string
-              description: DBFS path for the init script
-          deprecated: true
-          example: example_value
-        abfss:
-          type: object
-          properties:
-            destination:
-              type: string
-              description: Azure Blob Storage (ABFSS) path for the init script
-          example: example_value
+          enum:
+          - SPOT_AZURE
+          - ON_DEMAND_AZURE
+          - SPOT_WITH_FALLBACK_AZURE
+          description: Azure availability type for cluster nodes
+          example: SPOT_AZURE
+        spot_bid_max_price:
+          type: number
+          format: double
+          description: Max price for Azure spot instances. Set to -1 (default) to indicate that the instance should not be evicted based on price.
+          example: 42.5
     ClusterInfo:
       type: object
       properties:
@@ -1169,26 +1131,96 @@ components:
           format: float
           description: Total number of CPU cores in the cluster
           example: 42.5
-    ClusterLogConf:
+    SparkNode:
       type: object
-      description: Configuration for delivering Spark logs to a destination
       properties:
+        private_ip:
+          type: string
+          description: Private IP address of the node
+          example: example_value
+        public_dns:
+          type: string
+          description: Public DNS name of the node
+          example: example_value
+        node_id:
+          type: string
+          description: Unique identifier for the node
+          example: '500123'
+        instance_id:
+          type: string
+          description: Azure instance identifier
+          example: '500123'
+        start_timestamp:
+          type: integer
+          format: int64
+          description: Start time of the node (epoch milliseconds)
+          example: 10
+        host_private_ip:
+          type: string
+          description: Private IP address of the host
+          example: example_value
+    AutoScale:
+      type: object
+      properties:
+        min_workers:
+          type: integer
+          format: int32
+          description: Minimum number of workers
+          example: 10
+        max_workers:
+          type: integer
+          format: int32
+          description: Maximum number of workers
+          example: 10
+      required:
+      - min_workers
+      - max_workers
+    Error:
+      type: object
+      properties:
+        error_code:
+          type: string
+          description: Databricks error code (e.g., RESOURCE_DOES_NOT_EXIST, INVALID_PARAMETER_VALUE)
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message
+          example: example_value
+      required:
+      - error_code
+      - message
+    InitScriptInfo:
+      type: object
+      description: Configuration for a cluster init script
+      properties:
+        workspace:
+          type: object
+          properties:
+            destination:
+              type: string
+              description: Workspace path for the init script
+          example: example_value
+        volumes:
+          type: object
+          properties:
+            destination:
+              type: string
+              description: Unity Catalog Volumes path for the init script
+          example: example_value
         dbfs:
           type: object
           properties:
             destination:
               type: string
-              description: DBFS destination path for logs
+              description: DBFS path for the init script
+          deprecated: true
           example: example_value
-        s3:
+        abfss:
           type: object
           properties:
             destination:
               type: string
-            region:
-              type: string
-            endpoint:
-              type: string
+              description: Azure Blob Storage (ABFSS) path for the init script
           example: example_value
     NodeType:
       type: object
@@ -1331,79 +1363,47 @@ components:
           type: string
           description: The name of the single user who can execute commands on the cluster. Required when data_security_mode is SINGLE_USER.
           example: example_value
-    AzureAttributes:
+    ClusterEvent:
       type: object
-      description: Attributes specific to Azure Databricks clusters
       properties:
-        first_on_demand:
+        cluster_id:
+          type: string
+          description: Cluster ID associated with the event
+          example: '500123'
+        timestamp:
           type: integer
-          format: int32
-          description: The first nodes provisioned as on-demand instances. Remaining nodes will be spot instances.
+          format: int64
+          description: Timestamp of the event in epoch milliseconds
           example: 10
-        availability:
+        type:
           type: string
-          enum:
-          - SPOT_AZURE
-          - ON_DEMAND_AZURE
-          - SPOT_WITH_FALLBACK_AZURE
-          description: Azure availability type for cluster nodes
-          example: SPOT_AZURE
-        spot_bid_max_price:
-          type: number
-          format: double
-          description: Max price for Azure spot instances. Set to -1 (default) to indicate that the instance should not be evicted based on price.
-          example: 42.5
-    Error:
+          description: Type of event
+          example: example_value
+        details:
+          type: object
+          description: Event-specific details
+          example: example_value
+    ClusterLogConf:
       type: object
+      description: Configuration for delivering Spark logs to a destination
       properties:
-        error_code:
-          type: string
-          description: Databricks error code (e.g., RESOURCE_DOES_NOT_EXIST, INVALID_PARAMETER_VALUE)
+        dbfs:
+          type: object
+          properties:
+            destination:
+              type: string
+              description: DBFS destination path for logs
           example: example_value
-        message:
-          type: string
-          description: Human-readable error message
+        s3:
+          type: object
+          properties:
+            destination:
+              type: string
+            region:
+              type: string
+            endpoint:
+              type: string
           example: example_value
-      required:
-      - error_code
-      - message
-  responses:
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: The request has been rate-limited
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    InternalError:
-      description: An internal server error occurred
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: The caller does not have permission to perform the operation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request is malformed or contains invalid parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     BearerAuth:
       type: http

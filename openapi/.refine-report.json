@@ -1,9 +1,7 @@
 {
   "provider": "microsoft-azure-databricks",
   "sources": [
-    "microsoft-azure-databricks-clusters-api-openapi.yml",
-    "microsoft-azure-databricks-jobs-api-openapi.yml",
-    "microsoft-azure-databricks-workspace-api-openapi.yml"
+    "_original/azure-databricks-openapi.yml"
   ],
   "outputs": [
     "microsoft-azure-databricks-clusters-api-openapi.yml",
@@ -14,10 +12,13 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "microsoft-azure-databricks-clusters-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-azure-databricks-jobs-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-azure-databricks-workspace-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "apis.yml register: written (+3 apis, 38 total)"
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "azure-databricks-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "microsoft-azure-databricks-clusters-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-azure-databricks-jobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-azure-databricks-workspace-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
