@@ -37,13 +37,14 @@ tags:
   - Apache Spark
   - Big Data
   - Data Engineering
-  - Machine-Learning
+  - Machine Learning
 tags_raw:
   - Analytics
   - Apache Spark
   - Big Data
   - Data Engineering
   - Machine Learning
+  - Machine-Learning
 created: '2024-01-01'
 modified: '2026-05-19'
 url: https://learn.microsoft.com/azure/databricks/getting-started/
@@ -71,6 +72,9 @@ apis:
     statuses.
   baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/libraries
   tags:
+  - Dependencies
+  - Library
+  tags_raw:
   - Dependencies
   - Libraries
   properties:
@@ -130,7 +134,7 @@ apis:
   baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/mlflow
   tags:
   - Experiments
-  - Machine-Learning
+  - Machine Learning
   - MLOps
   - Model Tracking
   tags_raw:
@@ -138,6 +142,7 @@ apis:
   - Machine Learning
   - Mlops
   - Model Tracking
+  - Machine-Learning
   properties:
   - type: Documentation
     url: https://learn.microsoft.com/azure/databricks/mlflow/
@@ -339,13 +344,14 @@ apis:
   tags:
   - Deployment
   - Inference
-  - Machine-Learning
+  - Machine Learning
   - Model Serving
   tags_raw:
   - Deployment
   - Inference
   - Machine Learning
   - Model Serving
+  - Machine-Learning
   properties:
   - type: Documentation
     url: >-
@@ -357,13 +363,14 @@ apis:
     Manage registered models and model versions in the Databricks Model Registry for model lifecycle management.
   baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/mlflow/databricks
   tags:
-  - Machine-Learning
+  - Machine Learning
   - MLOps
   - Model Registry
   tags_raw:
   - Machine Learning
   - Mlops
   - Model Registry
+  - Machine-Learning
   properties:
   - type: APIReference
     url: https://docs.databricks.com/api/azure/workspace/modelregistry
@@ -371,13 +378,14 @@ apis:
   description: Manage registered models in Unity Catalog for centralized model governance and sharing.
   baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.1/unity-catalog/models
   tags:
-  - Machine-Learning
+  - Machine Learning
   - Model Registry
   - Unity Catalog
   tags_raw:
   - Machine Learning
   - Model Registry
   - Unity Catalog
+  - Machine-Learning
   properties:
   - type: APIReference
     url: https://docs.databricks.com/api/azure/workspace/registeredmodels
@@ -479,12 +487,13 @@ apis:
   baseURL: https://<databricks-instance>.azuredatabricks.net/api/2.0/online-tables
   tags:
   - Feature Serving
-  - Machine-Learning
+  - Machine Learning
   - Online Tables
   tags_raw:
   - Feature Serving
   - Machine Learning
   - Online Tables
+  - Machine-Learning
   properties:
   - type: APIReference
     url: https://docs.databricks.com/api/azure/workspace/onlinetables

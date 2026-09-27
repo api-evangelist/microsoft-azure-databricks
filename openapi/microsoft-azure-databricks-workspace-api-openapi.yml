@@ -392,14 +392,8 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
-    TooManyRequests:
-      description: The request has been rate-limited
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    InternalError:
-      description: An internal server error occurred
+    BadRequest:
+      description: The request is malformed or contains invalid parameters
       content:
         application/json:
           schema:
@@ -410,20 +404,26 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: The caller does not have permission to perform the operation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Authentication credentials are missing or invalid
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request is malformed or contains invalid parameters
+    TooManyRequests:
+      description: The request has been rate-limited
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: The caller does not have permission to perform the operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalError:
+      description: An internal server error occurred
       content:
         application/json:
           schema:

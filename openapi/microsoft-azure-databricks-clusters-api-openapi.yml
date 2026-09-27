@@ -877,43 +877,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    TooManyRequests:
-      description: The request has been rate-limited
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    InternalError:
-      description: An internal server error occurred
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: The caller does not have permission to perform the operation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request is malformed or contains invalid parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     AzureAttributes:
       type: object
@@ -937,6 +900,245 @@ components:
           format: double
           description: Max price for Azure spot instances. Set to -1 (default) to indicate that the instance should not be evicted based on price.
           example: 42.5
+    NodeType:
+      type: object
+      properties:
+        node_type_id:
+          type: string
+          description: Unique identifier for the node type
+          example: '500123'
+        memory_mb:
+          type: integer
+          format: int32
+          description: Memory in megabytes
+          example: 10
+        num_cores:
+          type: number
+          format: float
+          description: Number of CPU cores
+          example: 42.5
+        description:
+          type: string
+          description: Human-readable description
+          example: A sample description.
+        instance_type_id:
+          type: string
+          description: Azure instance type identifier
+          example: '500123'
+        is_deprecated:
+          type: boolean
+          description: Whether the node type is deprecated
+          example: true
+        num_gpus:
+          type: integer
+          format: int32
+          description: Number of GPUs available
+          example: 10
+        category:
+          type: string
+          description: Category of the node type (General Purpose, Memory Optimized, etc.)
+          example: example_value
+    CreateClusterRequest:
+      type: object
+      required:
+      - spark_version
+      properties:
+        cluster_name:
+          type: string
+          description: Cluster name requested by the user. Does not have to be unique. If not specified at creation, the cluster name is an empty string.
+          example: example_value
+        spark_version:
+          type: string
+          description: The runtime version of the cluster. You can retrieve a list of available runtime versions using the spark-versions endpoint.
+          examples:
+          - 13.3.x-scala2.12
+        node_type_id:
+          type: string
+          description: The node type for the worker nodes. Refer to list-node-types for available node types.
+          examples:
+          - Standard_DS3_v2
+        driver_node_type_id:
+          type: string
+          description: The node type for the driver node. If unset, the driver node type is set as the same value as node_type_id.
+          example: '500123'
+        num_workers:
+          type: integer
+          format: int32
+          description: Number of worker nodes. For a fixed-size cluster, set this to the desired number of workers. For an autoscaling cluster, this field is ignored in favor of autoscale settings.
+          example: 10
+        autoscale:
+          $ref: '#/components/schemas/AutoScale'
+        spark_conf:
+          type: object
+          additionalProperties:
+            type: string
+          description: Map of Spark configuration key-value pairs. These are passed directly to the Spark driver and executors.
+          example: example_value
+        azure_attributes:
+          $ref: '#/components/schemas/AzureAttributes'
+        ssh_public_keys:
+          type: array
+          items:
+            type: string
+          description: SSH public keys for accessing cluster nodes
+          example: []
+        custom_tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Custom tags applied to cluster resources. Databricks adds default tags in addition to any custom tags you specify.
+          example: example_value
+        cluster_log_conf:
+          $ref: '#/components/schemas/ClusterLogConf'
+        init_scripts:
+          type: array
+          items:
+            $ref: '#/components/schemas/InitScriptInfo'
+          description: Init scripts to run when the cluster starts
+          example: []
+        spark_env_vars:
+          type: object
+          additionalProperties:
+            type: string
+          description: Map of environment variable key-value pairs for the Spark process.
+          example: example_value
+        enable_elastic_disk:
+          type: boolean
+          description: If true, enable autoscaling local storage. When enabled, the amount of disk space used by the cluster auto-adjusts.
+          example: true
+        instance_pool_id:
+          type: string
+          description: ID of the instance pool to use for cluster nodes. If specified, the cluster uses the instance pool for both driver and worker nodes.
+          example: '500123'
+        policy_id:
+          type: string
+          description: Identifier of the cluster policy used to create the cluster.
+          example: '500123'
+        enable_local_disk_encryption:
+          type: boolean
+          description: Whether to enable local disk encryption for the cluster
+          example: true
+        runtime_engine:
+          type: string
+          enum:
+          - STANDARD
+          - PHOTON
+          description: The runtime engine to use. PHOTON provides optimized query execution.
+          example: STANDARD
+        data_security_mode:
+          type: string
+          enum:
+          - NONE
+          - SINGLE_USER
+          - USER_ISOLATION
+          - LEGACY_TABLE_ACL
+          - LEGACY_PASSTHROUGH
+          - LEGACY_SINGLE_USER
+          - LEGACY_SINGLE_USER_STANDARD
+          description: Data security mode for the cluster. Determines how data access is controlled.
+          example: NONE
+        single_user_name:
+          type: string
+          description: The name of the single user who can execute commands on the cluster. Required when data_security_mode is SINGLE_USER.
+          example: example_value
+    InitScriptInfo:
+      type: object
+      description: Configuration for a cluster init script
+      properties:
+        workspace:
+          type: object
+          properties:
+            destination:
+              type: string
+              description: Workspace path for the init script
+          example: example_value
+        volumes:
+          type: object
+          properties:
+            destination:
+              type: string
+              description: Unity Catalog Volumes path for the init script
+          example: example_value
+        dbfs:
+          type: object
+          properties:
+            destination:
+              type: string
+              description: DBFS path for the init script
+          deprecated: true
+          example: example_value
+        abfss:
+          type: object
+          properties:
+            destination:
+              type: string
+              description: Azure Blob Storage (ABFSS) path for the init script
+          example: example_value
+    SparkNode:
+      type: object
+      properties:
+        private_ip:
+          type: string
+          description: Private IP address of the node
+          example: example_value
+        public_dns:
+          type: string
+          description: Public DNS name of the node
+          example: example_value
+        node_id:
+          type: string
+          description: Unique identifier for the node
+          example: '500123'
+        instance_id:
+          type: string
+          description: Azure instance identifier
+          example: '500123'
+        start_timestamp:
+          type: integer
+          format: int64
+          description: Start time of the node (epoch milliseconds)
+          example: 10
+        host_private_ip:
+          type: string
+          description: Private IP address of the host
+          example: example_value
+    ClusterLogConf:
+      type: object
+      description: Configuration for delivering Spark logs to a destination
+      properties:
+        dbfs:
+          type: object
+          properties:
+            destination:
+              type: string
+              description: DBFS destination path for logs
+          example: example_value
+        s3:
+          type: object
+          properties:
+            destination:
+              type: string
+            region:
+              type: string
+            endpoint:
+              type: string
+          example: example_value
+    AutoScale:
+      type: object
+      properties:
+        min_workers:
+          type: integer
+          format: int32
+          description: Minimum number of workers
+          example: 10
+        max_workers:
+          type: integer
+          format: int32
+          description: Maximum number of workers
+          example: 10
+      required:
+      - min_workers
+      - max_workers
     ClusterInfo:
       type: object
       properties:
@@ -1131,50 +1333,6 @@ components:
           format: float
           description: Total number of CPU cores in the cluster
           example: 42.5
-    SparkNode:
-      type: object
-      properties:
-        private_ip:
-          type: string
-          description: Private IP address of the node
-          example: example_value
-        public_dns:
-          type: string
-          description: Public DNS name of the node
-          example: example_value
-        node_id:
-          type: string
-          description: Unique identifier for the node
-          example: '500123'
-        instance_id:
-          type: string
-          description: Azure instance identifier
-          example: '500123'
-        start_timestamp:
-          type: integer
-          format: int64
-          description: Start time of the node (epoch milliseconds)
-          example: 10
-        host_private_ip:
-          type: string
-          description: Private IP address of the host
-          example: example_value
-    AutoScale:
-      type: object
-      properties:
-        min_workers:
-          type: integer
-          format: int32
-          description: Minimum number of workers
-          example: 10
-        max_workers:
-          type: integer
-          format: int32
-          description: Maximum number of workers
-          example: 10
-      required:
-      - min_workers
-      - max_workers
     Error:
       type: object
       properties:
@@ -1189,180 +1347,6 @@ components:
       required:
       - error_code
       - message
-    InitScriptInfo:
-      type: object
-      description: Configuration for a cluster init script
-      properties:
-        workspace:
-          type: object
-          properties:
-            destination:
-              type: string
-              description: Workspace path for the init script
-          example: example_value
-        volumes:
-          type: object
-          properties:
-            destination:
-              type: string
-              description: Unity Catalog Volumes path for the init script
-          example: example_value
-        dbfs:
-          type: object
-          properties:
-            destination:
-              type: string
-              description: DBFS path for the init script
-          deprecated: true
-          example: example_value
-        abfss:
-          type: object
-          properties:
-            destination:
-              type: string
-              description: Azure Blob Storage (ABFSS) path for the init script
-          example: example_value
-    NodeType:
-      type: object
-      properties:
-        node_type_id:
-          type: string
-          description: Unique identifier for the node type
-          example: '500123'
-        memory_mb:
-          type: integer
-          format: int32
-          description: Memory in megabytes
-          example: 10
-        num_cores:
-          type: number
-          format: float
-          description: Number of CPU cores
-          example: 42.5
-        description:
-          type: string
-          description: Human-readable description
-          example: A sample description.
-        instance_type_id:
-          type: string
-          description: Azure instance type identifier
-          example: '500123'
-        is_deprecated:
-          type: boolean
-          description: Whether the node type is deprecated
-          example: true
-        num_gpus:
-          type: integer
-          format: int32
-          description: Number of GPUs available
-          example: 10
-        category:
-          type: string
-          description: Category of the node type (General Purpose, Memory Optimized, etc.)
-          example: example_value
-    CreateClusterRequest:
-      type: object
-      required:
-      - spark_version
-      properties:
-        cluster_name:
-          type: string
-          description: Cluster name requested by the user. Does not have to be unique. If not specified at creation, the cluster name is an empty string.
-          example: example_value
-        spark_version:
-          type: string
-          description: The runtime version of the cluster. You can retrieve a list of available runtime versions using the spark-versions endpoint.
-          examples:
-          - 13.3.x-scala2.12
-        node_type_id:
-          type: string
-          description: The node type for the worker nodes. Refer to list-node-types for available node types.
-          examples:
-          - Standard_DS3_v2
-        driver_node_type_id:
-          type: string
-          description: The node type for the driver node. If unset, the driver node type is set as the same value as node_type_id.
-          example: '500123'
-        num_workers:
-          type: integer
-          format: int32
-          description: Number of worker nodes. For a fixed-size cluster, set this to the desired number of workers. For an autoscaling cluster, this field is ignored in favor of autoscale settings.
-          example: 10
-        autoscale:
-          $ref: '#/components/schemas/AutoScale'
-        spark_conf:
-          type: object
-          additionalProperties:
-            type: string
-          description: Map of Spark configuration key-value pairs. These are passed directly to the Spark driver and executors.
-          example: example_value
-        azure_attributes:
-          $ref: '#/components/schemas/AzureAttributes'
-        ssh_public_keys:
-          type: array
-          items:
-            type: string
-          description: SSH public keys for accessing cluster nodes
-          example: []
-        custom_tags:
-          type: object
-          additionalProperties:
-            type: string
-          description: Custom tags applied to cluster resources. Databricks adds default tags in addition to any custom tags you specify.
-          example: example_value
-        cluster_log_conf:
-          $ref: '#/components/schemas/ClusterLogConf'
-        init_scripts:
-          type: array
-          items:
-            $ref: '#/components/schemas/InitScriptInfo'
-          description: Init scripts to run when the cluster starts
-          example: []
-        spark_env_vars:
-          type: object
-          additionalProperties:
-            type: string
-          description: Map of environment variable key-value pairs for the Spark process.
-          example: example_value
-        enable_elastic_disk:
-          type: boolean
-          description: If true, enable autoscaling local storage. When enabled, the amount of disk space used by the cluster auto-adjusts.
-          example: true
-        instance_pool_id:
-          type: string
-          description: ID of the instance pool to use for cluster nodes. If specified, the cluster uses the instance pool for both driver and worker nodes.
-          example: '500123'
-        policy_id:
-          type: string
-          description: Identifier of the cluster policy used to create the cluster.
-          example: '500123'
-        enable_local_disk_encryption:
-          type: boolean
-          description: Whether to enable local disk encryption for the cluster
-          example: true
-        runtime_engine:
-          type: string
-          enum:
-          - STANDARD
-          - PHOTON
-          description: The runtime engine to use. PHOTON provides optimized query execution.
-          example: STANDARD
-        data_security_mode:
-          type: string
-          enum:
-          - NONE
-          - SINGLE_USER
-          - USER_ISOLATION
-          - LEGACY_TABLE_ACL
-          - LEGACY_PASSTHROUGH
-          - LEGACY_SINGLE_USER
-          - LEGACY_SINGLE_USER_STANDARD
-          description: Data security mode for the cluster. Determines how data access is controlled.
-          example: NONE
-        single_user_name:
-          type: string
-          description: The name of the single user who can execute commands on the cluster. Required when data_security_mode is SINGLE_USER.
-          example: example_value
     ClusterEvent:
       type: object
       properties:
@@ -1383,27 +1367,43 @@ components:
           type: object
           description: Event-specific details
           example: example_value
-    ClusterLogConf:
-      type: object
-      description: Configuration for delivering Spark logs to a destination
-      properties:
-        dbfs:
-          type: object
-          properties:
-            destination:
-              type: string
-              description: DBFS destination path for logs
-          example: example_value
-        s3:
-          type: object
-          properties:
-            destination:
-              type: string
-            region:
-              type: string
-            endpoint:
-              type: string
-          example: example_value
+  responses:
+    BadRequest:
+      description: The request is malformed or contains invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: The request has been rate-limited
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalError:
+      description: An internal server error occurred
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: The caller does not have permission to perform the operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     BearerAuth:
       type: http
