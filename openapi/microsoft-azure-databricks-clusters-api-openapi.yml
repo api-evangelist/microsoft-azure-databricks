@@ -878,65 +878,54 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    AzureAttributes:
+    ClusterLogConf:
       type: object
-      description: Attributes specific to Azure Databricks clusters
+      description: Configuration for delivering Spark logs to a destination
       properties:
-        first_on_demand:
-          type: integer
-          format: int32
-          description: The first nodes provisioned as on-demand instances. Remaining nodes will be spot instances.
-          example: 10
-        availability:
-          type: string
-          enum:
-          - SPOT_AZURE
-          - ON_DEMAND_AZURE
-          - SPOT_WITH_FALLBACK_AZURE
-          description: Azure availability type for cluster nodes
-          example: SPOT_AZURE
-        spot_bid_max_price:
-          type: number
-          format: double
-          description: Max price for Azure spot instances. Set to -1 (default) to indicate that the instance should not be evicted based on price.
-          example: 42.5
-    NodeType:
+        dbfs:
+          type: object
+          properties:
+            destination:
+              type: string
+              description: DBFS destination path for logs
+          example: example_value
+        s3:
+          type: object
+          properties:
+            destination:
+              type: string
+            region:
+              type: string
+            endpoint:
+              type: string
+          example: example_value
+    SparkNode:
       type: object
       properties:
-        node_type_id:
+        private_ip:
           type: string
-          description: Unique identifier for the node type
+          description: Private IP address of the node
+          example: example_value
+        public_dns:
+          type: string
+          description: Public DNS name of the node
+          example: example_value
+        node_id:
+          type: string
+          description: Unique identifier for the node
           example: '500123'
-        memory_mb:
-          type: integer
-          format: int32
-          description: Memory in megabytes
-          example: 10
-        num_cores:
-          type: number
-          format: float
-          description: Number of CPU cores
-          example: 42.5
-        description:
+        instance_id:
           type: string
-          description: Human-readable description
-          example: A sample description.
-        instance_type_id:
-          type: string
-          description: Azure instance type identifier
+          description: Azure instance identifier
           example: '500123'
-        is_deprecated:
-          type: boolean
-          description: Whether the node type is deprecated
-          example: true
-        num_gpus:
+        start_timestamp:
           type: integer
-          format: int32
-          description: Number of GPUs available
+          format: int64
+          description: Start time of the node (epoch milliseconds)
           example: 10
-        category:
+        host_private_ip:
           type: string
-          description: Category of the node type (General Purpose, Memory Optimized, etc.)
+          description: Private IP address of the host
           example: example_value
     CreateClusterRequest:
       type: object
@@ -1074,71 +1063,6 @@ components:
               type: string
               description: Azure Blob Storage (ABFSS) path for the init script
           example: example_value
-    SparkNode:
-      type: object
-      properties:
-        private_ip:
-          type: string
-          description: Private IP address of the node
-          example: example_value
-        public_dns:
-          type: string
-          description: Public DNS name of the node
-          example: example_value
-        node_id:
-          type: string
-          description: Unique identifier for the node
-          example: '500123'
-        instance_id:
-          type: string
-          description: Azure instance identifier
-          example: '500123'
-        start_timestamp:
-          type: integer
-          format: int64
-          description: Start time of the node (epoch milliseconds)
-          example: 10
-        host_private_ip:
-          type: string
-          description: Private IP address of the host
-          example: example_value
-    ClusterLogConf:
-      type: object
-      description: Configuration for delivering Spark logs to a destination
-      properties:
-        dbfs:
-          type: object
-          properties:
-            destination:
-              type: string
-              description: DBFS destination path for logs
-          example: example_value
-        s3:
-          type: object
-          properties:
-            destination:
-              type: string
-            region:
-              type: string
-            endpoint:
-              type: string
-          example: example_value
-    AutoScale:
-      type: object
-      properties:
-        min_workers:
-          type: integer
-          format: int32
-          description: Minimum number of workers
-          example: 10
-        max_workers:
-          type: integer
-          format: int32
-          description: Maximum number of workers
-          example: 10
-      required:
-      - min_workers
-      - max_workers
     ClusterInfo:
       type: object
       properties:
@@ -1333,20 +1257,6 @@ components:
           format: float
           description: Total number of CPU cores in the cluster
           example: 42.5
-    Error:
-      type: object
-      properties:
-        error_code:
-          type: string
-          description: Databricks error code (e.g., RESOURCE_DOES_NOT_EXIST, INVALID_PARAMETER_VALUE)
-          example: example_value
-        message:
-          type: string
-          description: Human-readable error message
-          example: example_value
-      required:
-      - error_code
-      - message
     ClusterEvent:
       type: object
       properties:
@@ -1367,15 +1277,105 @@ components:
           type: object
           description: Event-specific details
           example: example_value
+    NodeType:
+      type: object
+      properties:
+        node_type_id:
+          type: string
+          description: Unique identifier for the node type
+          example: '500123'
+        memory_mb:
+          type: integer
+          format: int32
+          description: Memory in megabytes
+          example: 10
+        num_cores:
+          type: number
+          format: float
+          description: Number of CPU cores
+          example: 42.5
+        description:
+          type: string
+          description: Human-readable description
+          example: A sample description.
+        instance_type_id:
+          type: string
+          description: Azure instance type identifier
+          example: '500123'
+        is_deprecated:
+          type: boolean
+          description: Whether the node type is deprecated
+          example: true
+        num_gpus:
+          type: integer
+          format: int32
+          description: Number of GPUs available
+          example: 10
+        category:
+          type: string
+          description: Category of the node type (General Purpose, Memory Optimized, etc.)
+          example: example_value
+    AutoScale:
+      type: object
+      properties:
+        min_workers:
+          type: integer
+          format: int32
+          description: Minimum number of workers
+          example: 10
+        max_workers:
+          type: integer
+          format: int32
+          description: Maximum number of workers
+          example: 10
+      required:
+      - min_workers
+      - max_workers
+    AzureAttributes:
+      type: object
+      description: Attributes specific to Azure Databricks clusters
+      properties:
+        first_on_demand:
+          type: integer
+          format: int32
+          description: The first nodes provisioned as on-demand instances. Remaining nodes will be spot instances.
+          example: 10
+        availability:
+          type: string
+          enum:
+          - SPOT_AZURE
+          - ON_DEMAND_AZURE
+          - SPOT_WITH_FALLBACK_AZURE
+          description: Azure availability type for cluster nodes
+          example: SPOT_AZURE
+        spot_bid_max_price:
+          type: number
+          format: double
+          description: Max price for Azure spot instances. Set to -1 (default) to indicate that the instance should not be evicted based on price.
+          example: 42.5
+    Error:
+      type: object
+      properties:
+        error_code:
+          type: string
+          description: Databricks error code (e.g., RESOURCE_DOES_NOT_EXIST, INVALID_PARAMETER_VALUE)
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message
+          example: example_value
+      required:
+      - error_code
+      - message
   responses:
-    BadRequest:
-      description: The request is malformed or contains invalid parameters
+    NotFound:
+      description: The requested resource does not exist
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource does not exist
+    Forbidden:
+      description: The caller does not have permission to perform the operation
       content:
         application/json:
           schema:
@@ -1386,8 +1386,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: The request has been rate-limited
+    BadRequest:
+      description: The request is malformed or contains invalid parameters
       content:
         application/json:
           schema:
@@ -1398,8 +1398,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: The caller does not have permission to perform the operation
+    TooManyRequests:
+      description: The request has been rate-limited
       content:
         application/json:
           schema:
