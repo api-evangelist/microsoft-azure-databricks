@@ -1,0 +1,24 @@
+slug: microsoft-azure-databricks
+provider: Azure Databricks
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Clusters
+  spec_file: microsoft-azure-databricks-clusters-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: '"Create a New Cluster", "Start a Terminated Cluster", "Terminate a Cluster", schema "AutoScale"'
+  reason: Lifecycle and sizing of Spark compute clusters (create, start, restart, terminate, autoscale,
+    node types) is cloud compute infrastructure management.

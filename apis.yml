@@ -668,6 +668,9 @@ apis:
   - type: APIReference
     url: https://docs.databricks.com/api/azure/workspace/workspace
 common:
+  - type: CapabilityMap
+    url: capabilities/microsoft-azure-databricks-capability-edges.yml
+    name: Azure Databricks Business Capability Map
   - type: Website
     url: https://www.microsoft.com/
   - type: IssueTracker
