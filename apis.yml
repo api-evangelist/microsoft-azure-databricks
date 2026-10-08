@@ -668,6 +668,12 @@ apis:
   - type: APIReference
     url: https://docs.databricks.com/api/azure/workspace/workspace
 common:
+  - type: Plans
+    url: plans/azure-databricks-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/azure-databricks-rate-limits.yml
+  - type: FinOps
+    url: finops/azure-databricks-finops.yml
   - type: CapabilityMap
     url: capabilities/microsoft-azure-databricks-capability-edges.yml
     name: Azure Databricks Business Capability Map
