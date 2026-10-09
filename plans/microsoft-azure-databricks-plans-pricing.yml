@@ -149,3 +149,97 @@ plans:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - metered
+  - subscription
+  units:
+  - compute
+  - credit
+  - negotiated
+  - period
+  plans:
+  - name: Databricks Free Edition
+    access: freemium
+    model: free
+    model_how: derived
+    units:
+    - period
+    periods:
+    - month
+  - name: Standard Tier
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - compute
+    - credit
+    periods:
+    - per-use
+  - name: Premium Tier
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - credit
+    periods:
+    - per-use
+  - name: Databricks Commit Units (DBCU) Pre-Purchase
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - negotiated
+    periods:
+    - year
+  - name: Jobs Compute (Premium)
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - credit
+    periods:
+    - hour
+  - name: All-Purpose Compute (Premium)
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - credit
+    periods:
+    - hour
+  - name: All-Purpose Compute (Standard - retiring)
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - credit
+    periods:
+    - hour
+  - name: Databricks SQL Serverless (Premium)
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - credit
+    periods:
+    - hour
+  - name: Model Serving
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - credit
+    periods:
+    - hour
+  - name: DBCU Pre-Purchase
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - year
