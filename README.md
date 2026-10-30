@@ -1,4 +1,4 @@
-# Azure Databricks (azure-databricks)
+# Azure Databricks
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,786 +66,310 @@
 
 Azure Databricks is an Apache Spark-based analytics platform optimized for Microsoft Azure. It provides a collaborative workspace for data engineers, data scientists, and analysts to work together on big data and machine learning workloads.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/azure-databricks/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/azure-databricks/refs/heads/main/apis.yml)
+**Areas:** Analytics · Apache Spark · Big Data · Data Engineering · Machine Learning
+
+## Azure Databricks on APIs.io
+
+Everything profiled for Azure Databricks is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/microsoft-azure-databricks/](https://apis.io/providers/microsoft-azure-databricks/)** — or go straight to one of the APIs or properties below.
+
+### APIs (38)
+
+- [DBFS API](https://apis.io/apis/microsoft-azure-databricks/dbfs-api/) — Access Databricks File System (DBFS) for file operations including uploading, downloading, listing, and deleting files and directories.
+- [Libraries API](https://apis.io/apis/microsoft-azure-databricks/libraries-api/) — Manage libraries and dependencies on clusters including installing, uninstalling, and listing library statuses.
+- [Secrets API](https://apis.io/apis/microsoft-azure-databricks/secrets-api/) — Manage secrets and secret scopes for secure credential storage including creating scopes, putting secrets, and managing ACLs.
+- [Token Management API](https://apis.io/apis/microsoft-azure-databricks/token-management-api/) — Create and manage personal access tokens for API authentication including creating, listing, and revoking tokens.
+- [SQL Analytics API](https://apis.io/apis/microsoft-azure-databricks/sql-analytics-api/) — Manage SQL warehouses, queries, and dashboards for Databricks SQL analytics workloads.
+- [MLflow API](https://apis.io/apis/microsoft-azure-databricks/mlflow-api/) — Track experiments, log metrics, and manage ML models using the MLflow tracking and registry APIs.
+- [Instance Pools API](https://apis.io/apis/microsoft-azure-databricks/instance-pools-api/) — Create and manage instance pools to reduce cluster start and autoscaling times by maintaining a set of idle ready-to-use cloud instances.
+- [Cluster Policies API](https://apis.io/apis/microsoft-azure-databricks/cluster-policies-api/) — Create, list, and edit cluster policies to control cluster configurations and limit the ability to configure clusters based on a set of rules.
+- [Repos API](https://apis.io/apis/microsoft-azure-databricks/repos-api/) — Manage Git repositories within Databricks workspaces for version control of notebooks and files.
+- [Git Credentials API](https://apis.io/apis/microsoft-azure-databricks/git-credentials-api/) — Manage Git credentials for authenticating with Git providers when using Databricks Repos.
+- [Pipelines API](https://apis.io/apis/microsoft-azure-databricks/pipelines-api/) — Create, edit, delete, start, and view details about Delta Live Tables pipelines for building reliable data pipelines.
+- [Permissions API](https://apis.io/apis/microsoft-azure-databricks/permissions-api/) — Manage permissions on workspace objects including clusters, jobs, notebooks, and other resources using access control lists.
+- [Unity Catalog - Catalogs API](https://apis.io/apis/microsoft-azure-databricks/unity-catalog-catalogs-api/) — Manage Unity Catalog catalogs for organizing and governing data assets across workspaces.
+- [Unity Catalog - Schemas API](https://apis.io/apis/microsoft-azure-databricks/unity-catalog-schemas-api/) — Manage schemas within Unity Catalog catalogs for organizing tables, views, and functions.
+- [Unity Catalog - Tables API](https://apis.io/apis/microsoft-azure-databricks/unity-catalog-tables-api/) — Manage tables within Unity Catalog schemas including listing, getting, and deleting tables.
+- [Unity Catalog - Volumes API](https://apis.io/apis/microsoft-azure-databricks/unity-catalog-volumes-api/) — Manage Unity Catalog volumes for governing non-tabular data such as files and directories.
+- [Unity Catalog - Grants API](https://apis.io/apis/microsoft-azure-databricks/unity-catalog-grants-api/) — Manage permissions and grants on Unity Catalog objects including catalogs, schemas, tables, and other securable objects.
+- [Unity Catalog - External Locations API](https://apis.io/apis/microsoft-azure-databricks/unity-catalog-external-locations-api/) — Manage external locations in Unity Catalog for connecting to cloud storage paths.
+- [Unity Catalog - Storage Credentials API](https://apis.io/apis/microsoft-azure-databricks/unity-catalog-storage-credentials-api/) — Manage storage credentials in Unity Catalog for authenticating access to cloud storage.
+- [Unity Catalog - Metastores API](https://apis.io/apis/microsoft-azure-databricks/unity-catalog-metastores-api/) — Manage Unity Catalog metastores which serve as the top-level container for data governance.
+- [Model Serving Endpoints API](https://apis.io/apis/microsoft-azure-databricks/model-serving-endpoints-api/) — Create and manage model serving endpoints for deploying machine learning models as REST API endpoints.
+- [Model Registry API](https://apis.io/apis/microsoft-azure-databricks/model-registry-api/) — Manage registered models and model versions in the Databricks Model Registry for model lifecycle management.
+- [Registered Models API](https://apis.io/apis/microsoft-azure-databricks/registered-models-api/) — Manage registered models in Unity Catalog for centralized model governance and sharing.
+- [Global Init Scripts API](https://apis.io/apis/microsoft-azure-databricks/global-init-scripts-api/) — Manage global cluster initialization scripts that run on every cluster in the workspace.
+- [IP Access Lists API](https://apis.io/apis/microsoft-azure-databricks/ip-access-lists-api/) — Manage IP access lists to control network access to Azure Databricks workspaces.
+- [Statement Execution API](https://apis.io/apis/microsoft-azure-databricks/statement-execution-api/) — Execute SQL statements on SQL warehouses and retrieve results for programmatic SQL access.
+- [Command Execution API](https://apis.io/apis/microsoft-azure-databricks/command-execution-api/) — Execute commands on running clusters and retrieve results programmatically.
+- [Files API](https://apis.io/apis/microsoft-azure-databricks/files-api/) — Manage files in Unity Catalog volumes and workspace filesystem with operations for uploading, downloading, and deleting files.
+- [Apps API](https://apis.io/apis/microsoft-azure-databricks/apps-api/) — Deploy and manage Databricks Apps including creating, starting, stopping, and listing custom applications.
+- [Lakeview API](https://apis.io/apis/microsoft-azure-databricks/lakeview-api/) — Manage Lakeview dashboards programmatically including creating, updating, and publishing dashboards.
+- [Online Tables API](https://apis.io/apis/microsoft-azure-databricks/online-tables-api/) — Manage online tables for low-latency serving of feature data in Unity Catalog.
+- [Vector Search Indexes API](https://apis.io/apis/microsoft-azure-databricks/vector-search-indexes-api/) — Manage vector search indexes for similarity search and retrieval-augmented generation workloads.
+- [Vector Search Endpoints API](https://apis.io/apis/microsoft-azure-databricks/vector-search-endpoints-api/) — Manage vector search endpoints for hosting vector search indexes.
+- [Query History API](https://apis.io/apis/microsoft-azure-databricks/query-history-api/) — Retrieve query history for SQL warehouses including query text, status, and performance metrics.
+- [Account SCIM API](https://apis.io/apis/microsoft-azure-databricks/account-scim-api/) — Manage users, groups, and service principals across the Databricks account using SCIM 2.0 protocol.
+- [Azure Databricks Clusters API](https://apis.io/apis/microsoft-azure-databricks/microsoft-azure-databricks-clusters-api/) — Manage Databricks clusters for running Apache Spark workloads. Create, start, restart, resize, terminate, and permanently delete clusters.
+- [Azure Databricks Jobs API](https://apis.io/apis/microsoft-azure-databricks/microsoft-azure-databricks-jobs-api/) — Create and manage jobs to run notebooks, JARs, Spark submit, Python scripts, and pipeline tasks on Databricks clusters. Schedule recurring jobs, trigger…
+- [Azure Databricks Workspace API](https://apis.io/apis/microsoft-azure-databricks/microsoft-azure-databricks-workspace-api/) — Manage workspace objects such as notebooks, folders, files, and repos. Import, export, list, and delete workspace objects.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Arazzo workflows (20)
+
+Multi-step workflows that chain operations into a business task.
+
+- [Azure Databricks Back Up a Notebook by Export and Re-import](https://apis.io/arazzos/microsoft-azure-databricks/azure-databricks-backup-notebook-workflow/)
+- [Azure Databricks Cancel an Active Job Run](https://apis.io/arazzos/microsoft-azure-databricks/azure-databricks-cancel-active-run-workflow/)
+- [Azure Databricks Clean Up the Latest Completed Job Run](https://apis.io/arazzos/microsoft-azure-databricks/azure-databricks-cleanup-latest-job-run-workflow/)
+- [Azure Databricks Cluster Health Diagnostics](https://apis.io/arazzos/microsoft-azure-databricks/azure-databricks-cluster-health-diagnostics-workflow/)
+- [Azure Databricks Create a Directory and Import a Notebook](https://apis.io/arazzos/microsoft-azure-databricks/azure-databricks-create-directory-and-import-notebook-workflow/)
+- [Azure Databricks Create a Job and Run It to Completion](https://apis.io/arazzos/microsoft-azure-databricks/azure-databricks-create-job-and-run-workflow/)
+- [Azure Databricks Safely Delete a Workspace Directory](https://apis.io/arazzos/microsoft-azure-databricks/azure-databricks-delete-workspace-directory-workflow/)
+- [Azure Databricks Import a Notebook and Run It](https://apis.io/arazzos/microsoft-azure-databricks/azure-databricks-import-notebook-and-run-workflow/)
+- [Azure Databricks Pin the First Listed Cluster](https://apis.io/arazzos/microsoft-azure-databricks/azure-databricks-pin-most-recent-cluster-workflow/)
+- [Azure Databricks Preflight and Create a Cluster](https://apis.io/arazzos/microsoft-azure-databricks/azure-databricks-preflight-create-cluster-workflow/)
+- [Azure Databricks Provision a Cluster and Run a Job on It](https://apis.io/arazzos/microsoft-azure-databricks/azure-databricks-provision-cluster-and-run-job-workflow/)
+- [Azure Databricks Provision and Wait for Cluster](https://apis.io/arazzos/microsoft-azure-databricks/azure-databricks-provision-cluster-workflow/)
+- [Azure Databricks Overwrite Job Settings and Verify](https://apis.io/arazzos/microsoft-azure-databricks/azure-databricks-reset-job-and-verify-workflow/)
+- [Azure Databricks Resize a Running Cluster and Wait](https://apis.io/arazzos/microsoft-azure-databricks/azure-databricks-resize-running-cluster-workflow/)
+- [Azure Databricks Restart a Running Cluster and Wait](https://apis.io/arazzos/microsoft-azure-databricks/azure-databricks-restart-cluster-and-wait-workflow/)
+- [Azure Databricks Run an Existing Job and Wait](https://apis.io/arazzos/microsoft-azure-databricks/azure-databricks-run-existing-job-and-wait-workflow/)
+- [Azure Databricks Start a Terminated Cluster and Wait](https://apis.io/arazzos/microsoft-azure-databricks/azure-databricks-start-cluster-and-wait-workflow/)
+- [Azure Databricks Submit a One-time Run and Wait](https://apis.io/arazzos/microsoft-azure-databricks/azure-databricks-submit-one-time-run-workflow/)
+- [Azure Databricks Terminate and Permanently Delete a Cluster](https://apis.io/arazzos/microsoft-azure-databricks/azure-databricks-terminate-and-purge-cluster-workflow/)
+- [Azure Databricks Update a Job and Re-run It](https://apis.io/arazzos/microsoft-azure-databricks/azure-databricks-update-job-and-rerun-workflow/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Microsoft Azure Databricks Agentic Access](https://apis.io/agentic-access/microsoft-azure-databricks/microsoft-azure-databricks-agentic-access/)
+
+#### JSON Schema (45)
+
+The data models the API reads and writes.
+
+- [AutoScale](https://apis.io/schemas/microsoft-azure-databricks/azure-databricks-auto-scale/)
+- [AzureAttributes](https://apis.io/schemas/microsoft-azure-databricks/azure-databricks-azure-attributes/)
+- [Azure Databricks Cluster](https://apis.io/schemas/microsoft-azure-databricks/azure-databricks-cluster/)
+- [ClusterEvent](https://apis.io/schemas/microsoft-azure-databricks/azure-databricks-cluster-event/)
+- [ClusterInfo](https://apis.io/schemas/microsoft-azure-databricks/azure-databricks-cluster-info/)
+- [ClusterLogConf](https://apis.io/schemas/microsoft-azure-databricks/azure-databricks-cluster-log-conf/)
+- [CreateClusterRequest](https://apis.io/schemas/microsoft-azure-databricks/azure-databricks-create-cluster-request/)
+- [CronSchedule](https://apis.io/schemas/microsoft-azure-databricks/azure-databricks-cron-schedule/)
+- [EmailNotifications](https://apis.io/schemas/microsoft-azure-databricks/azure-databricks-email-notifications/)
+- [Error](https://apis.io/schemas/microsoft-azure-databricks/azure-databricks-error/)
+- [GitSource](https://apis.io/schemas/microsoft-azure-databricks/azure-databricks-git-source/)
+- [InitScriptInfo](https://apis.io/schemas/microsoft-azure-databricks/azure-databricks-init-script-info/)
+- [Job](https://apis.io/schemas/microsoft-azure-databricks/azure-databricks-job/)
+- [JobCluster](https://apis.io/schemas/microsoft-azure-databricks/azure-databricks-job-cluster/)
+- [JobSettings](https://apis.io/schemas/microsoft-azure-databricks/azure-databricks-job-settings/)
+- [Library](https://apis.io/schemas/microsoft-azure-databricks/azure-databricks-library/)
+- [NodeType](https://apis.io/schemas/microsoft-azure-databricks/azure-databricks-node-type/)
+- [Run](https://apis.io/schemas/microsoft-azure-databricks/azure-databricks-run/)
+- [RunState](https://apis.io/schemas/microsoft-azure-databricks/azure-databricks-run-state/)
+- [SparkNode](https://apis.io/schemas/microsoft-azure-databricks/azure-databricks-spark-node/)
+- [TaskSettings](https://apis.io/schemas/microsoft-azure-databricks/azure-databricks-task-settings/)
+- [WebhookNotifications](https://apis.io/schemas/microsoft-azure-databricks/azure-databricks-webhook-notifications/)
+- [WorkspaceObject](https://apis.io/schemas/microsoft-azure-databricks/azure-databricks-workspace-object/)
+- [AutoScale](https://apis.io/schemas/microsoft-azure-databricks/microsoft-azure-databricks-autoscale/)
+- [AzureAttributes](https://apis.io/schemas/microsoft-azure-databricks/microsoft-azure-databricks-azureattributes/)
+- …and 20 more published on APIs.io
+
+#### JSON Structure (23)
+
+Data models expressed in JSON Structure.
+
+- [Azure Databricks Auto Scale Structure](https://apis.io/json-structure/microsoft-azure-databricks/azure-databricks-auto-scale-structure/)
+- [Azure Databricks Azure Attributes Structure](https://apis.io/json-structure/microsoft-azure-databricks/azure-databricks-azure-attributes-structure/)
+- [Azure Databricks Cluster Event Structure](https://apis.io/json-structure/microsoft-azure-databricks/azure-databricks-cluster-event-structure/)
+- [Azure Databricks Cluster Info Structure](https://apis.io/json-structure/microsoft-azure-databricks/azure-databricks-cluster-info-structure/)
+- [Azure Databricks Cluster Log Conf Structure](https://apis.io/json-structure/microsoft-azure-databricks/azure-databricks-cluster-log-conf-structure/)
+- [Azure Databricks Create Cluster Request Structure](https://apis.io/json-structure/microsoft-azure-databricks/azure-databricks-create-cluster-request-structure/)
+- [Azure Databricks Cron Schedule Structure](https://apis.io/json-structure/microsoft-azure-databricks/azure-databricks-cron-schedule-structure/)
+- [Azure Databricks Email Notifications Structure](https://apis.io/json-structure/microsoft-azure-databricks/azure-databricks-email-notifications-structure/)
+- [Azure Databricks Error Structure](https://apis.io/json-structure/microsoft-azure-databricks/azure-databricks-error-structure/)
+- [Azure Databricks Git Source Structure](https://apis.io/json-structure/microsoft-azure-databricks/azure-databricks-git-source-structure/)
+- [Azure Databricks Init Script Info Structure](https://apis.io/json-structure/microsoft-azure-databricks/azure-databricks-init-script-info-structure/)
+- [Azure Databricks Job Cluster Structure](https://apis.io/json-structure/microsoft-azure-databricks/azure-databricks-job-cluster-structure/)
+- [Azure Databricks Job Settings Structure](https://apis.io/json-structure/microsoft-azure-databricks/azure-databricks-job-settings-structure/)
+- [Azure Databricks Job Structure](https://apis.io/json-structure/microsoft-azure-databricks/azure-databricks-job-structure/)
+- [Azure Databricks Library Structure](https://apis.io/json-structure/microsoft-azure-databricks/azure-databricks-library-structure/)
+- [Azure Databricks Node Type Structure](https://apis.io/json-structure/microsoft-azure-databricks/azure-databricks-node-type-structure/)
+- [Azure Databricks Run State Structure](https://apis.io/json-structure/microsoft-azure-databricks/azure-databricks-run-state-structure/)
+- [Azure Databricks Run Structure](https://apis.io/json-structure/microsoft-azure-databricks/azure-databricks-run-structure/)
+- [Azure Databricks Spark Node Structure](https://apis.io/json-structure/microsoft-azure-databricks/azure-databricks-spark-node-structure/)
+- [Azure Databricks Task Settings Structure](https://apis.io/json-structure/microsoft-azure-databricks/azure-databricks-task-settings-structure/)
+- [Azure Databricks Webhook Notifications Structure](https://apis.io/json-structure/microsoft-azure-databricks/azure-databricks-webhook-notifications-structure/)
+- [Azure Databricks Workspace Object Structure](https://apis.io/json-structure/microsoft-azure-databricks/azure-databricks-workspace-object-structure/)
+- [Microsoft Azure Databricks Structure](https://apis.io/json-structure/microsoft-azure-databricks/microsoft-azure-databricks-structure/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
 
-## Tags
-
-- Analytics
-- Apache Spark
-- Big Data
-- Data Engineering
-- Machine Learning
-
-## Timestamps
-
-- **Created:** 2024-01-01
-- **Modified:** 2026-05-19
-
-## APIs
-
-### Azure Databricks REST API
-
-Core REST API for managing Azure Databricks workspaces, clusters, jobs, notebooks, and other resources programmatically.
-
-- **Human URL:** [https://learn.microsoft.com/azure/databricks/](https://learn.microsoft.com/azure/databricks/)
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api`
-
-#### Tags
-
-- Clusters
-- Jobs
-- Notebooks
-- Workspace
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/)
-- [OpenAPI](openapi/azure-databricks-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Authentication](https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/authentication)
-- [API Reference](https://docs.databricks.com/api/azure/workspace/introduction)
-- [JSON Schema](json-schema/azure-databricks-cluster-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/azure-databricks-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-
-### Clusters API
-
-Manage Databricks clusters for running Spark jobs including creating, starting, editing, listing, terminating, and deleting clusters.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/clusters`
-
-#### Tags
-
-- Clusters
-- Compute
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/clusters)
-- [OpenAPI](openapi/azure-databricks-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/azure-databricks-cluster-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [API Reference](https://docs.databricks.com/api/azure/workspace/clusters)
-
-### Jobs API
-
-Create, manage, and run jobs on Databricks clusters including scheduling, listing runs, and managing job permissions.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.1/jobs`
-
-#### Tags
-
-- Automation
-- Jobs
-- Scheduling
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/jobs)
-- [OpenAPI](openapi/azure-databricks-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [API Reference](https://docs.databricks.com/api/azure/workspace/jobs)
-
-### Workspace API
-
-Manage notebooks, folders, and other workspace objects including listing, importing, exporting, and deleting workspace items.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/workspace`
-
-#### Tags
-
-- Folders
-- Notebooks
-- Workspace
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/workspace)
-- [OpenAPI](openapi/azure-databricks-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [API Reference](https://docs.databricks.com/api/azure/workspace/workspace)
-
-### DBFS API
-
-Access Databricks File System (DBFS) for file operations including uploading, downloading, listing, and deleting files and directories.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/dbfs`
-
-#### Tags
-
-- Files
-- Storage
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/dbfs)
-- [API Reference](https://docs.databricks.com/api/azure/workspace/dbfs)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Libraries API
-
-Manage libraries and dependencies on clusters including installing, uninstalling, and listing library statuses.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/libraries`
-
-#### Tags
-
-- Dependencies
-- Libraries
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/libraries)
-- [API Reference](https://docs.databricks.com/api/azure/workspace/libraries)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Secrets API
-
-Manage secrets and secret scopes for secure credential storage including creating scopes, putting secrets, and managing ACLs.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/secrets`
-
-#### Tags
-
-- Credentials
-- Secrets
-- Security
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/secrets)
-- [API Reference](https://docs.databricks.com/api/azure/workspace/secrets)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Token Management API
-
-Create and manage personal access tokens for API authentication including creating, listing, and revoking tokens.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/token`
-
-#### Tags
-
-- Authentication
-- Security
-- Tokens
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/token-management)
-- [API Reference](https://docs.databricks.com/api/azure/workspace/tokenmanagement)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### SQL Analytics API
-
-Manage SQL warehouses, queries, and dashboards for Databricks SQL analytics workloads.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/sql`
-
-#### Tags
-
-- Analytics
-- Queries
-- Sql
-- Warehouses
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/azure/databricks/sql/api/)
-- [API Reference](https://docs.databricks.com/api/azure/workspace/warehouses)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### MLflow API
-
-Track experiments, log metrics, and manage ML models using the MLflow tracking and registry APIs.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/mlflow`
-
-#### Tags
-
-- Experiments
-- Machine Learning
-- Mlops
-- Model Tracking
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/azure/databricks/mlflow/)
-- [API Reference](https://docs.databricks.com/api/azure/workspace/experiments)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Instance Pools API
-
-Create and manage instance pools to reduce cluster start and autoscaling times by maintaining a set of idle ready-to-use cloud instances.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/instance-pools`
-
-#### Tags
-
-- Clusters
-- Compute
-- Instance Pools
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/azure/databricks/compute/pool-index)
-- [API Reference](https://docs.databricks.com/api/azure/workspace/instancepools)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Cluster Policies API
-
-Create, list, and edit cluster policies to control cluster configurations and limit the ability to configure clusters based on a set of rules.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/policies/clusters`
-
-#### Tags
-
-- Clusters
-- Governance
-- Policies
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/azure/databricks/admin/clusters/policy-definition)
-- [API Reference](https://docs.databricks.com/api/azure/workspace/clusterpolicies)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Repos API
-
-Manage Git repositories within Databricks workspaces for version control of notebooks and files.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/repos`
-
-#### Tags
-
-- Git
-- Repositories
-- Version Control
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/azure/databricks/repos/)
-- [API Reference](https://docs.databricks.com/api/azure/workspace/repos)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Git Credentials API
-
-Manage Git credentials for authenticating with Git providers when using Databricks Repos.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/git-credentials`
-
-#### Tags
-
-- Authentication
-- Credentials
-- Git
-
-#### Properties
-
-- [API Reference](https://docs.databricks.com/api/azure/workspace/gitcredentials)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Pipelines API
-
-Create, edit, delete, start, and view details about Delta Live Tables pipelines for building reliable data pipelines.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/pipelines`
-
-#### Tags
-
-- Data Engineering
-- Delta Live Tables
-- ETL
-- Pipelines
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/azure/databricks/ldp/)
-- [API Reference](https://docs.databricks.com/api/azure/workspace/pipelines)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Permissions API
-
-Manage permissions on workspace objects including clusters, jobs, notebooks, and other resources using access control lists.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/permissions`
-
-#### Tags
-
-- Access Control
-- Permissions
-- Security
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/azure/databricks/security/auth/access-control/)
-- [API Reference](https://docs.databricks.com/api/azure/workspace/permissions)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Unity Catalog - Catalogs API
-
-Manage Unity Catalog catalogs for organizing and governing data assets across workspaces.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.1/unity-catalog/catalogs`
-
-#### Tags
-
-- Catalogs
-- Data Governance
-- Unity Catalog
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/azure/databricks/data-governance/unity-catalog/)
-- [API Reference](https://docs.databricks.com/api/azure/workspace/catalogs)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Unity Catalog - Schemas API
-
-Manage schemas within Unity Catalog catalogs for organizing tables, views, and functions.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.1/unity-catalog/schemas`
-
-#### Tags
-
-- Data Governance
-- Schemas
-- Unity Catalog
-
-#### Properties
-
-- [API Reference](https://docs.databricks.com/api/azure/workspace/schemas)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Unity Catalog - Tables API
-
-Manage tables within Unity Catalog schemas including listing, getting, and deleting tables.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.1/unity-catalog/tables`
-
-#### Tags
-
-- Data Governance
-- Tables
-- Unity Catalog
-
-#### Properties
-
-- [API Reference](https://docs.databricks.com/api/azure/workspace/tables)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Unity Catalog - Volumes API
-
-Manage Unity Catalog volumes for governing non-tabular data such as files and directories.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.1/unity-catalog/volumes`
-
-#### Tags
-
-- Storage
-- Unity Catalog
-- Volumes
-
-#### Properties
-
-- [API Reference](https://docs.databricks.com/api/azure/workspace/volumes)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Unity Catalog - Grants API
-
-Manage permissions and grants on Unity Catalog objects including catalogs, schemas, tables, and other securable objects.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.1/unity-catalog/permissions`
-
-#### Tags
-
-- Data Governance
-- Permissions
-- Unity Catalog
-
-#### Properties
-
-- [API Reference](https://docs.databricks.com/api/azure/workspace/grants)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Unity Catalog - External Locations API
-
-Manage external locations in Unity Catalog for connecting to cloud storage paths.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.1/unity-catalog/external-locations`
-
-#### Tags
-
-- External Locations
-- Storage
-- Unity Catalog
-
-#### Properties
-
-- [API Reference](https://docs.databricks.com/api/azure/workspace/externallocations)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Unity Catalog - Storage Credentials API
-
-Manage storage credentials in Unity Catalog for authenticating access to cloud storage.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.1/unity-catalog/storage-credentials`
-
-#### Tags
-
-- Credentials
-- Security
-- Storage
-- Unity Catalog
-
-#### Properties
-
-- [API Reference](https://docs.databricks.com/api/azure/workspace/storagecredentials)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Unity Catalog - Metastores API
-
-Manage Unity Catalog metastores which serve as the top-level container for data governance.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.1/unity-catalog/metastores`
-
-#### Tags
-
-- Data Governance
-- Metastores
-- Unity Catalog
-
-#### Properties
-
-- [API Reference](https://docs.databricks.com/api/azure/workspace/metastores)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Model Serving Endpoints API
-
-Create and manage model serving endpoints for deploying machine learning models as REST API endpoints.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/serving-endpoints`
-
-#### Tags
-
-- Deployment
-- Inference
-- Machine Learning
-- Model Serving
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/azure/databricks/machine-learning/model-serving/create-manage-serving-endpoints)
-- [API Reference](https://docs.databricks.com/api/azure/workspace/servingendpoints)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Model Registry API
-
-Manage registered models and model versions in the Databricks Model Registry for model lifecycle management.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/mlflow/databricks`
-
-#### Tags
-
-- Machine Learning
-- Mlops
-- Model Registry
-
-#### Properties
-
-- [API Reference](https://docs.databricks.com/api/azure/workspace/modelregistry)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Registered Models API
-
-Manage registered models in Unity Catalog for centralized model governance and sharing.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.1/unity-catalog/models`
-
-#### Tags
-
-- Machine Learning
-- Model Registry
-- Unity Catalog
-
-#### Properties
-
-- [API Reference](https://docs.databricks.com/api/azure/workspace/registeredmodels)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Global Init Scripts API
-
-Manage global cluster initialization scripts that run on every cluster in the workspace.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/global-init-scripts`
-
-#### Tags
-
-- Administration
-- Clusters
-- Initialization
-
-#### Properties
-
-- [API Reference](https://docs.databricks.com/api/azure/workspace/globalinitscripts)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### IP Access Lists API
-
-Manage IP access lists to control network access to Azure Databricks workspaces.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/ip-access-lists`
-
-#### Tags
-
-- Access Control
-- Networking
-- Security
-
-#### Properties
-
-- [API Reference](https://docs.databricks.com/api/azure/workspace/ipaccesslists)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Statement Execution API
-
-Execute SQL statements on SQL warehouses and retrieve results for programmatic SQL access.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/sql/statements`
-
-#### Tags
-
-- Query Execution
-- Sql
-- Warehouses
-
-#### Properties
-
-- [API Reference](https://docs.databricks.com/api/azure/workspace/statementexecution)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Command Execution API
-
-Execute commands on running clusters and retrieve results programmatically.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/1.2`
-
-#### Tags
-
-- Clusters
-- Commands
-- Execution
-
-#### Properties
-
-- [API Reference](https://docs.databricks.com/api/azure/workspace/commandexecution)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Files API
-
-Manage files in Unity Catalog volumes and workspace filesystem with operations for uploading, downloading, and deleting files.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/fs/files`
-
-#### Tags
-
-- Files
-- Storage
-- Unity Catalog
-
-#### Properties
-
-- [API Reference](https://docs.databricks.com/api/azure/workspace/files)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Apps API
-
-Deploy and manage Databricks Apps including creating, starting, stopping, and listing custom applications.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/apps`
-
-#### Tags
-
-- Applications
-- Deployment
-
-#### Properties
-
-- [API Reference](https://docs.databricks.com/api/azure/workspace/apps)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Lakeview API
-
-Manage Lakeview dashboards programmatically including creating, updating, and publishing dashboards.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/lakeview`
-
-#### Tags
-
-- Dashboards
-- Lakeview
-- Visualization
-
-#### Properties
-
-- [API Reference](https://docs.databricks.com/api/azure/workspace/lakeview)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Online Tables API
-
-Manage online tables for low-latency serving of feature data in Unity Catalog.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/online-tables`
-
-#### Tags
-
-- Feature Serving
-- Machine Learning
-- Online Tables
-
-#### Properties
-
-- [API Reference](https://docs.databricks.com/api/azure/workspace/onlinetables)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Vector Search Indexes API
-
-Manage vector search indexes for similarity search and retrieval-augmented generation workloads.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/vector-search/indexes`
-
-#### Tags
-
-- AI
-- RAG
-- Similarity Search
-- Vector Search
-
-#### Properties
-
-- [API Reference](https://docs.databricks.com/api/azure/workspace/vectorsearchindexes)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Vector Search Endpoints API
-
-Manage vector search endpoints for hosting vector search indexes.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/vector-search/endpoints`
-
-#### Tags
-
-- AI
-- Endpoints
-- Vector Search
-
-#### Properties
-
-- [API Reference](https://docs.databricks.com/api/azure/workspace/vectorsearchendpoints)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Query History API
-
-Retrieve query history for SQL warehouses including query text, status, and performance metrics.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/sql/history/queries`
-
-#### Tags
-
-- Monitoring
-- Query History
-- Sql
-
-#### Properties
-
-- [API Reference](https://docs.databricks.com/api/azure/workspace/queryhistory)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Account SCIM API
-
-Manage users, groups, and service principals across the Databricks account using SCIM 2.0 protocol.
-
-- **Base URL:** `https://<databricks-instance>.azuredatabricks.net/api/2.0/account/scim/v2`
-
-#### Tags
-
-- Groups
-- Identity Management
-- SCIM
-- Users
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/azure/databricks/reference/scim-2-1)
-- [API Reference](https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/scim/scim-groups)
-- [Postman Collection](collections/azure-databricks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-databricks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [Arazzo Workflows](arazzo/) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
-- [Getting Started](https://learn.microsoft.com/azure/databricks/getting-started/)
+- [Azure Databricks Context](https://apis.io/jsonld/microsoft-azure-databricks/azure-databricks-context/)
+
+#### Vocabulary (2)
+
+The provider's domain terms, defined.
+
+- [azure-databricks API Vocabulary](https://apis.io/vocabularies/microsoft-azure-databricks/azure-databricks-vocabulary/)
+- [Azure Databricks Domain Vocabulary](https://apis.io/vocabularies/microsoft-azure-databricks/microsoft-azure-databricks-vocabulary/)
+
+#### Examples (54)
+
+Example requests and responses.
+
+- [Azure Databricks Auto Scale Example](https://apis.io/examples/microsoft-azure-databricks/azure-databricks-auto-scale-example/)
+- [Azure Databricks Azure Attributes Example](https://apis.io/examples/microsoft-azure-databricks/azure-databricks-azure-attributes-example/)
+- [Azure Databricks Cluster Event Example](https://apis.io/examples/microsoft-azure-databricks/azure-databricks-cluster-event-example/)
+- [Azure Databricks Cluster Info Example](https://apis.io/examples/microsoft-azure-databricks/azure-databricks-cluster-info-example/)
+- [Azure Databricks Cluster Log Conf Example](https://apis.io/examples/microsoft-azure-databricks/azure-databricks-cluster-log-conf-example/)
+- [Azure Databricks Create Cluster Request Example](https://apis.io/examples/microsoft-azure-databricks/azure-databricks-create-cluster-request-example/)
+- [Azure Databricks Cron Schedule Example](https://apis.io/examples/microsoft-azure-databricks/azure-databricks-cron-schedule-example/)
+- [Azure Databricks Email Notifications Example](https://apis.io/examples/microsoft-azure-databricks/azure-databricks-email-notifications-example/)
+- [Azure Databricks Error Example](https://apis.io/examples/microsoft-azure-databricks/azure-databricks-error-example/)
+- [Azure Databricks Git Source Example](https://apis.io/examples/microsoft-azure-databricks/azure-databricks-git-source-example/)
+- [Azure Databricks Init Script Info Example](https://apis.io/examples/microsoft-azure-databricks/azure-databricks-init-script-info-example/)
+- [Azure Databricks Job Cluster Example](https://apis.io/examples/microsoft-azure-databricks/azure-databricks-job-cluster-example/)
+- [Azure Databricks Job Example](https://apis.io/examples/microsoft-azure-databricks/azure-databricks-job-example/)
+- [Azure Databricks Job Settings Example](https://apis.io/examples/microsoft-azure-databricks/azure-databricks-job-settings-example/)
+- [Azure Databricks Library Example](https://apis.io/examples/microsoft-azure-databricks/azure-databricks-library-example/)
+- [Azure Databricks Node Type Example](https://apis.io/examples/microsoft-azure-databricks/azure-databricks-node-type-example/)
+- [Azure Databricks Run Example](https://apis.io/examples/microsoft-azure-databricks/azure-databricks-run-example/)
+- [Azure Databricks Run State Example](https://apis.io/examples/microsoft-azure-databricks/azure-databricks-run-state-example/)
+- [Azure Databricks Spark Node Example](https://apis.io/examples/microsoft-azure-databricks/azure-databricks-spark-node-example/)
+- [Azure Databricks Task Settings Example](https://apis.io/examples/microsoft-azure-databricks/azure-databricks-task-settings-example/)
+- [Azure Databricks Webhook Notifications Example](https://apis.io/examples/microsoft-azure-databricks/azure-databricks-webhook-notifications-example/)
+- [Azure Databricks Workspace Object Example](https://apis.io/examples/microsoft-azure-databricks/azure-databricks-workspace-object-example/)
+- [Microsoft Azure Databricks Canceljobrun Example](https://apis.io/examples/microsoft-azure-databricks/microsoft-azure-databricks-canceljobrun-example/)
+- [Microsoft Azure Databricks Createcluster Example](https://apis.io/examples/microsoft-azure-databricks/microsoft-azure-databricks-createcluster-example/)
+- [Microsoft Azure Databricks Createjob Example](https://apis.io/examples/microsoft-azure-databricks/microsoft-azure-databricks-createjob-example/)
+- …and 29 more published on APIs.io
+
+#### Collections (5)
+
+Postman and Open Collection request collections.
+
+- [Azure Databricks REST API](https://apis.io/collections/microsoft-azure-databricks/open-azure-databricks/)
+- [Azure Databricks REST Clusters API](https://apis.io/collections/microsoft-azure-databricks/open-microsoft-azure-databricks-clusters-api/)
+- [Azure Databricks REST Clusters Jobs API](https://apis.io/collections/microsoft-azure-databricks/open-microsoft-azure-databricks-jobs-api/)
+- [Azure Databricks REST Clusters Workspace API](https://apis.io/collections/microsoft-azure-databricks/open-microsoft-azure-databricks-workspace-api/)
+- [Azure Databricks REST API](https://apis.io/collections/microsoft-azure-databricks/postman-azure-databricks/)
+
+#### Governance rules (3)
+
+Spectral rulesets for the provider's contracts.
+
+- [Azure Databricks — azure databricks rules](https://apis.io/rules/microsoft-azure-databricks/azure-databricks-spectral-rules/)
+- [Azure Databricks — jsonschema rules](https://apis.io/rules/microsoft-azure-databricks/microsoft-azure-databricks-jsonschema-spectral-rules/)
+- [Azure Databricks API Rules](https://apis.io/rules/microsoft-azure-databricks/microsoft-azure-databricks-spectral-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Azure Databricks Authentication](https://apis.io/security/microsoft-azure-databricks/azure-databricks-authentication/)
+- [Azure Databricks Domain Security](https://apis.io/security/microsoft-azure-databricks/azure-databricks-domain-security/)
+- [Azure Databricks Vulnerability Disclosure](https://apis.io/security/microsoft-azure-databricks/azure-databricks-vulnerability-disclosure/)
+
+#### OAuth scopes (2)
+
+The permissions the API asks for.
+
+- [Azure Databricks Scopes](https://apis.io/scopes/microsoft-azure-databricks/azure-databricks-scopes/)
+- [Microsoft Azure Databricks Scopes](https://apis.io/scopes/microsoft-azure-databricks/microsoft-azure-databricks-scopes/)
+
+#### Plans and pricing (2)
+
+Published plans, tiers and prices.
+
+- [Azure Databricks Plans Pricing](https://apis.io/plans/microsoft-azure-databricks/azure-databricks-plans-pricing/)
+- [Microsoft Azure Databricks Plans Pricing](https://apis.io/plans/microsoft-azure-databricks/microsoft-azure-databricks-plans-pricing/)
+
+#### Rate limits (2)
+
+Published request limits.
+
+- [Azure Databricks Rate Limits](https://apis.io/rate-limits/microsoft-azure-databricks/azure-databricks-rate-limits/)
+- [Microsoft Azure Databricks Rate Limits](https://apis.io/rate-limits/microsoft-azure-databricks/microsoft-azure-databricks-rate-limits/)
+
+#### FinOps (2)
+
+What the API costs to run, by operation.
+
+- [Azure Databricks Finops](https://apis.io/finops/microsoft-azure-databricks/azure-databricks-finops/)
+- [Microsoft Azure Databricks Finops](https://apis.io/finops/microsoft-azure-databricks/microsoft-azure-databricks-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.microsoft.com/)
+- [Getting started](https://learn.microsoft.com/azure/databricks/getting-started/)
+- [API reference](https://learn.microsoft.com/azure/databricks/reference/api)
 - [Pricing](https://azure.microsoft.com/pricing/details/databricks/)
-- [Status Page](https://status.azuredatabricks.net/)
-- [Security](https://learn.microsoft.com/azure/databricks/security/)
-- [SDK](https://learn.microsoft.com/azure/databricks/dev-tools/)
-- [C L I](https://learn.microsoft.com/azure/databricks/dev-tools/cli/)
-- [Authentication](https://learn.microsoft.com/azure/databricks/dev-tools/auth/)
-- [API Reference](https://learn.microsoft.com/azure/databricks/reference/api)
-- [Release Notes](https://learn.microsoft.com/azure/databricks/release-notes/product/)
-- [Changelog](https://learn.microsoft.com/azure/databricks/release-notes/)
 - [Support](https://learn.microsoft.com/answers/tags/166/azure-databricks)
-- [SDK](https://learn.microsoft.com/azure/databricks/dev-tools/sdk-python)
-- [SDK](https://learn.microsoft.com/azure/databricks/dev-tools/sdk-java)
-- [SDK](https://learn.microsoft.com/azure/databricks/dev-tools/sdk-go)
-- [SDK](https://learn.microsoft.com/azure/databricks/dev-tools/sdk-r)
-- [GitHub Repository](https://github.com/Azure/azure-databricks-client)
-- [OpenAPI](openapi/azure-databricks-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [JSON Schema](json-schema/azure-databricks-cluster-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/azure-databricks-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Spectral Rules](rules/azure-databricks-spectral-rules.yml)
-- [Vocabulary](vocabulary/azure-databricks-vocabulary.yaml)
-- [Features](undefined)
-- [Use Cases](undefined)
-- [Integrations](undefined)
-- [L L Ms Txt](https://docs.databricks.com/llms.txt)
+- [Changelog](https://learn.microsoft.com/azure/databricks/release-notes/)
+- [Blog](https://www.databricks.com/feed)
+- [Security](https://learn.microsoft.com/azure/databricks/security/)
+- [Status](https://status.azuredatabricks.net/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 57.9** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 62.2 |
+| Contract governance | 27.3 |
+| Operational transparency | 55.3 |
+| Developer ergonomics | 72.6 |
+| Access clarity | 13.2 |
+
+**Agent readiness 33.5** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | verified |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 30.0** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/microsoft-azure-databricks/](https://apis.io/providers/microsoft-azure-databricks/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Azure Databricks: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/microsoft-azure-databricks/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
